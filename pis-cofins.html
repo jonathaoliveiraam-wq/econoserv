@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperação Tributária PIS/COFINS | Econoserv</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    /* ─── CORES — trocar pelos hex da Econoserv ─── */
+    :root {
+      --primary:   #1B3A6B;   /* azul principal   */
+      --accent:    #F4A800;   /* amarelo/ouro      */
+      --dark:      #0D1F3C;
+      --light-bg:  #F5F7FA;
+      --text-muted:#6b7280;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── BOTÃO ── */
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 16px 36px;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      transition: opacity .2s;
+    }
+    .btn:hover { opacity: .88; }
+    .btn-white {
+      background: #fff;
+      color: var(--primary);
+    }
+
+    /* ─────────────────────────────────────────
+       SEÇÃO 1 — HERO
+    ───────────────────────────────────────── */
+    .hero {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 90px 24px 80px;
+    }
+    .hero .tag {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 4px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(1.9rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      max-width: 780px;
+      margin: 0 auto 20px;
+    }
+    .hero h1 span { color: var(--accent); }
+    .hero p {
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto 36px;
+      opacity: .88;
+    }
+    .hero small {
+      display: block;
+      margin-top: 14px;
+      font-size: .82rem;
+      opacity: .6;
+    }
+
+    /* ─────────────────────────────────────────
+       SEÇÃO 2 — PROBLEMA
+    ───────────────────────────────────────── */
+    .problema {
+      background: #fff;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .problema h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .problema p {
+      max-width: 680px;
+      margin: 0 auto 16px;
+      font-size: 1.05rem;
+      color: #374151;
+    }
+    .problema p strong { color: var(--primary); }
+    .problema .destaque {
+      background: var(--light-bg);
+      border-left: 4px solid var(--accent);
+      padding: 18px 24px;
+      max-width: 680px;
+      margin: 24px auto 0;
+      text-align: left;
+      font-size: 1.05rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* ─────────────────────────────────────────
+       SEÇÃO 3 — PROVA LEGAL
+    ───────────────────────────────────────── */
+    .prova {
+      background: var(--light-bg);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .prova h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 36px;
+    }
+    .stj-box {
+      background: var(--dark);
+      color: #fff;
+      max-width: 780px;
+      margin: 0 auto 40px;
+      padding: 36px 40px;
+      border-radius: 10px;
+      text-align: left;
+    }
+    .stj-box .stj-label {
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .stj-box blockquote {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      border-left: 3px solid var(--accent);
+      padding-left: 18px;
+      font-style: italic;
+      opacity: .92;
+    }
+    .stj-box .fundamento {
+      margin-top: 20px;
+      font-size: .88rem;
+      opacity: .65;
+    }
+
+    .selos {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .selo {
+      background: #fff;
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      padding: 18px 24px;
+      flex: 1 1 200px;
+      text-align: left;
+    }
+    .selo .icon { font-size: 1.6rem; margin-bottom: 8px; }
+    .selo strong { display: block; color: var(--primary); font-size: .95rem; }
+    .selo span { font-size: .85rem; color: var(--text-muted); }
+
+    /* ─────────────────────────────────────────
+       SEÇÃO 4 — OPORTUNIDADE
+    ───────────────────────────────────────── */
+    .oportunidade {
+      background: #fff;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .oportunidade h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 40px;
+    }
+    .cards {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--light-bg);
+      border-radius: 10px;
+      padding: 32px 28px;
+      flex: 1 1 240px;
+      text-align: left;
+    }
+    .card .icon { font-size: 2rem; margin-bottom: 14px; }
+    .card h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 8px; }
+    .card p { font-size: .92rem; color: #4b5563; }
+
+    /* ─────────────────────────────────────────
+       SEÇÃO 5 — COMO FUNCIONA
+    ───────────────────────────────────────── */
+    .como {
+      background: var(--primary);
+      color: #fff;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .como h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin-bottom: 48px;
+    }
+    .passos {
+      display: flex;
+      gap: 32px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .passo {
+      flex: 1 1 220px;
+      text-align: center;
+    }
+    .passo .num {
+      width: 56px;
+      height: 56px;
+      background: var(--accent);
+      border-radius: 50%;
+      font-size: 1.4rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+    .passo h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .passo p { font-size: .88rem; opacity: .82; }
+
+    /* ─────────────────────────────────────────
+       SEÇÃO 6 — OFERTA
+    ───────────────────────────────────────── */
+    .oferta {
+      background: var(--light-bg);
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .oferta h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .oferta .sub {
+      color: var(--text-muted);
+      margin-bottom: 40px;
+    }
+    .oferta-box {
+      background: #fff;
+      border: 2px solid var(--primary);
+      border-radius: 12px;
+      max-width: 680px;
+      margin: 0 auto 24px;
+      overflow: hidden;
+    }
+    .oferta-box table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .oferta-box td {
+      padding: 18px 28px;
+      font-size: .97rem;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: left;
+    }
+    .oferta-box td:last-child {
+      font-weight: 700;
+      color: var(--primary);
+      text-align: right;
+    }
+    .oferta-box tr:last-child td { border-bottom: none; }
+    .oferta-nota {
+      max-width: 680px;
+      margin: 0 auto;
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      padding: 16px 24px;
+      font-size: .9rem;
+      color: #92400e;
+      text-align: left;
+    }
+
+    /* ─────────────────────────────────────────
+       SEÇÃO 7 — DEPOIMENTO
+    ───────────────────────────────────────── */
+    .depoimento {
+      background: var(--dark);
+      color: #fff;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .depoimento h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin-bottom: 48px;
+    }
+    .depoimento-box {
+      max-width: 720px;
+      margin: 0 auto;
+      background: rgba(255,255,255,.06);
+      border-left: 4px solid var(--accent);
+      padding: 40px 44px;
+      border-radius: 0 12px 12px 0;
+      text-align: left;
+    }
+    .depoimento-box .aspas {
+      font-size: 3.5rem;
+      color: var(--accent);
+      line-height: .6;
+      margin-bottom: 20px;
+      font-family: Georgia, serif;
+    }
+    .depoimento-box p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: .92;
+      font-style: italic;
+    }
+    .depoimento-box .autor {
+      margin-top: 24px;
+      font-style: normal;
+      font-weight: 700;
+      font-size: .95rem;
+      color: var(--accent);
+    }
+
+    /* ─────────────────────────────────────────
+       SEÇÃO 8 — FAQ
+    ───────────────────────────────────────── */
+    .faq {
+      background: #fff;
+      padding: 80px 24px;
+    }
+    .faq h2 {
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .faq-list {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      border-bottom: 1px solid #e5e7eb;
+      padding: 24px 0;
+    }
+    .faq-item h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .faq-item p {
+      font-size: .93rem;
+      color: #4b5563;
+    }
+
+    /* ─────────────────────────────────────────
+       SEÇÃO 9 — CTA FINAL
+    ───────────────────────────────────────── */
+    .cta-final {
+      background: var(--primary);
+      color: #fff;
+      padding: 90px 24px;
+      text-align: center;
+    }
+    .cta-final h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      max-width: 680px;
+      margin: 0 auto 14px;
+    }
+    .cta-final p {
+      max-width: 520px;
+      margin: 0 auto 40px;
+      opacity: .82;
+      font-size: 1.05rem;
+    }
+    .form-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 40px 36px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .form-box input {
+      width: 100%;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 13px 16px;
+      font-size: 1rem;
+      margin-bottom: 14px;
+      color: #1a1a1a;
+    }
+    .form-box input:focus {
+      outline: 2px solid var(--primary);
+      border-color: transparent;
+    }
+    .form-box .btn { width: 100%; text-align: center; font-size: 1.05rem; }
+    .form-box .privacidade {
+      font-size: .78rem;
+      color: var(--text-muted);
+      margin-top: 10px;
+    }
+
+    /* ─────────────────────────────────────────
+       RODAPÉ
+    ───────────────────────────────────────── */
+    footer {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 32px 24px;
+      font-size: .82rem;
+      opacity: .75;
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVO
+    ───────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .stj-box { padding: 24px 20px; }
+      .depoimento-box { padding: 28px 24px; }
+      .form-box { padding: 28px 20px; }
+      .oferta-box td { padding: 14px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════ -->
+  <section class="hero">
+    <span class="tag">Zona Franca de Manaus · Decisão STJ</span>
+    <h1>Sua empresa está pagando um imposto que o <span>STJ já proibiu</span></h1>
+    <p>Empresas da Zona Franca de Manaus têm direito à isenção total de PIS e COFINS — e podem recuperar tudo que pagaram nos últimos 5 anos.</p>
+    <a href="#analise" class="btn">→ Quero saber quanto posso recuperar</a>
+    <small>Análise gratuita e sem compromisso · Processo conduzido por advogado especializado</small>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PROBLEMA
+  ══════════════════════════════════════════ -->
+  <section class="problema">
+    <h2>Você sabia que está pagando indevidamente?</h2>
+    <p>
+      Todos os meses, centenas de empresas da Zona Franca recolhem PIS e COFINS normalmente — sem saber que o Superior Tribunal de Justiça já decidiu que esse pagamento é <strong>ilegal para quem opera na ZFM.</strong>
+    </p>
+    <p>
+      Não é uma brecha. Não é interpretação.<br />
+      <strong>É uma decisão vinculante do STJ — obrigatória para todos os tribunais do país.</strong>
+    </p>
+    <div class="destaque">
+      Cada mês que passa sem agir é dinheiro que fica na mão da Receita Federal — e que é seu por direito.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PROVA LEGAL
+  ══════════════════════════════════════════ -->
+  <section class="prova">
+    <h2>A decisão que garante seu direito</h2>
+
+    <div class="stj-box">
+      <div class="stj-label">STJ — Tema 1.239 | Recurso Repetitivo</div>
+      <blockquote>
+        "Não incide a contribuição ao PIS e a COFINS sobre as receitas advindas da prestação de serviço e da venda de mercadorias nacionais e nacionalizadas, a pessoas físicas e jurídicas, no âmbito da Zona Franca de Manaus."
+      </blockquote>
+      <p class="fundamento">Fundamentação: Artigo 4º do Decreto-Lei nº 288/1967 · Constituição Federal, Art. 40 do ADCT</p>
+    </div>
+
+    <div class="selos">
+      <div class="selo">
+        <div class="icon">✅</div>
+        <strong>Decisão vinculante</strong>
+        <span>Todos os juízes do país são obrigados a seguir</span>
+      </div>
+      <div class="selo">
+        <div class="icon">⚖️</div>
+        <strong>Trânsito em julgado</strong>
+        <span>Sem possibilidade de recurso — é definitivo</span>
+      </div>
+      <div class="selo">
+        <div class="icon">🏆</div>
+        <strong>Já aplicado na ZFM</strong>
+        <span>Obtivemos decisão de trânsito em julgado em favor de empresa de Manaus</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       OPORTUNIDADE
+  ══════════════════════════════════════════ -->
+  <section class="oportunidade">
+    <h2>O que isso significa para o seu caixa</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="icon">↩️</div>
+        <h3>Recupere os últimos 5 anos</h3>
+        <p>Tudo que foi pago indevidamente de PIS e COFINS desde 2021 pode ser restituído via processo judicial.</p>
+      </div>
+      <div class="card">
+        <div class="icon">⛔</div>
+        <h3>Pare de pagar imediatamente</h3>
+        <p>Com a liminar, sua empresa interrompe o recolhimento enquanto o processo corre.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📈</div>
+        <h3>Isenção permanente</h3>
+        <p>Com o trânsito em julgado, sua empresa nunca mais paga PIS e COFINS. Para sempre.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       COMO FUNCIONA
+  ══════════════════════════════════════════ -->
+  <section class="como">
+    <h2>Simples. Seguro. Sem burocracia para você.</h2>
+    <div class="passos">
+      <div class="passo">
+        <div class="num">1</div>
+        <h3>Análise gratuita</h3>
+        <p>Nossa equipe levanta quanto sua empresa pagou e projeta o valor total a recuperar. Você não precisa fazer nada.</p>
+      </div>
+      <div class="passo">
+        <div class="num">2</div>
+        <h3>Processo judicial</h3>
+        <p>Advogado especializado entra com a ação baseada na decisão do STJ. Sua empresa recebe a proteção da liminar.</p>
+      </div>
+      <div class="passo">
+        <div class="num">3</div>
+        <h3>Você recebe</h3>
+        <p>O valor é restituído diretamente para sua empresa. A Econoserv acompanha cada etapa do processo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       OFERTA
+  ══════════════════════════════════════════ -->
+  <section class="oferta">
+    <h2>Você investe R$ 3.000. O resto só paga quando receber.</h2>
+    <p class="sub">Sem risco. Sem surpresa. Tudo no contrato.</p>
+
+    <div class="oferta-box">
+      <table>
+        <tr>
+          <td>Investimento inicial</td>
+          <td>R$ 3.000 para abertura do processo</td>
+        </tr>
+        <tr>
+          <td>Recuperação dos últimos 5 anos</td>
+          <td>30% do valor restituído</td>
+        </tr>
+        <tr>
+          <td>Se não recuperar</td>
+          <td>Você não paga mais nada</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="oferta-nota">
+      <strong>Sobre a economia futura:</strong> Se a liminar for concedida antes do trânsito em julgado, cobra-se 30% do valor que sua empresa deixaria de pagar nesse período — porque esse dinheiro fica no seu caixa. Se sair direto o trânsito em julgado, sem essa cobrança.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       DEPOIMENTO
+  ══════════════════════════════════════════ -->
+  <section class="depoimento">
+    <h2>Quem já fez isso na Zona Franca</h2>
+    <div class="depoimento-box">
+      <div class="aspas">"</div>
+      <p>
+        Quando a Econoserv me apresentou essa oportunidade, fiquei curioso mas cético. No fim, foi uma das melhores decisões que tomei pelo negócio. Recuperamos mais de R$ 600 mil que estavam na mão da Receita Federal e que eram nossos por direito. Impactou diretamente nossa lucratividade. Qualquer empresa da Zona Franca deveria fazer isso.
+      </p>
+      <p class="autor">— Isaías, Proprietário da Hidronox</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FAQ
+  ══════════════════════════════════════════ -->
+  <section class="faq">
+    <h2>Perguntas frequentes</h2>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <h3>Isso é legal?</h3>
+        <p>Sim. É baseado em decisão do próprio STJ — a mais alta corte do país para matéria tributária. Já existe trânsito em julgado favorável a empresas da ZFM.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Quanto tempo leva para recuperar?</h3>
+        <p>A liminar pode ser concedida em semanas. O valor da restituição dos últimos 5 anos é liberado com o trânsito em julgado, cujo prazo varia conforme o andamento do processo.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Preciso mudar algo na minha operação?</h3>
+        <p>Não. O processo corre sem impacto nas suas atividades. Sua empresa continua operando normalmente.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>E se a Receita Federal questionar?</h3>
+        <p>O processo é conduzido por advogado especializado. A decisão vinculante do STJ é a sua proteção jurídica.</p>
+      </div>
+
+      <div class="faq-item">
+        <h3>Qualquer empresa da ZFM tem direito?</h3>
+        <p>Empresas que operam dentro da Zona Franca de Manaus e que recolhem PIS e COFINS. A análise gratuita confirma o seu caso específico.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       CTA FINAL
+  ══════════════════════════════════════════ -->
+  <section class="cta-final" id="analise">
+    <h2>Descubra quanto sua empresa pode recuperar</h2>
+    <p>Análise gratuita e sem compromisso. Nossa equipe levanta os números e te mostra o potencial exato — sem você precisar fazer nada.</p>
+
+    <div class="form-box">
+      <input type="text"    placeholder="Seu nome completo" />
+      <input type="text"    placeholder="Nome da empresa" />
+      <input type="text"    placeholder="CNPJ" />
+      <input type="tel"     placeholder="WhatsApp com DDD" />
+      <button class="btn">→ Quero minha análise gratuita</button>
+      <p class="privacidade">Seus dados estão protegidos. Não fazemos spam.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       RODAPÉ
+  ══════════════════════════════════════════ -->
+  <footer>
+    <p>Econoserv Consultoria | Gestão Financeira em Manaus</p>
+    <p style="margin-top:6px;">Processo baseado no STJ Tema 1.239 · Decreto-Lei nº 288/1967 · Constituição Federal, Art. 40 do ADCT</p>
+  </footer>
+
+</body>
+</html>
