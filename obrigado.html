@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recebemos sua solicitação | Econoserv</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary: #1B3A6B;
+      --accent:  #F4A800;
+      --dark:    #0D1F3C;
+      --green:   #10b981;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0a1628 0%, #1B3A6B 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 28px;
+      padding: 60px 52px;
+      max-width: 560px;
+      width: 100%;
+      text-align: center;
+      animation: fadeUp .6s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .check-wrap {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--green), #34d399);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow: 0 0 0 12px rgba(16,185,129,.15);
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 0 12px rgba(16,185,129,.15); }
+      50%       { box-shadow: 0 0 0 20px rgba(16,185,129,.08); }
+    }
+
+    .check-wrap svg {
+      width: 36px; height: 36px;
+      stroke: #fff;
+      stroke-width: 2.5;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: #fff;
+      letter-spacing: -.02em;
+      margin-bottom: 14px;
+    }
+
+    p.sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,.65);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+
+    p.sub strong { color: var(--accent); }
+
+    .info-box {
+      background: rgba(244,168,0,.1);
+      border: 1px solid rgba(244,168,0,.25);
+      border-radius: 14px;
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      text-align: left;
+    }
+    .info-box .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .88rem;
+      color: rgba(255,255,255,.7);
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+    .info-box .info-row:last-child { margin-bottom: 0; }
+    .info-box .info-row .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent), #d4920a);
+      color: #fff;
+      font-weight: 700;
+      font-size: .95rem;
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(244,168,0,.35);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(244,168,0,.45);
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: .76rem;
+      color: rgba(255,255,255,.3);
+    }
+
+    @media (max-width: 480px) {
+      .card { padding: 40px 28px; }
+      h1 { font-size: 1.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+
+    <div class="check-wrap">
+      <svg viewBox="0 0 24 24">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <h1>Solicitação recebida!</h1>
+
+    <p class="sub">
+      Nossa equipe já foi notificada e vai analisar os dados da sua empresa.<br />
+      Em breve entramos em contato pelo <strong>WhatsApp</strong> que você informou.
+    </p>
+
+    <div class="info-box">
+      <div class="info-row">
+        <span class="dot"></span>
+        <span>Faremos o levantamento do valor que sua empresa pode recuperar dos últimos 5 anos.</span>
+      </div>
+      <div class="info-row">
+        <span class="dot"></span>
+        <span>A análise é gratuita e sem nenhum compromisso da sua parte.</span>
+      </div>
+      <div class="info-row">
+        <span class="dot"></span>
+        <span>Você receberá o contato em até <strong style="color:var(--accent)">24 horas úteis.</strong></span>
+      </div>
+    </div>
+
+    <a href="reducao-de-impostos.html" class="btn">← Voltar à página</a>
+
+    <p class="footer-note">Econoserv Consultoria · contato@econoserv.com.br</p>
+  </div>
+</body>
+</html>
