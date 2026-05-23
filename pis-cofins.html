@@ -4,498 +4,737 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Recuperação Tributária PIS/COFINS | Econoserv</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: 'Segoe UI', Arial, sans-serif;
-      color: #1a1a1a;
-      line-height: 1.6;
-    }
-
-    /* ─── CORES — trocar pelos hex da Econoserv ─── */
     :root {
-      --primary:   #1B3A6B;   /* azul principal   */
-      --accent:    #F4A800;   /* amarelo/ouro      */
+      --primary:   #1B3A6B;
+      --primary-light: #2a549a;
+      --accent:    #F4A800;
+      --accent-dark: #d4920a;
       --dark:      #0D1F3C;
       --light-bg:  #F5F7FA;
+      --text:      #1a1a2e;
       --text-muted:#6b7280;
+      --white:     #ffffff;
+      --border:    #e5e7eb;
     }
 
-    a { color: inherit; text-decoration: none; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── ANIMAÇÕES ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up:nth-child(2) { transition-delay: .1s; }
+    .fade-up:nth-child(3) { transition-delay: .2s; }
+    .fade-up:nth-child(4) { transition-delay: .3s; }
 
     /* ── BOTÃO ── */
     .btn {
-      display: inline-block;
-      background: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
       color: #fff;
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
       padding: 16px 36px;
-      border-radius: 6px;
+      border-radius: 50px;
       cursor: pointer;
       border: none;
-      transition: opacity .2s;
+      box-shadow: 0 4px 20px rgba(244,168,0,.35);
+      transition: transform .2s, box-shadow .2s;
+      text-decoration: none;
     }
-    .btn:hover { opacity: .88; }
-    .btn-white {
-      background: #fff;
-      color: var(--primary);
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(244,168,0,.45);
+    }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid rgba(255,255,255,.4);
+      color: #fff;
+      box-shadow: none;
+    }
+    .btn-outline:hover {
+      background: rgba(255,255,255,.1);
+      box-shadow: none;
     }
 
-    /* ─────────────────────────────────────────
-       SEÇÃO 1 — HERO
-    ───────────────────────────────────────── */
+    /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
     .hero {
-      background: var(--dark);
+      background: linear-gradient(135deg, #0a1628 0%, #1B3A6B 60%, #0f2d5c 100%);
       color: #fff;
       text-align: center;
-      padding: 90px 24px 80px;
+      padding: 100px 24px 90px;
+      position: relative;
+      overflow: hidden;
     }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 40%, rgba(244,168,0,.12) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(42,84,154,.3) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-inner { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
     .hero .tag {
-      display: inline-block;
-      background: var(--accent);
-      color: #fff;
-      font-size: .8rem;
-      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(244,168,0,.15);
+      border: 1px solid rgba(244,168,0,.4);
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 600;
       letter-spacing: .1em;
       text-transform: uppercase;
       padding: 6px 16px;
-      border-radius: 4px;
-      margin-bottom: 24px;
+      border-radius: 50px;
+      margin-bottom: 28px;
     }
     .hero h1 {
-      font-size: clamp(1.9rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.2;
-      max-width: 780px;
-      margin: 0 auto 20px;
+      font-size: clamp(2rem, 5.5vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      margin-bottom: 22px;
     }
-    .hero h1 span { color: var(--accent); }
+    .hero h1 span {
+      background: linear-gradient(90deg, var(--accent), #ffcc44);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .hero p {
       font-size: 1.15rem;
-      max-width: 600px;
-      margin: 0 auto 36px;
-      opacity: .88;
+      max-width: 580px;
+      margin: 0 auto 40px;
+      opacity: .82;
+      line-height: 1.7;
     }
+    .hero-ctas { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
     .hero small {
       display: block;
-      margin-top: 14px;
-      font-size: .82rem;
-      opacity: .6;
+      margin-top: 20px;
+      font-size: .78rem;
+      opacity: .5;
+      letter-spacing: .03em;
     }
 
-    /* ─────────────────────────────────────────
-       SEÇÃO 2 — PROBLEMA
-    ───────────────────────────────────────── */
+    /* ══════════════════════════════════════
+       STATS BAR
+    ══════════════════════════════════════ */
+    .stats-bar {
+      background: var(--accent);
+      padding: 0;
+    }
+    .stats-inner {
+      display: flex;
+      justify-content: center;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .stat-item {
+      flex: 1;
+      text-align: center;
+      padding: 24px 20px;
+      border-right: 1px solid rgba(0,0,0,.1);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-item .num {
+      display: block;
+      font-size: 1.7rem;
+      font-weight: 900;
+      color: var(--dark);
+      line-height: 1;
+    }
+    .stat-item .label {
+      font-size: .78rem;
+      font-weight: 600;
+      color: rgba(13,31,60,.7);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-top: 4px;
+    }
+
+    /* ══════════════════════════════════════
+       PROBLEMA
+    ══════════════════════════════════════ */
     .problema {
-      background: #fff;
-      padding: 80px 24px;
+      background: var(--white);
+      padding: 96px 24px;
       text-align: center;
     }
-    .problema h2 {
-      font-size: 1.9rem;
+    .section-label {
+      display: inline-block;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 14px;
+    }
+    h2.section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
       font-weight: 800;
       color: var(--primary);
+      line-height: 1.25;
+      letter-spacing: -.02em;
       margin-bottom: 20px;
     }
     .problema p {
-      max-width: 680px;
+      max-width: 660px;
       margin: 0 auto 16px;
       font-size: 1.05rem;
       color: #374151;
     }
     .problema p strong { color: var(--primary); }
-    .problema .destaque {
+    .destaque-box {
       background: var(--light-bg);
       border-left: 4px solid var(--accent);
-      padding: 18px 24px;
-      max-width: 680px;
-      margin: 24px auto 0;
+      border-radius: 0 12px 12px 0;
+      padding: 20px 28px;
+      max-width: 660px;
+      margin: 28px auto 0;
       text-align: left;
-      font-size: 1.05rem;
-      border-radius: 0 6px 6px 0;
+      font-size: 1rem;
+      color: var(--text);
     }
 
-    /* ─────────────────────────────────────────
-       SEÇÃO 3 — PROVA LEGAL
-    ───────────────────────────────────────── */
+    /* ══════════════════════════════════════
+       PROVA LEGAL
+    ══════════════════════════════════════ */
     .prova {
       background: var(--light-bg);
-      padding: 80px 24px;
+      padding: 96px 24px;
       text-align: center;
     }
-    .prova h2 {
-      font-size: 1.9rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 36px;
-    }
-    .stj-box {
-      background: var(--dark);
+    .stj-card {
+      background: linear-gradient(135deg, var(--dark) 0%, #1B3A6B 100%);
       color: #fff;
-      max-width: 780px;
+      max-width: 800px;
       margin: 0 auto 40px;
-      padding: 36px 40px;
-      border-radius: 10px;
+      padding: 44px 48px;
+      border-radius: 20px;
       text-align: left;
+      box-shadow: 0 20px 60px rgba(13,31,60,.25);
+      position: relative;
+      overflow: hidden;
     }
-    .stj-box .stj-label {
-      font-size: .8rem;
-      font-weight: 700;
-      letter-spacing: .12em;
-      text-transform: uppercase;
+    .stj-card::after {
+      content: '';
+      position: absolute;
+      right: -40px; top: -40px;
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      background: rgba(244,168,0,.07);
+    }
+    .stj-card .stj-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(244,168,0,.15);
+      border: 1px solid rgba(244,168,0,.3);
       color: var(--accent);
-      margin-bottom: 14px;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 20px;
     }
-    .stj-box blockquote {
-      font-size: 1.1rem;
-      line-height: 1.7;
+    .stj-card blockquote {
+      font-size: 1.08rem;
+      line-height: 1.75;
       border-left: 3px solid var(--accent);
-      padding-left: 18px;
+      padding-left: 20px;
       font-style: italic;
-      opacity: .92;
+      opacity: .9;
+      position: relative;
+      z-index: 1;
     }
-    .stj-box .fundamento {
+    .stj-card .fundamento {
       margin-top: 20px;
-      font-size: .88rem;
-      opacity: .65;
+      font-size: .82rem;
+      opacity: .5;
+      letter-spacing: .02em;
     }
-
     .selos {
       display: flex;
+      gap: 16px;
       justify-content: center;
-      gap: 24px;
       flex-wrap: wrap;
-      max-width: 780px;
+      max-width: 800px;
       margin: 0 auto;
     }
     .selo {
-      background: #fff;
-      border: 2px solid var(--primary);
-      border-radius: 8px;
-      padding: 18px 24px;
-      flex: 1 1 200px;
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px 22px;
+      flex: 1 1 210px;
       text-align: left;
+      box-shadow: 0 2px 12px rgba(0,0,0,.06);
+      transition: transform .25s, box-shadow .25s;
     }
-    .selo .icon { font-size: 1.6rem; margin-bottom: 8px; }
-    .selo strong { display: block; color: var(--primary); font-size: .95rem; }
-    .selo span { font-size: .85rem; color: var(--text-muted); }
+    .selo:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(0,0,0,.1);
+    }
+    .selo .icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .selo strong { display: block; color: var(--primary); font-size: .95rem; font-weight: 700; margin-bottom: 4px; }
+    .selo span { font-size: .84rem; color: var(--text-muted); }
 
-    /* ─────────────────────────────────────────
-       SEÇÃO 4 — OPORTUNIDADE
-    ───────────────────────────────────────── */
+    /* ══════════════════════════════════════
+       OPORTUNIDADE
+    ══════════════════════════════════════ */
     .oportunidade {
-      background: #fff;
-      padding: 80px 24px;
+      background: var(--white);
+      padding: 96px 24px;
       text-align: center;
-    }
-    .oportunidade h2 {
-      font-size: 1.9rem;
-      font-weight: 800;
-      color: var(--primary);
-      margin-bottom: 40px;
     }
     .cards {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       justify-content: center;
       flex-wrap: wrap;
-      max-width: 960px;
-      margin: 0 auto;
+      max-width: 980px;
+      margin: 48px auto 0;
     }
     .card {
       background: var(--light-bg);
-      border-radius: 10px;
-      padding: 32px 28px;
-      flex: 1 1 240px;
+      border-radius: 20px;
+      padding: 36px 30px;
+      flex: 1 1 260px;
       text-align: left;
+      border: 1px solid var(--border);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
     }
-    .card .icon { font-size: 2rem; margin-bottom: 14px; }
-    .card h3 { font-size: 1.05rem; color: var(--primary); margin-bottom: 8px; }
-    .card p { font-size: .92rem; color: #4b5563; }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.08);
+      border-color: var(--accent);
+    }
+    .card .icon-wrap {
+      width: 52px; height: 52px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+    .card h3 { font-size: 1rem; font-weight: 700; color: var(--primary); margin-bottom: 10px; }
+    .card p { font-size: .9rem; color: #4b5563; line-height: 1.6; }
 
-    /* ─────────────────────────────────────────
-       SEÇÃO 5 — COMO FUNCIONA
-    ───────────────────────────────────────── */
+    /* ══════════════════════════════════════
+       COMO FUNCIONA
+    ══════════════════════════════════════ */
     .como {
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary) 0%, #0f2d5c 100%);
       color: #fff;
-      padding: 80px 24px;
+      padding: 96px 24px;
       text-align: center;
     }
-    .como h2 {
-      font-size: 1.9rem;
-      font-weight: 800;
-      margin-bottom: 48px;
-    }
+    .como .section-label { color: rgba(244,168,0,.9); }
+    .como h2.section-title { color: #fff; }
     .passos {
       display: flex;
-      gap: 32px;
+      gap: 0;
       justify-content: center;
       flex-wrap: wrap;
       max-width: 900px;
-      margin: 0 auto;
+      margin: 56px auto 0;
+      position: relative;
+    }
+    .passos::before {
+      content: '';
+      position: absolute;
+      top: 28px; left: 15%; right: 15%;
+      height: 2px;
+      background: rgba(244,168,0,.25);
     }
     .passo {
       flex: 1 1 220px;
       text-align: center;
+      padding: 0 20px;
+      position: relative;
     }
     .passo .num {
-      width: 56px;
-      height: 56px;
-      background: var(--accent);
+      width: 56px; height: 56px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
       border-radius: 50%;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 4px 20px rgba(244,168,0,.4);
+      position: relative; z-index: 1;
     }
-    .passo h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .passo p { font-size: .88rem; opacity: .82; }
+    .passo h3 { font-size: .95rem; font-weight: 700; margin-bottom: 10px; }
+    .passo p { font-size: .84rem; opacity: .75; line-height: 1.6; }
 
-    /* ─────────────────────────────────────────
-       SEÇÃO 6 — OFERTA
-    ───────────────────────────────────────── */
+    /* ══════════════════════════════════════
+       OFERTA
+    ══════════════════════════════════════ */
     .oferta {
       background: var(--light-bg);
-      padding: 80px 24px;
+      padding: 96px 24px;
       text-align: center;
     }
-    .oferta h2 {
-      font-size: 1.9rem;
-      font-weight: 800;
+    .oferta-grid {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 860px;
+      margin: 48px auto 0;
+    }
+    .oferta-item {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 32px 28px;
+      flex: 1 1 220px;
+      text-align: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,.06);
+      border: 2px solid transparent;
+      transition: border-color .25s, transform .25s;
+    }
+    .oferta-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+    .oferta-item.destaque {
+      background: linear-gradient(135deg, var(--primary), #2a549a);
+      color: #fff;
+      border-color: transparent;
+    }
+    .oferta-item .valor {
+      font-size: 2.2rem;
+      font-weight: 900;
       color: var(--primary);
-      margin-bottom: 10px;
+      line-height: 1;
+      margin: 12px 0 8px;
     }
-    .oferta .sub {
-      color: var(--text-muted);
-      margin-bottom: 40px;
-    }
-    .oferta-box {
-      background: #fff;
-      border: 2px solid var(--primary);
-      border-radius: 12px;
-      max-width: 680px;
-      margin: 0 auto 24px;
-      overflow: hidden;
-    }
-    .oferta-box table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .oferta-box td {
-      padding: 18px 28px;
-      font-size: .97rem;
-      border-bottom: 1px solid #e5e7eb;
-      text-align: left;
-    }
-    .oferta-box td:last-child {
+    .oferta-item.destaque .valor { color: var(--accent); }
+    .oferta-item .rotulo {
+      font-size: .72rem;
       font-weight: 700;
-      color: var(--primary);
-      text-align: right;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--text-muted);
     }
-    .oferta-box tr:last-child td { border-bottom: none; }
-    .oferta-nota {
+    .oferta-item.destaque .rotulo { color: rgba(255,255,255,.6); }
+    .oferta-item .desc {
+      font-size: .85rem;
+      color: #6b7280;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .oferta-item.destaque .desc { color: rgba(255,255,255,.7); }
+    .oferta-item .icone { font-size: 1.6rem; margin-bottom: 4px; }
+    .oferta-garantia {
       max-width: 680px;
-      margin: 0 auto;
+      margin: 28px auto 0;
       background: #fffbeb;
       border: 1px solid #fcd34d;
-      border-radius: 8px;
-      padding: 16px 24px;
+      border-radius: 14px;
+      padding: 20px 28px;
       font-size: .9rem;
       color: #92400e;
       text-align: left;
+      line-height: 1.6;
     }
+    .oferta-garantia strong { color: #78350f; }
 
-    /* ─────────────────────────────────────────
-       SEÇÃO 7 — DEPOIMENTO
-    ───────────────────────────────────────── */
+    /* ══════════════════════════════════════
+       DEPOIMENTO
+    ══════════════════════════════════════ */
     .depoimento {
-      background: var(--dark);
+      background: linear-gradient(135deg, #0a1628 0%, var(--dark) 100%);
       color: #fff;
-      padding: 80px 24px;
+      padding: 96px 24px;
       text-align: center;
     }
-    .depoimento h2 {
-      font-size: 1.9rem;
-      font-weight: 800;
-      margin-bottom: 48px;
-    }
-    .depoimento-box {
-      max-width: 720px;
+    .depoimento .section-label { color: rgba(244,168,0,.8); }
+    .depoimento h2.section-title { color: #fff; margin-bottom: 48px; }
+    .depo-card {
+      max-width: 740px;
       margin: 0 auto;
-      background: rgba(255,255,255,.06);
-      border-left: 4px solid var(--accent);
-      padding: 40px 44px;
-      border-radius: 0 12px 12px 0;
+      background: rgba(255,255,255,.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 24px;
+      padding: 48px 52px;
       text-align: left;
+      position: relative;
     }
-    .depoimento-box .aspas {
-      font-size: 3.5rem;
+    .depo-card .aspas {
+      font-size: 5rem;
       color: var(--accent);
-      line-height: .6;
-      margin-bottom: 20px;
+      line-height: .5;
       font-family: Georgia, serif;
+      margin-bottom: 24px;
+      opacity: .7;
     }
-    .depoimento-box p {
+    .depo-card p {
       font-size: 1.1rem;
-      line-height: 1.8;
-      opacity: .92;
+      line-height: 1.85;
+      opacity: .9;
       font-style: italic;
     }
-    .depoimento-box .autor {
-      margin-top: 24px;
-      font-style: normal;
-      font-weight: 700;
+    .depo-card .autor-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 28px;
+    }
+    .depo-card .autor-avatar {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.2rem; color: var(--dark);
+    }
+    .depo-card .autor-info strong {
+      display: block;
       font-size: .95rem;
+      font-weight: 700;
       color: var(--accent);
     }
+    .depo-card .autor-info span {
+      font-size: .8rem;
+      opacity: .55;
+    }
+    .depo-resultado {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(244,168,0,.12);
+      border: 1px solid rgba(244,168,0,.25);
+      color: var(--accent);
+      font-size: .82rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-top: 24px;
+    }
 
-    /* ─────────────────────────────────────────
-       SEÇÃO 8 — FAQ
-    ───────────────────────────────────────── */
+    /* ══════════════════════════════════════
+       FAQ
+    ══════════════════════════════════════ */
     .faq {
-      background: #fff;
-      padding: 80px 24px;
+      background: var(--white);
+      padding: 96px 24px;
     }
-    .faq h2 {
-      font-size: 1.9rem;
-      font-weight: 800;
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .faq-list {
-      max-width: 720px;
-      margin: 0 auto;
-    }
+    .faq-inner { max-width: 720px; margin: 0 auto; }
     .faq-item {
-      border-bottom: 1px solid #e5e7eb;
-      padding: 24px 0;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 12px;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .faq-item:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 16px rgba(27,58,107,.07);
     }
     .faq-item h3 {
-      font-size: 1rem;
+      font-size: .97rem;
       font-weight: 700;
       color: var(--primary);
       margin-bottom: 8px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .faq-item h3::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      margin-top: 1px;
     }
     .faq-item p {
-      font-size: .93rem;
+      font-size: .9rem;
       color: #4b5563;
+      line-height: 1.65;
+      padding-left: 22px;
     }
 
-    /* ─────────────────────────────────────────
-       SEÇÃO 9 — CTA FINAL
-    ───────────────────────────────────────── */
+    /* ══════════════════════════════════════
+       CTA FINAL
+    ══════════════════════════════════════ */
     .cta-final {
-      background: var(--primary);
+      background: linear-gradient(135deg, var(--primary) 0%, #0f2d5c 100%);
       color: #fff;
-      padding: 90px 24px;
+      padding: 100px 24px;
       text-align: center;
+      position: relative;
+      overflow: hidden;
     }
+    .cta-final::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(244,168,0,.12) 0%, transparent 60%);
+    }
+    .cta-final-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+    .cta-final .section-label { color: rgba(244,168,0,.8); }
     .cta-final h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      max-width: 680px;
-      margin: 0 auto 14px;
-    }
-    .cta-final p {
-      max-width: 520px;
-      margin: 0 auto 40px;
-      opacity: .82;
-      font-size: 1.05rem;
-    }
-    .form-box {
-      background: #fff;
-      border-radius: 12px;
-      padding: 40px 36px;
-      max-width: 500px;
-      margin: 0 auto;
-    }
-    .form-box input {
-      width: 100%;
-      border: 1px solid #d1d5db;
-      border-radius: 6px;
-      padding: 13px 16px;
-      font-size: 1rem;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      font-weight: 900;
+      letter-spacing: -.02em;
+      line-height: 1.2;
       margin-bottom: 14px;
-      color: #1a1a1a;
     }
-    .form-box input:focus {
-      outline: 2px solid var(--primary);
-      border-color: transparent;
+    .cta-final > .cta-final-inner > p {
+      opacity: .75;
+      margin-bottom: 44px;
+      font-size: 1rem;
     }
-    .form-box .btn { width: 100%; text-align: center; font-size: 1.05rem; }
-    .form-box .privacidade {
-      font-size: .78rem;
-      color: var(--text-muted);
-      margin-top: 10px;
+    .form-card {
+      background: rgba(255,255,255,.07);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 24px;
+      padding: 40px 36px;
+    }
+    .form-card input {
+      width: 100%;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: .95rem;
+      color: #fff;
+      margin-bottom: 12px;
+      transition: border-color .2s, background .2s;
+      font-family: inherit;
+    }
+    .form-card input::placeholder { color: rgba(255,255,255,.45); }
+    .form-card input:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255,255,255,.15);
+    }
+    .form-card .btn { width: 100%; justify-content: center; font-size: 1rem; margin-top: 4px; }
+    .form-card .privacidade {
+      font-size: .75rem;
+      color: rgba(255,255,255,.35);
+      margin-top: 14px;
     }
 
-    /* ─────────────────────────────────────────
+    /* ══════════════════════════════════════
        RODAPÉ
-    ───────────────────────────────────────── */
+    ══════════════════════════════════════ */
     footer {
-      background: var(--dark);
-      color: #fff;
+      background: #060e1c;
+      color: rgba(255,255,255,.4);
       text-align: center;
       padding: 32px 24px;
-      font-size: .82rem;
-      opacity: .75;
+      font-size: .78rem;
+      line-height: 1.8;
     }
 
-    /* ─────────────────────────────────────────
+    /* ══════════════════════════════════════
        RESPONSIVO
-    ───────────────────────────────────────── */
-    @media (max-width: 600px) {
-      .stj-box { padding: 24px 20px; }
-      .depoimento-box { padding: 28px 24px; }
-      .form-box { padding: 28px 20px; }
-      .oferta-box td { padding: 14px 16px; }
+    ══════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .stats-inner { flex-direction: column; }
+      .stat-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,.1); }
+      .stat-item:last-child { border-bottom: none; }
+      .stj-card { padding: 28px 24px; }
+      .depo-card { padding: 32px 24px; }
+      .form-card { padding: 28px 20px; }
+      .passos::before { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ══════════════════════════════════════
        HERO
-  ══════════════════════════════════════════ -->
+  ══════════════════════════════════════ -->
   <section class="hero">
-    <span class="tag">Zona Franca de Manaus · Decisão STJ</span>
-    <h1>Sua empresa está pagando um imposto que o <span>STJ já proibiu</span></h1>
-    <p>Empresas da Zona Franca de Manaus têm direito à isenção total de PIS e COFINS — e podem recuperar tudo que pagaram nos últimos 5 anos.</p>
-    <a href="#analise" class="btn">→ Quero saber quanto posso recuperar</a>
-    <small>Análise gratuita e sem compromisso · Processo conduzido por advogado especializado</small>
-  </section>
-
-  <!-- ═══════════════════════════════════════
-       PROBLEMA
-  ══════════════════════════════════════════ -->
-  <section class="problema">
-    <h2>Você sabia que está pagando indevidamente?</h2>
-    <p>
-      Todos os meses, centenas de empresas da Zona Franca recolhem PIS e COFINS normalmente — sem saber que o Superior Tribunal de Justiça já decidiu que esse pagamento é <strong>ilegal para quem opera na ZFM.</strong>
-    </p>
-    <p>
-      Não é uma brecha. Não é interpretação.<br />
-      <strong>É uma decisão vinculante do STJ — obrigatória para todos os tribunais do país.</strong>
-    </p>
-    <div class="destaque">
-      Cada mês que passa sem agir é dinheiro que fica na mão da Receita Federal — e que é seu por direito.
+    <div class="hero-inner">
+      <span class="tag">⚖️ Zona Franca de Manaus · STJ Tema 1.239</span>
+      <h1 class="fade-up">Sua empresa está pagando um imposto<br /><span>que não deveria estar pagando</span></h1>
+      <p class="fade-up">Empresas da Zona Franca têm direito à isenção total de PIS e COFINS, e podem recuperar tudo que pagaram nos últimos 5 anos.</p>
+      <div class="hero-ctas fade-up">
+        <a href="#analise" class="btn">→ Quero saber quanto posso recuperar</a>
+      </div>
+      <small>Análise gratuita e sem compromisso · Processo conduzido por advogado especializado</small>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
-       PROVA LEGAL
-  ══════════════════════════════════════════ -->
-  <section class="prova">
-    <h2>A decisão que garante seu direito</h2>
+  <!-- ══════════════════════════════════════
+       STATS BAR
+  ══════════════════════════════════════ -->
+  <div class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="num">5 anos</span>
+        <span class="label">de valores recuperáveis</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">R$ 600k+</span>
+        <span class="label">já recuperados na ZFM</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">100%</span>
+        <span class="label">dos clientes receberam</span>
+      </div>
+      <div class="stat-item">
+        <span class="num">STJ</span>
+        <span class="label">decisão vinculante</span>
+      </div>
+    </div>
+  </div>
 
-    <div class="stj-box">
-      <div class="stj-label">STJ — Tema 1.239 | Recurso Repetitivo</div>
+  <!-- ══════════════════════════════════════
+       PROBLEMA
+  ══════════════════════════════════════ -->
+  <section class="problema">
+    <span class="section-label fade-up">O que está acontecendo</span>
+    <h2 class="section-title fade-up">Você sabia que está pagando indevidamente?</h2>
+    <p class="fade-up">
+      Todos os meses, centenas de empresas da Zona Franca recolhem PIS e COFINS normalmente, sem saber que o Superior Tribunal de Justiça já decidiu que esse valor <strong>não deve ser cobrado de quem opera na ZFM.</strong>
+    </p>
+    <p class="fade-up">
+      Não é uma brecha. Não é interpretação.<br />
+      <strong>É uma decisão vinculante do STJ, obrigatória para todos os tribunais do país.</strong>
+    </p>
+    <div class="destaque-box fade-up">
+      Cada mês que passa sem agir é dinheiro que fica na mão da Receita Federal. É seu por direito.
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       PROVA LEGAL
+  ══════════════════════════════════════ -->
+  <section class="prova">
+    <span class="section-label fade-up">A base jurídica</span>
+    <h2 class="section-title fade-up">A decisão que garante seu direito</h2>
+
+    <div class="stj-card fade-up">
+      <div class="stj-badge">⚖️ STJ: Tema 1.239 · Recurso Repetitivo</div>
       <blockquote>
         "Não incide a contribuição ao PIS e a COFINS sobre as receitas advindas da prestação de serviço e da venda de mercadorias nacionais e nacionalizadas, a pessoas físicas e jurídicas, no âmbito da Zona Franca de Manaus."
       </blockquote>
@@ -503,65 +742,67 @@
     </div>
 
     <div class="selos">
-      <div class="selo">
+      <div class="selo fade-up">
         <div class="icon">✅</div>
         <strong>Decisão vinculante</strong>
         <span>Todos os juízes do país são obrigados a seguir</span>
       </div>
-      <div class="selo">
+      <div class="selo fade-up">
         <div class="icon">⚖️</div>
         <strong>Trânsito em julgado</strong>
-        <span>Sem possibilidade de recurso — é definitivo</span>
+        <span>Sem possibilidade de recurso. É definitivo.</span>
       </div>
-      <div class="selo">
+      <div class="selo fade-up">
         <div class="icon">🏆</div>
         <strong>Já aplicado na ZFM</strong>
-        <span>Obtivemos decisão de trânsito em julgado em favor de empresa de Manaus</span>
+        <span>Obtivemos decisão favorável para empresa de Manaus</span>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ══════════════════════════════════════
        OPORTUNIDADE
-  ══════════════════════════════════════════ -->
+  ══════════════════════════════════════ -->
   <section class="oportunidade">
-    <h2>O que isso significa para o seu caixa</h2>
+    <span class="section-label fade-up">O que sua empresa ganha</span>
+    <h2 class="section-title fade-up">O que isso significa para o seu caixa</h2>
     <div class="cards">
-      <div class="card">
-        <div class="icon">↩️</div>
+      <div class="card fade-up">
+        <div class="icon-wrap">↩️</div>
         <h3>Recupere os últimos 5 anos</h3>
         <p>Tudo que foi pago indevidamente de PIS e COFINS desde 2021 pode ser restituído via processo judicial.</p>
       </div>
-      <div class="card">
-        <div class="icon">⛔</div>
+      <div class="card fade-up">
+        <div class="icon-wrap">⛔</div>
         <h3>Pare de pagar imediatamente</h3>
         <p>Com a liminar, sua empresa interrompe o recolhimento enquanto o processo corre.</p>
       </div>
-      <div class="card">
-        <div class="icon">📈</div>
+      <div class="card fade-up">
+        <div class="icon-wrap">📈</div>
         <h3>Isenção permanente</h3>
         <p>Com o trânsito em julgado, sua empresa nunca mais paga PIS e COFINS. Para sempre.</p>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ══════════════════════════════════════
        COMO FUNCIONA
-  ══════════════════════════════════════════ -->
+  ══════════════════════════════════════ -->
   <section class="como">
-    <h2>Simples. Seguro. Sem burocracia para você.</h2>
+    <span class="section-label fade-up">O processo</span>
+    <h2 class="section-title fade-up">Simples. Seguro. Sem burocracia para você.</h2>
     <div class="passos">
-      <div class="passo">
+      <div class="passo fade-up">
         <div class="num">1</div>
         <h3>Análise gratuita</h3>
-        <p>Nossa equipe levanta quanto sua empresa pagou e projeta o valor total a recuperar. Você não precisa fazer nada.</p>
+        <p>Nossa equipe levanta quanto sua empresa pagou e projeta o valor total a recuperar. Você não faz nada.</p>
       </div>
-      <div class="passo">
+      <div class="passo fade-up">
         <div class="num">2</div>
         <h3>Processo judicial</h3>
         <p>Advogado especializado entra com a ação baseada na decisão do STJ. Sua empresa recebe a proteção da liminar.</p>
       </div>
-      <div class="passo">
+      <div class="passo fade-up">
         <div class="num">3</div>
         <h3>Você recebe</h3>
         <p>O valor é restituído diretamente para sua empresa. A Econoserv acompanha cada etapa do processo.</p>
@@ -569,108 +810,139 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ══════════════════════════════════════
        OFERTA
-  ══════════════════════════════════════════ -->
+  ══════════════════════════════════════ -->
   <section class="oferta">
-    <h2>Você investe R$ 3.000. O resto só paga quando receber.</h2>
-    <p class="sub">Sem risco. Sem surpresa. Tudo no contrato.</p>
+    <span class="section-label fade-up">Investimento</span>
+    <h2 class="section-title fade-up">Você investe R$ 3.000.<br />O resto só paga quando receber.</h2>
 
-    <div class="oferta-box">
-      <table>
-        <tr>
-          <td>Investimento inicial</td>
-          <td>R$ 3.000 para abertura do processo</td>
-        </tr>
-        <tr>
-          <td>Recuperação dos últimos 5 anos</td>
-          <td>30% do valor restituído</td>
-        </tr>
-        <tr>
-          <td>Se não recuperar</td>
-          <td>Você não paga mais nada</td>
-        </tr>
-      </table>
+    <div class="oferta-grid">
+      <div class="oferta-item fade-up">
+        <div class="icone">🚀</div>
+        <div class="rotulo">Para começar</div>
+        <div class="valor">R$ 3.000</div>
+        <div class="desc">Investimento único para abertura do processo</div>
+      </div>
+      <div class="oferta-item destaque fade-up">
+        <div class="icone">💰</div>
+        <div class="rotulo">Após a restituição</div>
+        <div class="valor">30%</div>
+        <div class="desc">Sobre o valor recuperado dos últimos 5 anos</div>
+      </div>
+      <div class="oferta-item fade-up">
+        <div class="icone">📊</div>
+        <div class="rotulo">Resultado comprovado</div>
+        <div class="valor">100%</div>
+        <div class="desc">Todos os nossos clientes receberam a restituição</div>
+      </div>
     </div>
 
-    <div class="oferta-nota">
-      <strong>Sobre a economia futura:</strong> Se a liminar for concedida antes do trânsito em julgado, cobra-se 30% do valor que sua empresa deixaria de pagar nesse período — porque esse dinheiro fica no seu caixa. Se sair direto o trânsito em julgado, sem essa cobrança.
+    <div class="oferta-garantia fade-up">
+      <strong>Sobre a economia futura:</strong> Se a liminar for concedida antes do trânsito em julgado, cobra-se 30% do valor que sua empresa deixaria de pagar nesse período, porque esse dinheiro fica no seu caixa. Se sair direto o trânsito em julgado, sem essa cobrança.
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ══════════════════════════════════════
        DEPOIMENTO
-  ══════════════════════════════════════════ -->
+  ══════════════════════════════════════ -->
   <section class="depoimento">
-    <h2>Quem já fez isso na Zona Franca</h2>
-    <div class="depoimento-box">
+    <span class="section-label fade-up">Resultado real</span>
+    <h2 class="section-title fade-up">Quem já fez isso na Zona Franca</h2>
+
+    <div class="depo-card fade-up">
       <div class="aspas">"</div>
       <p>
         Quando a Econoserv me apresentou essa oportunidade, fiquei curioso mas cético. No fim, foi uma das melhores decisões que tomei pelo negócio. Recuperamos mais de R$ 600 mil que estavam na mão da Receita Federal e que eram nossos por direito. Impactou diretamente nossa lucratividade. Qualquer empresa da Zona Franca deveria fazer isso.
       </p>
-      <p class="autor">— Isaías, Proprietário da Hidronox</p>
+      <div class="autor-row">
+        <div class="autor-avatar">I</div>
+        <div class="autor-info">
+          <strong>Isaías</strong>
+          <span>Proprietário da Hidronox</span>
+        </div>
+      </div>
+      <div class="depo-resultado">🏆 R$ 600.000 recuperados</div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ══════════════════════════════════════
        FAQ
-  ══════════════════════════════════════════ -->
+  ══════════════════════════════════════ -->
   <section class="faq">
-    <h2>Perguntas frequentes</h2>
-    <div class="faq-list">
-
-      <div class="faq-item">
-        <h3>Isso é legal?</h3>
-        <p>Sim. É baseado em decisão do próprio STJ — a mais alta corte do país para matéria tributária. Já existe trânsito em julgado favorável a empresas da ZFM.</p>
+    <div class="faq-inner">
+      <div style="text-align:center; margin-bottom: 48px;">
+        <span class="section-label fade-up">Dúvidas</span>
+        <h2 class="section-title fade-up">Perguntas frequentes</h2>
       </div>
 
-      <div class="faq-item">
+      <div class="faq-item fade-up">
+        <h3>Isso é legal?</h3>
+        <p>Sim. É baseado em decisão do próprio STJ, a mais alta corte do país para matéria tributária. Já existe trânsito em julgado favorável a empresas da ZFM.</p>
+      </div>
+      <div class="faq-item fade-up">
         <h3>Quanto tempo leva para recuperar?</h3>
         <p>A liminar pode ser concedida em semanas. O valor da restituição dos últimos 5 anos é liberado com o trânsito em julgado, cujo prazo varia conforme o andamento do processo.</p>
       </div>
-
-      <div class="faq-item">
+      <div class="faq-item fade-up">
         <h3>Preciso mudar algo na minha operação?</h3>
         <p>Não. O processo corre sem impacto nas suas atividades. Sua empresa continua operando normalmente.</p>
       </div>
-
-      <div class="faq-item">
+      <div class="faq-item fade-up">
         <h3>E se a Receita Federal questionar?</h3>
         <p>O processo é conduzido por advogado especializado. A decisão vinculante do STJ é a sua proteção jurídica.</p>
       </div>
-
-      <div class="faq-item">
+      <div class="faq-item fade-up">
         <h3>Qualquer empresa da ZFM tem direito?</h3>
         <p>Empresas que operam dentro da Zona Franca de Manaus e que recolhem PIS e COFINS. A análise gratuita confirma o seu caso específico.</p>
       </div>
-
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ══════════════════════════════════════
        CTA FINAL
-  ══════════════════════════════════════════ -->
+  ══════════════════════════════════════ -->
   <section class="cta-final" id="analise">
-    <h2>Descubra quanto sua empresa pode recuperar</h2>
-    <p>Análise gratuita e sem compromisso. Nossa equipe levanta os números e te mostra o potencial exato — sem você precisar fazer nada.</p>
+    <div class="cta-final-inner">
+      <span class="section-label fade-up">Análise gratuita</span>
+      <h2 class="fade-up">Descubra quanto sua empresa pode recuperar</h2>
+      <p class="fade-up">Sem compromisso. Nossa equipe levanta os números e te mostra o potencial exato, sem você precisar fazer nada.</p>
 
-    <div class="form-box">
-      <input type="text"    placeholder="Seu nome completo" />
-      <input type="text"    placeholder="Nome da empresa" />
-      <input type="text"    placeholder="CNPJ" />
-      <input type="tel"     placeholder="WhatsApp com DDD" />
-      <button class="btn">→ Quero minha análise gratuita</button>
-      <p class="privacidade">Seus dados estão protegidos. Não fazemos spam.</p>
+      <form class="form-card fade-up" action="https://formsubmit.co/contato@econoserv.com.br" method="POST">
+        <input type="hidden" name="_subject"  value="Nova análise PIS/COFINS - Econoserv" />
+        <input type="hidden" name="_captcha"  value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="text" name="nome"      placeholder="Seu nome completo"  required />
+        <input type="text" name="empresa"   placeholder="Nome da empresa"    required />
+        <input type="text" name="cnpj"      placeholder="CNPJ"               required />
+        <input type="tel"  name="whatsapp"  placeholder="WhatsApp com DDD"   required />
+        <button type="submit" class="btn">→ Quero minha análise gratuita</button>
+        <p class="privacidade">🔒 Seus dados estão protegidos. Não fazemos spam.</p>
+      </form>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════
+  <!-- ══════════════════════════════════════
        RODAPÉ
-  ══════════════════════════════════════════ -->
+  ══════════════════════════════════════ -->
   <footer>
-    <p>Econoserv Consultoria | Gestão Financeira em Manaus</p>
-    <p style="margin-top:6px;">Processo baseado no STJ Tema 1.239 · Decreto-Lei nº 288/1967 · Constituição Federal, Art. 40 do ADCT</p>
+    <p>Econoserv Consultoria · Gestão Financeira em Manaus</p>
+    <p>Processo baseado no STJ Tema 1.239 · Decreto-Lei nº 288/1967 · Constituição Federal, Art. 40 do ADCT</p>
   </footer>
+
+  <!-- ── SCROLL ANIMATIONS ── -->
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
