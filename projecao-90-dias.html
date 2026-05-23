@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projeção 90 Dias | PIS/COFINS | Econoserv</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --primary:  #1B3A6B;
+      --accent:   #F4A800;
+      --dark:     #0D1F3C;
+      --green:    #10b981;
+      --yellow:   #f59e0b;
+      --red:      #ef4444;
+      --bg:       #F0F2F5;
+      --white:    #ffffff;
+      --border:   #e2e8f0;
+      --text:     #1e293b;
+      --muted:    #64748b;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--primary) 100%);
+      color: #fff;
+      padding: 28px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header-left h1 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -.01em;
+    }
+    .header-left p {
+      font-size: .82rem;
+      opacity: .55;
+      margin-top: 3px;
+    }
+    .header-badge {
+      background: rgba(244,168,0,.15);
+      border: 1px solid rgba(244,168,0,.35);
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 700;
+      padding: 6px 16px;
+      border-radius: 50px;
+      letter-spacing: .06em;
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1140px; margin: 0 auto; padding: 36px 24px 60px; }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: .7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* ── STAT CARDS ── */
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px 22px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--accent);
+    }
+    .stat-card.green::before  { background: var(--green); }
+    .stat-card.blue::before   { background: var(--primary); }
+    .stat-card.dark::before   { background: var(--dark); }
+    .stat-card .label {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 10px;
+    }
+    .stat-card .value {
+      font-size: 1.75rem;
+      font-weight: 900;
+      color: var(--text);
+      line-height: 1;
+      letter-spacing: -.02em;
+    }
+    .stat-card .sub {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .stat-card .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 50px;
+      margin-top: 8px;
+    }
+    .badge.up   { background: #d1fae5; color: #065f46; }
+    .badge.info { background: #dbeafe; color: #1e40af; }
+
+    /* ── PIPELINE ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 32px;
+    }
+    .card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px;
+      border: 1px solid var(--border);
+    }
+    .card-title {
+      font-size: .95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Pipeline bars */
+    .pipeline-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .pipeline-item:last-child { margin-bottom: 0; }
+    .pipeline-label {
+      font-size: .82rem;
+      font-weight: 600;
+      color: var(--text);
+      width: 180px;
+      flex-shrink: 0;
+    }
+    .pipeline-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: var(--bg);
+      border-radius: 50px;
+      overflow: hidden;
+    }
+    .pipeline-bar {
+      height: 100%;
+      border-radius: 50px;
+      background: linear-gradient(90deg, var(--accent), #ffcc44);
+    }
+    .pipeline-bar.green  { background: linear-gradient(90deg, var(--green), #34d399); }
+    .pipeline-bar.blue   { background: linear-gradient(90deg, var(--primary), #2a549a); }
+    .pipeline-val {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--muted);
+      width: 70px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── SCENARIOS ── */
+    .scenarios {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .scenario {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px 24px;
+      border: 2px solid var(--border);
+      text-align: center;
+      transition: border-color .2s, transform .2s;
+    }
+    .scenario:hover { transform: translateY(-3px); }
+    .scenario.destaque {
+      border-color: var(--accent);
+      background: linear-gradient(135deg, #fffbeb, #fff);
+    }
+    .scenario .tag {
+      display: inline-block;
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+    .scenario.conservador .tag { background: #f1f5f9; color: var(--muted); }
+    .scenario.destaque .tag    { background: #fef3c7; color: #92400e; }
+    .scenario.otimista .tag    { background: #d1fae5; color: #065f46; }
+    .scenario h3 {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--primary);
+      letter-spacing: -.03em;
+      margin-bottom: 4px;
+    }
+    .scenario .scenario-label {
+      font-size: .78rem;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+    .scenario-items { text-align: left; }
+    .scenario-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .82rem;
+    }
+    .scenario-item:last-child { border-bottom: none; }
+    .scenario-item .si-label { color: var(--muted); }
+    .scenario-item .si-val   { font-weight: 700; color: var(--text); }
+    .scenario-item .si-val.green { color: var(--green); }
+
+    /* ── TIMELINE ── */
+    .timeline { margin-bottom: 32px; }
+    .tl-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .tl-col {
+      padding: 28px 24px;
+      border-right: 1px solid var(--border);
+    }
+    .tl-col:last-child { border-right: none; }
+    .tl-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .tl-num {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent), #d4920a);
+      border-radius: 10px;
+      font-weight: 800;
+      font-size: .9rem;
+      color: var(--dark);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .tl-header h4 { font-size: .88rem; font-weight: 700; }
+    .tl-header p  { font-size: .72rem; color: var(--muted); margin-top: 1px; }
+    .tl-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 10px;
+      font-size: .82rem;
+      color: #475569;
+      line-height: 1.4;
+    }
+    .tl-item::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+    .tl-meta {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 10px 14px;
+      margin-top: 16px;
+    }
+    .tl-meta .tm-val {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--primary);
+    }
+    .tl-meta .tm-label { font-size: .72rem; color: var(--muted); }
+
+    /* ── CLIENTES TABLE ── */
+    .table-wrap {
+      background: var(--white);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .table-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .table-header h3 { font-size: .95rem; font-weight: 700; }
+    .table-header span {
+      font-size: .78rem;
+      background: var(--bg);
+      color: var(--muted);
+      padding: 4px 12px;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      background: var(--bg);
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--muted);
+      padding: 10px 16px;
+      text-align: left;
+    }
+    td {
+      padding: 12px 16px;
+      font-size: .84rem;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #fafbfc; }
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px; height: 24px;
+      border-radius: 6px;
+      font-size: .7rem;
+      font-weight: 800;
+    }
+    .tier-2 { background: #fef3c7; color: #92400e; }
+    .tier-3 { background: #dbeafe; color: #1e40af; }
+    .tier-4 { background: #f1f5f9; color: var(--muted); }
+    .status-dot {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .78rem;
+      font-weight: 600;
+    }
+    .status-dot::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+    .status-dot.pendente::before { background: var(--yellow); }
+
+    /* ── TOTAL BAR ── */
+    .total-bar {
+      background: linear-gradient(135deg, var(--primary), var(--dark));
+      border-radius: 16px;
+      padding: 28px 32px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .total-bar h3 { font-size: .88rem; opacity: .6; margin-bottom: 6px; }
+    .total-bar .big { font-size: 2.2rem; font-weight: 900; letter-spacing: -.03em; }
+    .total-bar .big span { color: var(--accent); }
+    .total-bar-items {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .tbi { text-align: center; }
+    .tbi .v { font-size: 1.3rem; font-weight: 800; color: var(--accent); }
+    .tbi .l { font-size: .72rem; opacity: .5; margin-top: 3px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .grid-2, .scenarios, .tl-grid { grid-template-columns: 1fr; }
+      .tl-col { border-right: none; border-bottom: 1px solid var(--border); }
+      .tl-col:last-child { border-bottom: none; }
+    }
+    @media (max-width: 560px) {
+      .grid-4 { grid-template-columns: 1fr; }
+      .header { padding: 20px; }
+      .container { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>Econoserv · Projeção PIS/COFINS</h1>
+      <p>Recuperação Tributária ZFM · Atualizado: Maio 2026</p>
+    </div>
+    <span class="header-badge">⏱ Horizonte: 90 dias</span>
+  </div>
+
+  <div class="container">
+
+    <!-- ══ CARDS RESUMO ══ -->
+    <p class="section-title">Visão geral da base</p>
+    <div class="grid-4">
+      <div class="stat-card">
+        <div class="label">Clientes identificados</div>
+        <div class="value">80</div>
+        <div class="sub">Na base total mapeada</div>
+        <span class="badge info">Tier 2, 3 e 4</span>
+      </div>
+      <div class="stat-card green">
+        <div class="label">Confirmados pagando DARF</div>
+        <div class="value">29</div>
+        <div class="sub">PIS 8109 / COFINS 2172</div>
+        <span class="badge up">Leads quentes</span>
+      </div>
+      <div class="stat-card blue">
+        <div class="label">Potencial 5 anos (base)</div>
+        <div class="value">R$ 4,3M</div>
+        <div class="sub">Estimativa total recuperável</div>
+      </div>
+      <div class="stat-card dark">
+        <div class="label">Honorário potencial (30%)</div>
+        <div class="value">R$ 1,3M</div>
+        <div class="sub">Se 100% da base fechar</div>
+      </div>
+    </div>
+
+    <!-- ══ PIPELINE + BREAKDOWN ══ -->
+    <p class="section-title">Pipeline por prioridade</p>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📊 Distribuição por tier</div>
+
+        <div class="pipeline-item">
+          <span class="pipeline-label">Tier 2 — Alta prioridade</span>
+          <div class="pipeline-bar-wrap">
+            <div class="pipeline-bar green" style="width:20%"></div>
+          </div>
+          <span class="pipeline-val">16 clientes</span>
+        </div>
+        <div class="pipeline-item">
+          <span class="pipeline-label">Tier 3 — Média prioridade</span>
+          <div class="pipeline-bar-wrap">
+            <div class="pipeline-bar" style="width:35%"></div>
+          </div>
+          <span class="pipeline-val">28 clientes</span>
+        </div>
+        <div class="pipeline-item">
+          <span class="pipeline-label">Tier 4 — Base ampla</span>
+          <div class="pipeline-bar-wrap">
+            <div class="pipeline-bar blue" style="width:45%"></div>
+          </div>
+          <span class="pipeline-val">36 clientes</span>
+        </div>
+
+        <div style="border-top:1px solid var(--border); margin-top: 20px; padding-top: 20px;">
+          <div class="pipeline-item">
+            <span class="pipeline-label">Confirmados DARF</span>
+            <div class="pipeline-bar-wrap">
+              <div class="pipeline-bar green" style="width:36%"></div>
+            </div>
+            <span class="pipeline-val">29 / 80</span>
+          </div>
+          <div class="pipeline-item">
+            <span class="pipeline-label">A confirmar</span>
+            <div class="pipeline-bar-wrap">
+              <div class="pipeline-bar" style="width:64%"></div>
+            </div>
+            <span class="pipeline-val">51 / 80</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">💰 Receita por fonte (projeção)</div>
+
+        <div class="pipeline-item">
+          <span class="pipeline-label">Honorário inicial (R$3k)</span>
+          <div class="pipeline-bar-wrap">
+            <div class="pipeline-bar green" style="width:16%"></div>
+          </div>
+          <span class="pipeline-val">R$ 240k</span>
+        </div>
+        <div class="pipeline-item">
+          <span class="pipeline-label">30% restituição 5 anos</span>
+          <div class="pipeline-bar-wrap">
+            <div class="pipeline-bar" style="width:85%"></div>
+          </div>
+          <span class="pipeline-val">R$ 1,29M</span>
+        </div>
+        <div class="pipeline-item">
+          <span class="pipeline-label">30% economia c/ liminar</span>
+          <div class="pipeline-bar-wrap">
+            <div class="pipeline-bar blue" style="width:55%"></div>
+          </div>
+          <span class="pipeline-val">variável</span>
+        </div>
+
+        <div style="background:var(--bg); border-radius:10px; padding:14px 16px; margin-top:20px;">
+          <div style="font-size:.72rem; color:var(--muted); margin-bottom:4px;">TOTAL POTENCIAL IDENTIFICADO</div>
+          <div style="font-size:1.6rem; font-weight:900; color:var(--primary);">R$ 1.529.077</div>
+          <div style="font-size:.75rem; color:var(--muted); margin-top:2px;">base de 80 clientes · honorário inicial + 30% recuperação</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CENÁRIOS 90 DIAS ══ -->
+    <p class="section-title">Projeção de receita — próximos 90 dias</p>
+    <div class="scenarios" style="margin-bottom:32px;">
+
+      <div class="scenario conservador">
+        <span class="tag">Conservador</span>
+        <h3>R$ 63k</h3>
+        <div class="scenario-label">conversão 40% dos 29 confirmados<br />+ 15% dos 51 restantes</div>
+        <div class="scenario-items">
+          <div class="scenario-item">
+            <span class="si-label">Clientes fechados</span>
+            <span class="si-val">~19 clientes</span>
+          </div>
+          <div class="scenario-item">
+            <span class="si-label">Honorário inicial</span>
+            <span class="si-val">R$ 57.000</span>
+          </div>
+          <div class="scenario-item">
+            <span class="si-label">Pipeline de recuperação</span>
+            <span class="si-val green">+ R$ 308k futuro</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario destaque">
+        <span class="tag">⭐ Realista</span>
+        <h3>R$ 96k</h3>
+        <div class="scenario-label">conversão 60% dos 29 confirmados<br />+ 25% dos 51 restantes</div>
+        <div class="scenario-items">
+          <div class="scenario-item">
+            <span class="si-label">Clientes fechados</span>
+            <span class="si-val">~30 clientes</span>
+          </div>
+          <div class="scenario-item">
+            <span class="si-label">Honorário inicial</span>
+            <span class="si-val">R$ 90.000</span>
+          </div>
+          <div class="scenario-item">
+            <span class="si-label">Pipeline de recuperação</span>
+            <span class="si-val green">+ R$ 516k futuro</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="scenario otimista">
+        <span class="tag">Otimista</span>
+        <h3>R$ 135k</h3>
+        <div class="scenario-label">conversão 80% dos 29 confirmados<br />+ 40% dos 51 restantes</div>
+        <div class="scenario-items">
+          <div class="scenario-item">
+            <span class="si-label">Clientes fechados</span>
+            <span class="si-val">~43 clientes</span>
+          </div>
+          <div class="scenario-item">
+            <span class="si-label">Honorário inicial</span>
+            <span class="si-val">R$ 129.000</span>
+          </div>
+          <div class="scenario-item">
+            <span class="si-label">Pipeline de recuperação</span>
+            <span class="si-val green">+ R$ 740k futuro</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TIMELINE 90 DIAS ══ -->
+    <p class="section-title">Plano de execução — 90 dias</p>
+    <div class="timeline">
+      <div class="tl-grid">
+        <div class="tl-col">
+          <div class="tl-header">
+            <div class="tl-num">1</div>
+            <div>
+              <h4>Mês 1 — Dias 1 a 30</h4>
+              <p>Ativação dos confirmados</p>
+            </div>
+          </div>
+          <div class="tl-item">Disparar WhatsApp para os 29 confirmados DARF com valor personalizado</div>
+          <div class="tl-item">Agendar reuniões com Tier 2 (16 clientes maiores)</div>
+          <div class="tl-item">Realizar apresentações e fechar contratos</div>
+          <div class="tl-item">Publicar LP e compartilhar link nas reuniões</div>
+          <div class="tl-meta">
+            <div class="tm-val">R$ 36k – 69k</div>
+            <div class="tm-label">honorário inicial estimado no mês 1</div>
+          </div>
+        </div>
+
+        <div class="tl-col">
+          <div class="tl-header">
+            <div class="tl-num">2</div>
+            <div>
+              <h4>Mês 2 — Dias 31 a 60</h4>
+              <p>Expansão para base restante</p>
+            </div>
+          </div>
+          <div class="tl-item">Confirmar pagamento DARF dos 51 clientes restantes</div>
+          <div class="tl-item">Disparar campanha Tier 3 com dados atualizados</div>
+          <div class="tl-item">Follow-up dos que não responderam no mês 1</div>
+          <div class="tl-item">Iniciar processos dos fechados no mês 1</div>
+          <div class="tl-meta">
+            <div class="tm-val">R$ 21k – 39k</div>
+            <div class="tm-label">honorário inicial estimado no mês 2</div>
+          </div>
+        </div>
+
+        <div class="tl-col">
+          <div class="tl-header">
+            <div class="tl-num">3</div>
+            <div>
+              <h4>Mês 3 — Dias 61 a 90</h4>
+              <p>Escala e indicações</p>
+            </div>
+          </div>
+          <div class="tl-item">Ativar Tier 4 com mensagem genérica</div>
+          <div class="tl-item">Pedir indicações para os clientes que já fecharam</div>
+          <div class="tl-item">Primeiras liminares dos mês 1 podem sair</div>
+          <div class="tl-item">Revisar pipeline e projetar próximos 90 dias</div>
+          <div class="tl-meta">
+            <div class="tm-val">R$ 6k – 27k</div>
+            <div class="tm-label">honorário inicial estimado no mês 3</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ CLIENTES CONFIRMADOS ══ -->
+    <p class="section-title">Clientes confirmados — pagam via DARF (29)</p>
+    <div class="table-wrap">
+      <div class="table-header">
+        <h3>Leads quentes — Prioridade máxima</h3>
+        <span>29 clientes · R$ 87.000 em honorário inicial potencial</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Empresa</th>
+            <th>Código</th>
+            <th>Honorário Inicial</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>A. V. de Brito Ltda</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>2</td><td>Adrielle Souza Distribuidora Taruma</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>3</td><td>Ana L. dos Santos Molter e Cia Ltda</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>4</td><td>BF Comércio de Alimentos e Represent Ltda</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>5</td><td>E Barros de Queiroz</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>6</td><td>Ecodots Tecnologia da Informacao Ltda</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>7</td><td>Edson da Silva Cruz - E S Gestao Comercial</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>8</td><td>Faço a Conta Contabilidade - Manaus</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>9</td><td>Faço a Conta Contabilidade - Tabatinga</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>10</td><td>Getter S.A</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>11</td><td>HEV Servicos Administrativos Ltda</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>12</td><td>Inventors Engenharia e Representacao Ltda</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>13</td><td>Jose Alves Matias - Casa das Frutas</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>14</td><td>Jose Alves Neto - Jneto Gas</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>15</td><td>K Gomes da Silva e Cia Ltda - Benjamin Constant</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>16</td><td>K Gomes da Silva e Cia Ltda - Manaus</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>17</td><td>Liracio Fernandes da Silva - Tabatinga</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>18</td><td>M M da Costa Pimentel Neto Ltda</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>19</td><td>Marcio B Andrade - Gordo Gas</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>20</td><td>Marivelto Barbosa - Distribuidora Canecao</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>21</td><td>Marivete Fonseca - Menezes Auto Car</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>22</td><td>MP Treinamento</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>23</td><td>Oiapoque QR Inova Simples</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>24</td><td>PBC Digital Tecnologia</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>25</td><td>R Assuncao de Oliveira</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>26</td><td>R Assunção de Oliveira Capital Ltda</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>27</td><td>Reigiane dos Santos - Distribuidora Pedrogelo</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>28</td><td>TR Engenharia Ltda - Loja do Instalador</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+          <tr><td>29</td><td>Tropos Amazonia Ltda</td><td>PIS 8109 / COFINS 2172</td><td>R$ 3.000</td><td><span class="status-dot pendente">A contatar</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ══ TOTAL FINAL ══ -->
+    <div class="total-bar">
+      <div>
+        <h3>Potencial total da operação (base completa)</h3>
+        <div class="big">R$ <span>1.529.077</span></div>
+        <div style="font-size:.78rem; opacity:.45; margin-top:6px;">honorário inicial + 30% sobre restituição dos 5 anos</div>
+      </div>
+      <div class="total-bar-items">
+        <div class="tbi">
+          <div class="v">R$ 240k</div>
+          <div class="l">honorário inicial<br />(80 clientes × R$3k)</div>
+        </div>
+        <div class="tbi">
+          <div class="v">R$ 1,29M</div>
+          <div class="l">30% da restituição<br />dos últimos 5 anos</div>
+        </div>
+        <div class="tbi">
+          <div class="v">90 dias</div>
+          <div class="l">para capturar<br />R$ 63k – 135k</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
