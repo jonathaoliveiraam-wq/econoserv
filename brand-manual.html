@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guia de Identidade Visual · Alavanca Aceleradora</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black: #0B0B0B;
+      --green: #2EB857;
+      --white: #F2EFE6;
+      --gray-900: #111111;
+      --gray-800: #1A1A1A;
+      --gray-700: #222222;
+      --gray-600: #2A2A2A;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 220px; right: 0; z-index: 100;
+      padding: 18px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(11,11,11,0.92);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(46,184,87,0.12);
+    }
+    .nav-brand {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+    }
+    .nav-brand span { color: var(--green); }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(242,239,230,0.4); text-decoration: none; transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--green); }
+
+    /* ─── SIDEBAR ─── */
+    .sidebar {
+      position: fixed; left: 0; top: 0; height: 100vh; width: 220px;
+      background: #0e0e0e;
+      border-right: 1px solid rgba(46,184,87,0.1);
+      padding: 32px 0 32px;
+      display: flex; flex-direction: column; z-index: 110;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 0 28px 28px;
+      border-bottom: 1px solid rgba(46,184,87,0.1);
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sidebar-logo-text {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: 11px; letter-spacing: 2px; line-height: 1.3;
+      color: var(--white);
+    }
+    .sidebar-logo-text span { color: var(--green); display: block; font-weight: 400; font-size: 9px; letter-spacing: 3px; }
+    .sidebar-link {
+      display: block; padding: 11px 28px;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(242,239,230,0.3); text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: all .2s;
+    }
+    .sidebar-link:hover, .sidebar-link.active {
+      color: var(--white); border-left-color: var(--green);
+      background: rgba(46,184,87,0.05);
+    }
+    .sidebar-num { color: var(--green); margin-right: 10px; }
+    .sidebar-version {
+      padding: 16px 28px 0;
+      margin-top: auto;
+      font-size: 10px; color: rgba(242,239,230,0.2); letter-spacing: 1px;
+      border-top: 1px solid rgba(242,239,230,0.06);
+    }
+
+    /* ─── LAYOUT ─── */
+    .main { margin-left: 220px; }
+
+    /* ─── SECTIONS ─── */
+    .section {
+      padding: 100px 80px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+    .section-divider {
+      border: none; border-top: 1px solid rgba(46,184,87,0.08);
+      margin: 0; max-width: 100%;
+    }
+    .eyebrow {
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--green); display: block; margin-bottom: 14px;
+    }
+    .section-title {
+      font-family: 'Montserrat', sans-serif; font-weight: 800;
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px;
+    }
+    .section-lead {
+      font-size: 16px; line-height: 1.85;
+      color: rgba(242,239,230,0.55); max-width: 620px; margin-bottom: 56px;
+    }
+    .green-line {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, var(--green) 0%, transparent 60%);
+      margin: 64px 0;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      padding: 80px 60px; position: relative; overflow: hidden;
+    }
+    #hero::after {
+      content: '';
+      position: absolute; bottom: -100px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(46,184,87,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: rgba(242,239,230,0.4);
+      border: 1px solid rgba(46,184,87,0.2);
+      padding: 8px 20px; border-radius: 2px; margin-bottom: 56px;
+    }
+    .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+    .hero-name {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      font-size: clamp(48px, 8vw, 96px);
+      letter-spacing: -3px; line-height: 0.95;
+      margin-bottom: 12px;
+    }
+    .hero-sub {
+      font-family: 'Montserrat', sans-serif; font-weight: 300;
+      font-size: clamp(13px, 2vw, 16px); letter-spacing: 8px;
+      text-transform: uppercase; color: rgba(242,239,230,0.4);
+      margin-bottom: 56px;
+    }
+    .hero-bar {
+      width: 60px; height: 2px; background: var(--green);
+      margin: 0 auto 56px;
+    }
+    .hero-stats {
+      display: flex; gap: 64px; justify-content: center;
+    }
+    .stat-item { text-align: center; }
+    .stat-label {
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(242,239,230,0.3); display: block; margin-bottom: 6px;
+    }
+    .stat-value {
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 12px; color: var(--white);
+    }
+
+    /* ─── COLORS ─── */
+    .color-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .color-card { border-radius: 3px; overflow: hidden; }
+    .swatch { height: 220px; position: relative; }
+    .swatch-black { background: #0B0B0B; border: 1px solid rgba(255,255,255,0.08); }
+    .swatch-green { background: #2EB857; }
+    .swatch-white { background: #F2EFE6; }
+    .swatch-usage {
+      position: absolute; bottom: 16px; left: 16px; right: 16px;
+      font-size: 10px; letter-spacing: 1px; opacity: .4;
+    }
+    .color-info { background: var(--gray-800); padding: 24px; }
+    .color-name {
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 15px; margin-bottom: 3px;
+    }
+    .color-role {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 20px;
+    }
+    .color-vals { display: flex; flex-direction: column; gap: 7px; }
+    .color-val { display: flex; justify-content: space-between; font-size: 12px; }
+    .color-val .k { color: rgba(242,239,230,0.35); letter-spacing: 1px; }
+    .color-val .v { font-family: 'Montserrat', sans-serif; font-weight: 700; color: var(--white); }
+
+    /* ─── USAGE COLS ─── */
+    .usage-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+    .usage-col { padding: 22px; background: var(--gray-800); border-radius: 3px; }
+    .usage-col-label {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 14px;
+    }
+    .usage-col ul { list-style: none; font-size: 13px; color: rgba(242,239,230,0.55); line-height: 2.1; }
+
+    /* ─── LOGO ─── */
+    .logo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 40px; }
+    .logo-card { border-radius: 3px; overflow: hidden; }
+    .logo-preview {
+      padding: 64px 40px;
+      display: flex; justify-content: center; align-items: center; min-height: 220px;
+    }
+    .lp-dark { background: #0B0B0B; border: 1px solid rgba(255,255,255,0.06); }
+    .lp-gray { background: #181818; border: 1px solid rgba(255,255,255,0.04); }
+    .lp-white { background: #F2EFE6; }
+    .lp-green { background: #2EB857; }
+    .logo-card-label {
+      padding: 14px 22px; background: var(--gray-800);
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(242,239,230,0.35);
+    }
+    .logo-h {
+      display: flex; align-items: center; gap: 20px;
+    }
+    .logo-wordmark-wrap { display: flex; flex-direction: column; }
+    .logo-wordmark-main {
+      font-family: 'Montserrat', sans-serif; font-weight: 900;
+      letter-spacing: 2px; line-height: 1;
+    }
+    .logo-wordmark-sep { height: 1.5px; background: var(--green); margin: 5px 0; }
+    .logo-wordmark-sub {
+      font-family: 'Montserrat', sans-serif; font-weight: 400;
+      letter-spacing: 5px;
+    }
+    .logo-v { flex-direction: column; gap: 14px; text-align: center; }
+
+    /* anatomy */
+    .anatomy-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px;
+      align-items: center; padding: 48px; background: var(--gray-800); border-radius: 3px;
+      margin-top: 40px;
+    }
+    .anatomy-logo { display: flex; justify-content: center; }
+    .anatomy-items { display: flex; flex-direction: column; gap: 24px; }
+    .anatomy-item { display: flex; gap: 14px; }
+    .anatomy-dot {
+      width: 3px; flex-shrink: 0; margin-top: 4px; border-radius: 2px;
+    }
+    .anatomy-dot-w { background: var(--white); height: 40px; }
+    .anatomy-dot-g { background: var(--green); height: 40px; }
+    .anatomy-dot-d { background: var(--green); height: 40px; transform: rotate(0); }
+    .anatomy-text-title {
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 13px; margin-bottom: 4px;
+    }
+    .anatomy-text-desc { font-size: 12px; color: rgba(242,239,230,0.45); line-height: 1.6; }
+
+    /* rules */
+    .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; }
+    .rule-card { border-radius: 3px; overflow: hidden; }
+    .rule-header { padding: 14px 22px; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; }
+    .rule-do .rule-header { background: rgba(46,184,87,0.12); color: var(--green); }
+    .rule-dont .rule-header { background: rgba(220,50,50,0.1); color: #e04040; }
+    .rule-body { background: var(--gray-800); padding: 22px; }
+    .rule-body ul { list-style: none; }
+    .rule-body ul li {
+      padding: 8px 0 8px 18px; font-size: 13px;
+      color: rgba(242,239,230,0.6);
+      border-bottom: 1px solid rgba(242,239,230,0.05);
+      position: relative;
+    }
+    .rule-do .rule-body ul li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-size: 11px; top: 9px; }
+    .rule-dont .rule-body ul li::before { content: '✕'; position: absolute; left: 0; color: #e04040; font-size: 11px; top: 9px; }
+
+    /* ─── TYPOGRAPHY ─── */
+    .type-spec { padding-bottom: 44px; margin-bottom: 44px; border-bottom: 1px solid rgba(242,239,230,0.06); }
+    .type-spec:last-child { border: none; }
+    .type-meta { display: flex; align-items: baseline; gap: 14px; margin-bottom: 14px; }
+    .type-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); }
+    .type-info { font-size: 11px; color: rgba(242,239,230,0.3); }
+    .t-display { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: clamp(40px,6vw,72px); letter-spacing: -3px; line-height: .95; }
+    .t-h1 { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: clamp(28px,4vw,48px); letter-spacing: -1.5px; line-height: 1.1; }
+    .t-h2 { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: clamp(20px,3vw,32px); letter-spacing: -.5px; }
+    .t-sub { font-family: 'Inter', sans-serif; font-weight: 600; font-size: clamp(16px,2vw,22px); line-height: 1.4; }
+    .t-body { font-family: 'Inter', sans-serif; font-weight: 300; font-size: 16px; line-height: 1.85; color: rgba(242,239,230,0.6); }
+    .t-label { font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: rgba(242,239,230,0.35); }
+
+    .scale-table { margin-top: 48px; }
+    .scale-row { display: flex; align-items: baseline; gap: 36px; padding: 14px 0; border-bottom: 1px solid rgba(242,239,230,0.05); }
+    .scale-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(242,239,230,0.3); width: 110px; flex-shrink: 0; }
+    .scale-px { font-size: 11px; color: var(--green); width: 52px; flex-shrink: 0; font-family: 'Montserrat', sans-serif; font-weight: 700; }
+
+    .font-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 48px; }
+    .font-col { padding: 28px; background: var(--gray-800); border-radius: 3px; }
+    .font-col-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 20px; }
+    .font-item { margin-bottom: 16px; }
+    .font-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 3px; }
+    .font-weight-list { font-size: 11px; color: rgba(242,239,230,0.35); }
+    .font-note { margin-top: 16px; padding: 12px 14px; background: rgba(46,184,87,0.07); border-left: 2px solid var(--green); font-size: 12px; color: rgba(242,239,230,0.55); line-height: 1.6; }
+
+    /* ─── DESIGN PRINCIPLES ─── */
+    .principles-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .principle-card {
+      padding: 32px; background: var(--gray-800); border-radius: 3px;
+      position: relative; overflow: hidden;
+    }
+    .principle-card::before {
+      content: '';
+      position: absolute; top: 0; right: 0;
+      width: 60px; height: 60px;
+      background: rgba(46,184,87,0.04);
+      clip-path: polygon(100% 0, 0 0, 100% 100%);
+    }
+    .principle-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--green); margin-bottom: 14px; }
+    .principle-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 17px; margin-bottom: 10px; }
+    .principle-desc { font-size: 13px; color: rgba(242,239,230,0.55); line-height: 1.7; }
+
+    /* buttons preview */
+    .btn-preview { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 40px; }
+    .btn-sample {
+      padding: 14px 36px;
+      font-family: 'Montserrat', sans-serif; font-weight: 700;
+      font-size: 12px; letter-spacing: 2px; text-transform: uppercase;
+      border-radius: 2px; cursor: pointer; border: none;
+    }
+    .btn-primary-s { background: var(--green); color: var(--black); }
+    .btn-outline-w { background: transparent; color: var(--white); border: 1px solid rgba(242,239,230,0.25); }
+    .btn-outline-g { background: transparent; color: var(--green); border: 1px solid var(--green); }
+
+    /* prohibitions */
+    .prohibit-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+      padding: 28px; background: rgba(220,50,50,0.04);
+      border: 1px solid rgba(220,50,50,0.15); border-radius: 3px; margin-top: 32px;
+    }
+    .prohibit-item { display: flex; gap: 10px; align-items: flex-start; }
+    .prohibit-x { color: #e04040; font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+    .prohibit-text { font-size: 13px; color: rgba(242,239,230,0.6); line-height: 1.5; }
+
+    /* ─── VOICE ─── */
+    .voice-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .voice-card { padding: 28px; background: var(--gray-800); border-radius: 3px; }
+    .voice-attr { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 26px; color: var(--green); margin-bottom: 8px; }
+    .voice-desc { font-size: 13px; color: rgba(242,239,230,0.5); line-height: 1.7; margin-bottom: 18px; }
+    .voice-quote {
+      padding: 14px 16px; background: rgba(46,184,87,0.05);
+      border-left: 2px solid var(--green); border-radius: 0 2px 2px 0;
+      font-size: 13px; color: rgba(242,239,230,0.75); font-style: italic; line-height: 1.6;
+    }
+    .vocab-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+    .vocab-tag {
+      padding: 5px 14px;
+      background: rgba(46,184,87,0.08); border: 1px solid rgba(46,184,87,0.2);
+      border-radius: 2px; font-size: 11px; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--green);
+    }
+    .vocab-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .vocab-col { padding: 22px; border-radius: 3px; }
+    .vocab-do { background: rgba(46,184,87,0.05); border: 1px solid rgba(46,184,87,0.12); }
+    .vocab-dont { background: rgba(220,50,50,0.04); border: 1px solid rgba(220,50,50,0.12); }
+    .vocab-col-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+    .vocab-do .vocab-col-label { color: var(--green); }
+    .vocab-dont .vocab-col-label { color: #e04040; }
+    .vocab-col ul { list-style: none; font-size: 13px; color: rgba(242,239,230,0.6); line-height: 2.1; }
+
+    /* ─── APPLICATIONS ─── */
+    .app-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .app-grid .span-3 { grid-column: span 3; }
+    .app-card { background: var(--gray-800); border-radius: 3px; overflow: hidden; }
+    .app-preview {
+      height: 180px; display: flex;
+      justify-content: center; align-items: center;
+      background: var(--gray-700); position: relative; overflow: hidden;
+    }
+    .app-info { padding: 20px 22px; }
+    .app-name { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 13px; margin-bottom: 4px; }
+    .app-spec { font-size: 11px; color: rgba(242,239,230,0.3); letter-spacing: 1px; }
+
+    /* ─── FOOTER / CTA ─── */
+    .end-section {
+      background: var(--gray-800); text-align: center;
+      padding: 80px 60px;
+      border-top: 1px solid rgba(46,184,87,0.15);
+    }
+    .end-title { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: clamp(28px, 4vw, 52px); letter-spacing: -2px; margin: 12px 0 8px; }
+    .end-sub { font-size: 14px; color: rgba(242,239,230,0.45); line-height: 1.7; max-width: 500px; margin: 0 auto 32px; }
+    .end-tags { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .end-tag { padding: 5px 14px; background: rgba(46,184,87,0.08); border: 1px solid rgba(46,184,87,0.2); border-radius: 2px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); }
+
+    footer {
+      background: var(--black); border-top: 1px solid rgba(242,239,230,0.05);
+      padding: 32px 80px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-brand { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; }
+    .footer-brand span { color: var(--green); }
+    .footer-copy { font-size: 10px; color: rgba(242,239,230,0.2); letter-spacing: 1px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 960px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+      nav { left: 0; padding: 16px 24px; }
+      .nav-links { display: none; }
+      .section { padding: 72px 24px; }
+      .color-grid, .logo-grid, .rules-grid, .principles-grid, .voice-grid, .font-cols, .vocab-cols { grid-template-columns: 1fr; }
+      .app-grid { grid-template-columns: 1fr 1fr; }
+      .usage-cols, .prohibit-grid { grid-template-columns: 1fr; }
+      .anatomy-wrap { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 10px; text-align: center; padding: 28px 24px; }
+    }
+    @media (max-width: 600px) { .app-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <img src="logo-horizontal.png" alt="Alavanca Aceleradora" style="width:160px; object-fit:contain; display:block;">
+  </div>
+  <a href="#hero"       class="sidebar-link"><span class="sidebar-num">00</span> Capa</a>
+  <a href="#conceito"   class="sidebar-link"><span class="sidebar-num">01</span> Conceito</a>
+  <a href="#cores"      class="sidebar-link"><span class="sidebar-num">02</span> Cores</a>
+  <a href="#logo"       class="sidebar-link"><span class="sidebar-num">03</span> Logo</a>
+  <a href="#tipografia" class="sidebar-link"><span class="sidebar-num">04</span> Tipografia</a>
+  <a href="#estilo"     class="sidebar-link"><span class="sidebar-num">05</span> Estilo</a>
+  <a href="#voz"        class="sidebar-link"><span class="sidebar-num">06</span> Tom de Voz</a>
+  <a href="#aplicacoes" class="sidebar-link"><span class="sidebar-num">07</span> Aplicações</a>
+  <div class="sidebar-version">Versão 1.0 · 2026<br>Uso Interno e Autorizado</div>
+</aside>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">ALAVANCA <span>ACELERADORA</span></div>
+  <ul class="nav-links">
+    <li><a href="#conceito">Conceito</a></li>
+    <li><a href="#cores">Cores</a></li>
+    <li><a href="#logo">Logo</a></li>
+    <li><a href="#tipografia">Tipo</a></li>
+    <li><a href="#estilo">Estilo</a></li>
+    <li><a href="#voz">Voz</a></li>
+    <li><a href="#aplicacoes">Aplicações</a></li>
+  </ul>
+</nav>
+
+<main class="main">
+
+  <!-- ══ 00. HERO ══ -->
+  <section id="hero" style="max-width:100%; padding:0 80px;">
+    <div class="hero-tag">Guia de Identidade Visual · Versão 1.0</div>
+
+    <img src="logo-mug.png" alt="Alavanca Aceleradora" style="width:320px; max-width:80vw; object-fit:contain; margin-bottom:20px; border-radius:4px;">
+
+    <h1 class="hero-name">ALAVANCA</h1>
+    <p class="hero-sub">Aceleradora</p>
+    <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:clamp(16px,2vw,22px); color:var(--green); letter-spacing:2px; margin-bottom:8px;">Vende. Estrutura. Acelera.</div>
+    <div style="font-size:12px; color:rgba(242,239,230,0.3); letter-spacing:3px; text-transform:uppercase; margin-bottom:40px;">Slogan da Marca</div>
+
+    <div class="hero-bar"></div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-label">Segmento</span>
+        <span class="stat-value">Rede de Negócios em Movimento</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Posicionamento</span>
+        <span class="stat-value">Premium · Alta Performance</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Versão</span>
+        <span class="stat-value">1.0 · 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ══ 01. CONCEITO ══ -->
+  <section id="conceito" class="section">
+    <span class="eyebrow">01 · Conceito da Marca</span>
+    <h2 class="section-title">O que a Alavanca representa</h2>
+    <p class="section-lead">Uma rede que coloca negócios em movimento. A Alavanca existe para uma coisa: fazer o ciclo girar. Vende, traz receita, traz as pessoas certas, arruma os processos. E repete.</p>
+
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:20px;">
+      <div style="padding:32px 28px; background:var(--gray-800); border-radius:3px; border-left:2px solid var(--green);">
+        <div style="margin-bottom:20px;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <polygon points="14,3 26,25 2,25" stroke="#2EB857" stroke-width="1.8" fill="none"/>
+          </svg>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; margin-bottom:8px;">Progresso</div>
+        <div style="font-size:13px; color:rgba(242,239,230,0.5); line-height:1.7;">O movimento ascendente do "A" simboliza o ciclo que toda empresa que cresce precisa girar: vende, estrutura, repete.</div>
+      </div>
+      <div style="padding:32px 28px; background:var(--gray-800); border-radius:3px; border-left:2px solid var(--green);">
+        <div style="margin-bottom:20px;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <line x1="4" y1="24" x2="24" y2="4" stroke="#2EB857" stroke-width="2"/>
+            <circle cx="24" cy="4" r="3" fill="#2EB857"/>
+          </svg>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; margin-bottom:8px;">Aceleração</div>
+        <div style="font-size:13px; color:rgba(242,239,230,0.5); line-height:1.7;">A diagonal verde que corta o símbolo representa velocidade, dinamismo e impulso estratégico.</div>
+      </div>
+      <div style="padding:32px 28px; background:var(--gray-800); border-radius:3px; border-left:2px solid var(--green);">
+        <div style="margin-bottom:20px;">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect x="3" y="3" width="9" height="9" stroke="#2EB857" stroke-width="1.8" fill="none"/>
+            <rect x="16" y="16" width="9" height="9" stroke="#2EB857" stroke-width="1.8" fill="none"/>
+            <line x1="12" y1="7" x2="16" y2="7" stroke="#2EB857" stroke-width="1.8"/>
+            <line x1="20" y1="12" x2="20" y2="16" stroke="#2EB857" stroke-width="1.8"/>
+          </svg>
+        </div>
+        <div style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; margin-bottom:8px;">Escalabilidade</div>
+        <div style="font-size:13px; color:rgba(242,239,230,0.5); line-height:1.7;">Arquitetura visual geométrica que reflete sistemas estruturados e escaláveis por design.</div>
+      </div>
+    </div>
+
+    <div class="green-line"></div>
+
+    <blockquote style="padding:32px 36px; background:var(--gray-800); border-left:3px solid var(--green); border-radius:0 3px 3px 0;">
+      <p style="font-family:'Montserrat',sans-serif; font-size:clamp(16px,2vw,22px); font-weight:600; line-height:1.5;">
+        "Toda empresa que cresce passou pelo mesmo ciclo. A diferença está em quem entendeu a ordem e quem ficou improvisando."
+      </p>
+      <p style="margin-top:16px; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--green);">Manifesto da Marca</p>
+    </blockquote>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ══ 02. CORES ══ -->
+  <section id="cores" class="section">
+    <span class="eyebrow">02 · Paleta de Cores</span>
+    <h2 class="section-title">Core Palette</h2>
+    <p class="section-lead">Todas as interfaces e elementos visuais devem respeitar estas cores rigorosamente. A paleta foi construída para comunicar premium, autoridade e movimento.</p>
+
+    <div class="color-grid">
+      <!-- Black -->
+      <div class="color-card">
+        <div class="swatch swatch-black">
+          <span class="swatch-usage" style="color:var(--white);">Fundo Principal</span>
+        </div>
+        <div class="color-info">
+          <div class="color-name">Dark Black</div>
+          <div class="color-role">Fundo · Backgrounds</div>
+          <div class="color-vals">
+            <div class="color-val"><span class="k">HEX</span><span class="v">#0B0B0B</span></div>
+            <div class="color-val"><span class="k">RGB</span><span class="v">11 · 11 · 11</span></div>
+            <div class="color-val"><span class="k">HSL</span><span class="v">0° · 0% · 4%</span></div>
+            <div class="color-val"><span class="k">CMYK</span><span class="v">0 · 0 · 0 · 96</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- Green -->
+      <div class="color-card">
+        <div class="swatch swatch-green">
+          <span class="swatch-usage" style="color:#0B0B0B;">Destaque · CTA · Ação</span>
+        </div>
+        <div class="color-info">
+          <div class="color-name">Acceleration Green</div>
+          <div class="color-role">Destaque · CTA · Conversão</div>
+          <div class="color-vals">
+            <div class="color-val"><span class="k">HEX</span><span class="v">#2EB857</span></div>
+            <div class="color-val"><span class="k">RGB</span><span class="v">46 · 184 · 87</span></div>
+            <div class="color-val"><span class="k">HSL</span><span class="v">138° · 60% · 45%</span></div>
+            <div class="color-val"><span class="k">CMYK</span><span class="v">75 · 0 · 53 · 28</span></div>
+          </div>
+        </div>
+      </div>
+      <!-- White -->
+      <div class="color-card">
+        <div class="swatch swatch-white">
+          <span class="swatch-usage" style="color:#0B0B0B;">Texto · Acentos</span>
+        </div>
+        <div class="color-info">
+          <div class="color-name">Soft White</div>
+          <div class="color-role">Texto · Ícones · Acentos</div>
+          <div class="color-vals">
+            <div class="color-val"><span class="k">HEX</span><span class="v">#F2EFE6</span></div>
+            <div class="color-val"><span class="k">RGB</span><span class="v">242 · 239 · 230</span></div>
+            <div class="color-val"><span class="k">HSL</span><span class="v">45° · 29% · 92%</span></div>
+            <div class="color-val"><span class="k">CMYK</span><span class="v">0 · 1 · 5 · 5</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="usage-cols">
+      <div class="usage-col">
+        <div class="usage-col-label">Dark Black · Use para</div>
+        <ul>
+          <li>→ Fundos de página e seção</li>
+          <li>→ Cards e containers</li>
+          <li>→ Fundos de apresentação</li>
+          <li>→ Elementos de sobreposição</li>
+        </ul>
+      </div>
+      <div class="usage-col">
+        <div class="usage-col-label">Acceleration Green · Use para</div>
+        <ul>
+          <li>→ Botões de CTA principal</li>
+          <li>→ Links ativos e hover</li>
+          <li>→ Bordas de destaque</li>
+          <li>→ Ícones e separadores</li>
+        </ul>
+      </div>
+      <div class="usage-col">
+        <div class="usage-col-label">Soft White · Use para</div>
+        <ul>
+          <li>→ Texto principal e títulos</li>
+          <li>→ Ícones em fundo escuro</li>
+          <li>→ Fundos de seções claras</li>
+          <li>→ Elementos de contraste</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ══ 03. LOGO ══ -->
+  <section id="logo" class="section">
+    <span class="eyebrow">03 · Identidade Gráfica</span>
+    <h2 class="section-title">Logo & Símbolo</h2>
+    <p class="section-lead">O símbolo geométrico "A" é o núcleo da identidade. A Linha de Aceleração, diagonal verde, é o elemento de movimento que diferencia e identifica a marca.</p>
+
+    <div class="logo-grid">
+      <!-- Horizontal dark (preferred) -->
+      <div class="logo-card">
+        <div class="logo-preview lp-dark" style="padding:32px;">
+          <img src="logo-horizontal.png" alt="Alavanca Aceleradora — Horizontal" style="width:100%; max-width:380px; object-fit:contain; border-radius:2px;">
+        </div>
+        <div class="logo-card-label">Versão Horizontal · Fundo Escuro (Preferencial)</div>
+      </div>
+
+      <!-- Square / Gradient -->
+      <div class="logo-card">
+        <div class="logo-preview" style="padding:0; background:#0B0B0B;">
+          <img src="logo-mug.png" alt="Alavanca Aceleradora — Quadrado" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="logo-card-label">Versão Quadrada · Fundo Gradiente Escuro</div>
+      </div>
+
+      <!-- Horizontal variant 2 -->
+      <div class="logo-card">
+        <div class="logo-preview lp-dark" style="padding:32px;">
+          <img src="logo-h2.png" alt="Alavanca Aceleradora — Variação" style="width:100%; max-width:380px; object-fit:contain; border-radius:2px;">
+        </div>
+        <div class="logo-card-label">Variação Horizontal · Textura Escura</div>
+      </div>
+
+      <!-- Note card for other versions -->
+      <div class="logo-card">
+        <div class="logo-preview" style="background:var(--gray-700); flex-direction:column; gap:16px;">
+          <div style="width:48px; height:48px; border:1.5px dashed rgba(46,184,87,0.4); border-radius:2px; display:flex; align-items:center; justify-content:center;">
+            <span style="color:var(--green); font-size:20px;">+</span>
+          </div>
+          <div style="text-align:center; padding:0 24px;">
+            <div style="font-size:12px; color:rgba(242,239,230,0.5); line-height:1.6;">Versões em fundo claro e verde devem ser solicitadas ao designer com fundo transparente (PNG)</div>
+          </div>
+        </div>
+        <div class="logo-card-label">Versões Adicionais · Solicitar ao Designer</div>
+      </div>
+    </div>
+
+    <!-- Anatomy -->
+    <div class="anatomy-wrap">
+      <div class="anatomy-logo">
+        <img src="logo-horizontal.png" alt="Anatomia do Logo" style="width:100%; max-width:340px; object-fit:contain; border-radius:3px;">
+      </div>
+      <div class="anatomy-items">
+        <div class="anatomy-item">
+          <div class="anatomy-dot anatomy-dot-w"></div>
+          <div>
+            <div class="anatomy-text-title">Elemento Branco (Soft White)</div>
+            <div class="anatomy-text-desc">Perna esquerda do "A": a base sólida, a clareza estratégica e a fundação do negócio.</div>
+          </div>
+        </div>
+        <div class="anatomy-item">
+          <div class="anatomy-dot anatomy-dot-g"></div>
+          <div>
+            <div class="anatomy-text-title">Elemento Verde (Acceleration Green)</div>
+            <div class="anatomy-text-desc">Perna direita do "A": ação, crescimento e o diferencial competitivo da marca.</div>
+          </div>
+        </div>
+        <div class="anatomy-item">
+          <div class="anatomy-dot anatomy-dot-d" style="transform:rotate(-25deg); transform-origin:top;"></div>
+          <div>
+            <div class="anatomy-text-title">Linha de Aceleração</div>
+            <div class="anatomy-text-desc">Diagonal verde que corta o símbolo: velocidade, impulso e a trajetória de aceleração.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Do / Don't -->
+    <div class="rules-grid">
+      <div class="rule-card rule-do">
+        <div class="rule-header">Use Assim</div>
+        <div class="rule-body">
+          <ul>
+            <li>Aplique preferencialmente em fundos escuros</li>
+            <li>Mantenha as proporções originais do símbolo</li>
+            <li>Respeite o espaço de respiro ao redor do logo</li>
+            <li>Use a versão horizontal em layouts wide</li>
+            <li>Aplique sobre texturas foscas de qualidade</li>
+            <li>Mantenha sempre a paleta de cores oficial</li>
+          </ul>
+        </div>
+      </div>
+      <div class="rule-card rule-dont">
+        <div class="rule-header">Não Use Assim</div>
+        <div class="rule-body">
+          <ul>
+            <li>Não distorça ou altere as proporções</li>
+            <li>Não aplique sobre fundos poluídos ou coloridos</li>
+            <li>Não adicione sombras, contornos ou brilhos</li>
+            <li>Não altere as cores originais do logo</li>
+            <li>Não use em tamanho menor que 24px de altura</li>
+            <li>Não rotacione ou incline o símbolo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ══ 04. TIPOGRAFIA ══ -->
+  <section id="tipografia" class="section">
+    <span class="eyebrow">04 · Tipografia</span>
+    <h2 class="section-title">Sistema Tipográfico</h2>
+    <p class="section-lead">Design limpo e altamente legível. As fontes foram escolhidas para comunicar modernidade, sofisticação e autoridade em qualquer dispositivo.</p>
+
+    <div class="type-spec">
+      <div class="type-meta">
+        <span class="type-tag">Display</span>
+        <span class="type-info">Montserrat · ExtraBold 800 · -3px tracking</span>
+      </div>
+      <div class="t-display">ALAVANCA</div>
+      <div style="margin-top:10px; font-size:11px; color:rgba(242,239,230,0.2); letter-spacing:2px;">A B C D E F G H I J K L M N O P Q R S T U V W X Y Z &nbsp;·&nbsp; 0 1 2 3 4 5 6 7 8 9</div>
+    </div>
+
+    <div class="type-spec">
+      <div class="type-meta">
+        <span class="type-tag">H1</span>
+        <span class="type-info">Montserrat · Bold 700 · -1.5px tracking</span>
+      </div>
+      <div class="t-h1">Acelere seus resultados com estratégia</div>
+    </div>
+
+    <div class="type-spec">
+      <div class="type-meta">
+        <span class="type-tag">H2</span>
+        <span class="type-info">Montserrat · Bold 700 · -.5px tracking</span>
+      </div>
+      <div class="t-h2">Estratégia. Processo. Escala.</div>
+    </div>
+
+    <div class="type-spec">
+      <div class="type-meta">
+        <span class="type-tag">Subheading</span>
+        <span class="type-info">Inter · SemiBold 600</span>
+      </div>
+      <div class="t-sub">Uma rede que coloca negócios em movimento</div>
+    </div>
+
+    <div class="type-spec">
+      <div class="type-meta">
+        <span class="type-tag">Body</span>
+        <span class="type-info">Inter · Light 300 · 1.85 line-height</span>
+      </div>
+      <div class="t-body">Toda empresa que cresce passa pelo mesmo ciclo: vende primeiro, traz receita, contrata as pessoas certas para entregar bem, arruma os processos. Depois repete. A Alavanca existe para fazer esse ciclo girar mais rápido e com menos erro no caminho.</div>
+    </div>
+
+    <div class="type-spec">
+      <div class="type-meta">
+        <span class="type-tag">Label</span>
+        <span class="type-info">Inter · Regular · Uppercase · +3px tracking</span>
+      </div>
+      <div class="t-label">Rede de Negócios · Premium · 2026</div>
+    </div>
+
+    <!-- Scale -->
+    <div class="scale-table">
+      <div style="font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(242,239,230,0.25); margin-bottom:20px;">Escala Tipográfica</div>
+      <div class="scale-row">
+        <span class="scale-tag">Display</span><span class="scale-px">72px</span>
+        <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:clamp(28px,4vw,56px); letter-spacing:-2px;">Alavanca</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-tag">H1</span><span class="scale-px">48px</span>
+        <span style="font-family:'Montserrat',sans-serif; font-weight:800; font-size:clamp(22px,3vw,38px); letter-spacing:-1px;">Acelere seu negócio</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-tag">H2</span><span class="scale-px">32px</span>
+        <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:clamp(18px,2.5vw,26px);">Estratégia e Execução</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-tag">H3</span><span class="scale-px">22px</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:600; font-size:clamp(15px,2vw,18px);">Resultados mensuráveis</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-tag">Body</span><span class="scale-px">16px</span>
+        <span style="font-family:'Inter',sans-serif; font-weight:300; font-size:16px; color:rgba(242,239,230,0.6);">Texto principal de parágrafo</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-tag">Small</span><span class="scale-px">13px</span>
+        <span style="font-family:'Inter',sans-serif; font-size:13px; color:rgba(242,239,230,0.4);">Texto secundário e legendas</span>
+      </div>
+      <div class="scale-row">
+        <span class="scale-tag">Label</span><span class="scale-px">10–11px</span>
+        <span style="font-family:'Inter',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--green);">Eyebrow e labels</span>
+      </div>
+    </div>
+
+    <!-- Font Stack -->
+    <div class="font-cols">
+      <div class="font-col">
+        <div class="font-col-label">Fontes Principais</div>
+        <div class="font-item">
+          <div class="font-name" style="font-family:'Montserrat',sans-serif;">Montserrat</div>
+          <div class="font-weight-list">Bold 700 · ExtraBold 800 · Black 900</div>
+        </div>
+        <div class="font-item">
+          <div class="font-name" style="font-family:'Inter',sans-serif;">Inter</div>
+          <div class="font-weight-list">SemiBold 600 · Bold 700</div>
+        </div>
+        <div class="font-note">Alternativas aceitas: <strong style="color:var(--white);">Poppins SemiBold</strong> · <strong style="color:var(--white);">Satoshi Bold</strong></div>
+      </div>
+      <div class="font-col">
+        <div class="font-col-label">Fontes de Apoio (Texto Secundário)</div>
+        <div class="font-item">
+          <div class="font-name" style="font-family:'Montserrat',sans-serif; font-weight:300;">Montserrat Light</div>
+          <div class="font-weight-list">Light 300 · Regular 400</div>
+        </div>
+        <div class="font-item">
+          <div class="font-name" style="font-family:'Inter',sans-serif; font-weight:300;">Inter Light</div>
+          <div class="font-weight-list">Light 300 · Regular 400</div>
+        </div>
+        <div class="font-note">Use para corpo de texto extenso, legendas, texto de apoio e descrições.</div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ══ 05. ESTILO ══ -->
+  <section id="estilo" class="section">
+    <span class="eyebrow">05 · Estilo de Design</span>
+    <h2 class="section-title">Princípios Visuais para LPs</h2>
+    <p class="section-lead">O site deve respirar luxo e performance. Cada decisão de design reforça a percepção de autoridade, sofisticação e alto valor percebido.</p>
+
+    <div class="principles-grid">
+      <div class="principle-card">
+        <div class="principle-tag">Layout</div>
+        <div class="principle-title">Espaço Negativo Generoso</div>
+        <div class="principle-desc">Amplo uso de espaço em branco. O conteúdo respira. Menos é mais. Cada elemento tem propósito definido. Nunca sobrecarregue a tela.</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-tag">Elementos Gráficos</div>
+        <div class="principle-title">Linhas Finas & Geometria</div>
+        <div class="principle-desc">Uso de linhas finas verdes, cortes diagonais e composições geométricas. Separadores como elementos de design, não apenas divisores.</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-tag">Direção de Arte</div>
+        <div class="principle-title">Premium Corporate Lifestyle</div>
+        <div class="principle-desc">Iluminação cinematográfica, tons escuros, alto contraste. Imagens que transmitem sofisticação. Sem stock photos genéricos ou amadores.</div>
+      </div>
+      <div class="principle-card">
+        <div class="principle-tag">Conversão</div>
+        <div class="principle-title">Verde Guia a Ação</div>
+        <div class="principle-desc">Todos os CTAs usam Acceleration Green. A cor orienta o olho do visitante até o ponto de conversão. Use com intenção e hierarquia clara.</div>
+      </div>
+    </div>
+
+    <!-- Buttons Preview -->
+    <div style="margin-top:48px;">
+      <div style="font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(242,239,230,0.25); margin-bottom:20px;">Botões & Call to Action</div>
+      <div class="btn-preview">
+        <button class="btn-sample btn-primary-s">Quero Acelerar</button>
+        <button class="btn-sample btn-outline-w">Saiba Mais</button>
+        <button class="btn-sample btn-outline-g">Ver Detalhes →</button>
+      </div>
+      <div style="margin-top:20px; padding:16px 20px; background:var(--gray-800); border-radius:3px; border-left:2px solid var(--green);">
+        <div style="font-size:12px; color:rgba(242,239,230,0.5); line-height:1.7;">
+          <strong style="color:var(--white);">Hierarquia de CTA:</strong> Primário (verde sólido) → Secundário (borda branca) → Terciário (borda verde). Use apenas 1 CTA primário por seção de conversão.
+        </div>
+      </div>
+    </div>
+
+    <!-- Prohibited -->
+    <div style="margin-top:48px;">
+      <div style="font-size:10px; letter-spacing:3px; text-transform:uppercase; color:#e04040; margin-bottom:16px;">Proibido</div>
+      <div class="prohibit-grid">
+        <div class="prohibit-item"><span class="prohibit-x">✕</span><span class="prohibit-text">Estilo amador ou visual de baixo custo</span></div>
+        <div class="prohibit-item"><span class="prohibit-x">✕</span><span class="prohibit-text">Tons infantis ou cores fora da paleta</span></div>
+        <div class="prohibit-item"><span class="prohibit-x">✕</span><span class="prohibit-text">Layouts desorganizados ou poluídos</span></div>
+        <div class="prohibit-item"><span class="prohibit-x">✕</span><span class="prohibit-text">Excesso de efeitos visuais desnecessários</span></div>
+        <div class="prohibit-item"><span class="prohibit-x">✕</span><span class="prohibit-text">Sombras excessivas no logo ou símbolo</span></div>
+        <div class="prohibit-item"><span class="prohibit-x">✕</span><span class="prohibit-text">Múltiplos CTAs primários competindo</span></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ══ 06. TOM DE VOZ ══ -->
+  <section id="voz" class="section">
+    <span class="eyebrow">06 · Tom de Voz</span>
+    <h2 class="section-title">Como a Alavanca fala</h2>
+    <p class="section-lead">Estratégico, direto, confiante e inteligente. A comunicação transmite autoridade e visão de negócios. Sem superficialidade. Sem linguagem vazia.</p>
+
+    <div class="voice-grid">
+      <div class="voice-card">
+        <div class="voice-attr">Estratégico</div>
+        <div class="voice-desc">Cada palavra serve um propósito. A comunicação parte de quem entende o ciclo do negócio, não de quem repete frase motivacional.</div>
+        <div class="voice-quote">Não é sobre trabalhar mais. É sobre entender a sequência: vende primeiro, depois traz gente, depois arruma processo. Nessa ordem.</div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-attr">Direto</div>
+        <div class="voice-desc">Zero rodeios. A mensagem vai ao ponto. Sem enrolação, sem jargões, sem promessas que ninguém consegue medir.</div>
+        <div class="voice-quote">Sua empresa precisa de receita agora. Depois a gente cuida do resto.</div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-attr">Confiante</div>
+        <div class="voice-desc">Autoridade construída com quem já passou pelo ciclo. A Alavanca não pede permissão para ser referência. Simplesmente é.</div>
+        <div class="voice-quote">Você não precisa de mais teoria. Você precisa da sequência certa e de quem já passou por isso.</div>
+      </div>
+      <div class="voice-card">
+        <div class="voice-attr">Inteligente</div>
+        <div class="voice-desc">Respeita a inteligência de quem lê. Fala de negócio com quem entende de negócio. Sem simplificar demais, sem complicar à toa.</div>
+        <div class="voice-quote">Toda empresa que cresceu passou pelo mesmo ciclo. A diferença está em quem entendeu a ordem e quem ficou improvisando.</div>
+      </div>
+    </div>
+
+    <div class="green-line"></div>
+
+    <div style="font-size:10px; letter-spacing:3px; text-transform:uppercase; color:rgba(242,239,230,0.25); margin-bottom:18px;">Vocabulário da Marca</div>
+    <div class="vocab-tags">
+      <span class="vocab-tag">Acelerar</span>
+      <span class="vocab-tag">Estratégia</span>
+      <span class="vocab-tag">Performance</span>
+      <span class="vocab-tag">Escala</span>
+      <span class="vocab-tag">Sistemas</span>
+      <span class="vocab-tag">Resultados</span>
+      <span class="vocab-tag">Execução</span>
+      <span class="vocab-tag">Alavancagem</span>
+      <span class="vocab-tag">Premium</span>
+      <span class="vocab-tag">Ecossistema</span>
+      <span class="vocab-tag">Alta Performance</span>
+      <span class="vocab-tag">Crescimento</span>
+    </div>
+
+    <div class="vocab-cols">
+      <div class="vocab-col vocab-do">
+        <div class="vocab-col-label">Use</div>
+        <ul>
+          <li>→ "Aceleração / Alavancagem"</li>
+          <li>→ "Resultados comprovados"</li>
+          <li>→ "Estratégia de escala"</li>
+          <li>→ "Alta performance"</li>
+          <li>→ "Ecossistema de negócios"</li>
+          <li>→ "Execução com precisão"</li>
+        </ul>
+      </div>
+      <div class="vocab-col vocab-dont">
+        <div class="vocab-col-label">Evite</div>
+        <ul>
+          <li>✕ "Incrível / Fantástico / Surpreendente"</li>
+          <li>✕ "Guru / Especialista renomado"</li>
+          <li>✕ "Segredo revelado / Método exclusivo"</li>
+          <li>✕ Exageros sem fundamento</li>
+          <li>✕ Linguagem genérica de marketing</li>
+          <li>✕ Clichês motivacionais vazios</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ══ 07. APLICAÇÕES ══ -->
+  <section id="aplicacoes" class="section">
+    <span class="eyebrow">07 · Aplicações</span>
+    <h2 class="section-title">A Marca em Uso</h2>
+    <p class="section-lead">A identidade visual deve ser aplicada de forma consistente em todos os pontos de contato, digitais e físicos, mantendo o padrão premium em cada interação.</p>
+
+    <div class="app-grid">
+
+      <!-- Business Card - imagem real -->
+      <div class="app-card">
+        <div class="app-preview" style="padding:0; background:#2a2a2a;">
+          <img src="cartao-visita.png" alt="Cartão de Visita Alavanca" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="app-info">
+          <div class="app-name">Cartão de Visita</div>
+          <div class="app-spec">85 × 55mm · Laminação Fosca · Jonatha Oliveira · Diretor Executivo</div>
+        </div>
+      </div>
+
+      <!-- Mug - imagem real -->
+      <div class="app-card">
+        <div class="app-preview" style="padding:0; background:#111;">
+          <img src="caneca.png" alt="Caneca Alavanca" style="width:100%; height:100%; object-fit:cover;">
+        </div>
+        <div class="app-info">
+          <div class="app-name">Brinde Premium</div>
+          <div class="app-spec">Caneca 350ml · Matte Black · Sublimação</div>
+        </div>
+      </div>
+
+      <!-- Perfil Instagram / WhatsApp -->
+      <div class="app-card">
+        <div class="app-preview" style="padding:0; background:#0B0B0B; flex-direction:column; gap:0;">
+          <div style="width:100%; height:100%; display:flex; gap:8px; align-items:center; justify-content:center; padding:20px;">
+            <!-- Instagram circle -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+              <div style="width:72px; height:72px; border-radius:50%; overflow:hidden; border:2.5px solid #2EB857; box-shadow:0 0 0 2px #0B0B0B, 0 0 0 4px rgba(46,184,87,0.3);">
+                <img src="logo-perfil.png" alt="Perfil Instagram" style="width:100%; height:100%; object-fit:cover;">
+              </div>
+              <span style="font-size:8px; letter-spacing:1px; color:rgba(242,239,230,0.35); text-transform:uppercase;">Instagram</span>
+            </div>
+            <!-- WhatsApp circle -->
+            <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+              <div style="width:72px; height:72px; border-radius:50%; overflow:hidden; border:2.5px solid #2EB857; box-shadow:0 0 0 2px #0B0B0B, 0 0 0 4px rgba(46,184,87,0.3);">
+                <img src="logo-perfil.png" alt="Perfil WhatsApp" style="width:100%; height:100%; object-fit:cover;">
+              </div>
+              <span style="font-size:8px; letter-spacing:1px; color:rgba(242,239,230,0.35); text-transform:uppercase;">WhatsApp</span>
+            </div>
+          </div>
+        </div>
+        <div class="app-info">
+          <div class="app-name">Foto de Perfil</div>
+          <div class="app-spec">Instagram · WhatsApp · 800×800px</div>
+        </div>
+      </div>
+
+      <!-- Email Signature - estilo cartão fundo preto -->
+      <div class="app-card span-3">
+        <div style="padding:10px; background:var(--gray-800); border-radius:3px 3px 0 0;">
+          <div style="font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,239,230,0.3);">Assinatura de E-mail · Estilo Cartão · Fundo Escuro</div>
+        </div>
+        <!-- Preview da assinatura -->
+        <div style="background:#111; padding:40px; display:flex; justify-content:center;">
+          <div style="background:#0B0B0B; border:1px solid rgba(46,184,87,0.15); border-radius:4px; width:100%; max-width:600px; overflow:hidden; box-shadow:0 8px 40px rgba(0,0,0,0.6);">
+            <!-- Topo verde -->
+            <div style="height:3px; background:linear-gradient(90deg, #2EB857, transparent);"></div>
+            <div style="padding:32px 36px; display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap;">
+              <!-- Lado esquerdo: logo + nome -->
+              <div style="display:flex; align-items:center; gap:24px;">
+                <img src="logo-perfil.png" alt="Logo" style="width:72px; height:72px; border-radius:3px; object-fit:cover; border:1px solid rgba(46,184,87,0.2);">
+                <div>
+                  <div style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:18px; color:#F2EFE6; letter-spacing:-0.5px; margin-bottom:2px;">JONATHA OLIVEIRA</div>
+                  <div style="font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#2EB857; margin-bottom:12px;">Diretor Executivo</div>
+                  <div style="height:1px; width:100%; background:rgba(46,184,87,0.2); margin-bottom:12px;"></div>
+                  <div style="display:flex; flex-direction:column; gap:4px;">
+                    <div style="font-size:12px; color:rgba(242,239,230,0.55);">+55 (92) 98159-0598</div>
+                    <div style="font-size:12px; color:rgba(242,239,230,0.55);">contato@alavanca.ac.br</div>
+                  </div>
+                </div>
+              </div>
+              <!-- Lado direito: logo horizontal -->
+              <div style="display:flex; flex-direction:column; align-items:flex-end; gap:12px;">
+                <img src="logo-horizontal.png" alt="Alavanca Aceleradora" style="height:36px; object-fit:contain;">
+                <div style="font-size:9px; letter-spacing:2px; text-transform:uppercase; color:rgba(242,239,230,0.2);">alavanca.ac.br</div>
+              </div>
+            </div>
+            <!-- Rodapé -->
+            <div style="height:1px; background:rgba(46,184,87,0.1);"></div>
+            <div style="padding:12px 36px; display:flex; justify-content:space-between; align-items:center;">
+              <div style="font-size:10px; color:rgba(242,239,230,0.2); letter-spacing:1px;">Rede de Negócios em Movimento</div>
+              <div style="height:16px; width:1px; background:rgba(46,184,87,0.2);"></div>
+              <div style="font-size:10px; color:rgba(242,239,230,0.2); letter-spacing:1px;">Manaus · AM · Brasil</div>
+            </div>
+          </div>
+        </div>
+        <div class="app-info" style="background:var(--gray-800);">
+          <div class="app-name">Assinatura de E-mail</div>
+          <div class="app-spec">HTML Email · 600px · Fundo #0B0B0B · Estilo Cartão de Visita</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- END -->
+  <div class="end-section">
+    <span class="eyebrow">Guia de Identidade Visual</span>
+    <h2 class="end-title">ALAVANCA ACELERADORA</h2>
+    <p class="end-sub">Toda aplicação da marca deve seguir as diretrizes deste guia. Em caso de dúvidas sobre uso da identidade visual, consulte o responsável pela marca.</p>
+    <div class="end-tags">
+      <span class="end-tag">Versão 1.0</span>
+      <span class="end-tag">2026</span>
+      <span class="end-tag">Confidencial</span>
+      <span class="end-tag">Uso Autorizado</span>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-brand">ALAVANCA <span>ACELERADORA</span></div>
+    <div class="footer-copy">Guia de Identidade Visual · v1.0 · 2026 · Uso Interno e Autorizado</div>
+  </footer>
+
+</main>
+
+<script>
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const links = document.querySelectorAll('.sidebar-link');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => {
+          l.classList.remove('active');
+          if (l.getAttribute('href') === '#' + e.target.id) l.classList.add('active');
+        });
+      }
+    });
+  }, { threshold: 0.25 });
+  sections.forEach(s => io.observe(s));
+</script>
+
+</body>
+</html>
