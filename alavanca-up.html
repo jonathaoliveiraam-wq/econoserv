@@ -230,6 +230,8 @@
       overflow: hidden;
       width: 340px;
       text-align: left;
+      display: flex;
+      flex-direction: column;
     }
     .avatar-photo {
       width: 100%;
@@ -237,10 +239,10 @@
       object-fit: cover;
       object-position: center;
       display: block;
+      flex-shrink: 0;
     }
-    .specialist-body { padding: 24px; }
-    .specialist-card h3 { font-size: 1.15rem; margin-bottom: 4px; }
-    .specialist-card .role { font-size: .84rem; color: #E8A87C; font-weight: 600; margin-bottom: 12px; }
+    .specialist-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+    .specialist-card h3 { font-size: 1.15rem; margin-bottom: 10px; }
     .specialist-card p { font-size: .92rem; color: rgba(255,255,255,.75); margin-bottom: 16px; }
     .specialist-card a { color: #E8A87C; font-size: .84rem; font-weight: 600; text-decoration: none; }
     .specialist-card a:hover { text-decoration: underline; }
@@ -252,6 +254,7 @@
       border-radius: 12px;
       padding: 14px;
       margin-bottom: 4px;
+      margin-top: auto;
     }
     .areas-box span {
       background: rgba(255,255,255,.08);
@@ -259,8 +262,26 @@
       color: #fff;
       font-size: .78rem;
       font-weight: 600;
-      padding: 5px 12px;
-      border-radius: 50px;
+      padding: 8px 14px;
+      border-radius: 8px;
+      opacity: 0;
+      transform: scale(.6);
+      transition: transform .2s ease, background .2s ease, border-color .2s ease;
+    }
+    .areas-box span:hover {
+      transform: scale(1.08);
+      background: rgba(226,112,63,.25);
+      border-color: rgba(226,112,63,.5);
+    }
+    .specialist-card.visible .areas-box span { animation: tagPop .45s ease forwards; }
+    .specialist-card.visible .areas-box span:nth-child(1) { animation-delay: .05s; }
+    .specialist-card.visible .areas-box span:nth-child(2) { animation-delay: .15s; }
+    .specialist-card.visible .areas-box span:nth-child(3) { animation-delay: .25s; }
+    .specialist-card.visible .areas-box span:nth-child(4) { animation-delay: .35s; }
+    @keyframes tagPop {
+      0%   { opacity: 0; transform: scale(.6); }
+      70%  { opacity: 1; transform: scale(1.12); }
+      100% { opacity: 1; transform: scale(1); }
     }
 
     /* ══════════════════════════════════════
@@ -573,20 +594,17 @@
         <img class="avatar-photo" src="jaqueline-guedes.jpg" alt="Jaqueline Guedes" />
         <div class="specialist-body">
           <h3>Jaqueline Guedes</h3>
-          <div class="role">AlcanceUp</div>
           <p>Constrói posicionamento e identidade de marca para negócios que precisam parar de ser invisíveis. Conduz os 2 encontros de Marketing.</p>
           <div class="areas-box">
             <span>Marketing</span><span>Posicionamento</span><span>Branding</span>
           </div>
-          <a href="https://www.instagram.com/alcanceupagencia/" target="_blank" rel="noopener">alcanceupagencia →</a>
         </div>
       </div>
       <div class="specialist-card fade-up">
         <img class="avatar-photo" src="jonatha-oliveira.jpg" alt="Jonatha Oliveira" />
         <div class="specialist-body">
           <h3>Jonatha Oliveira</h3>
-          <div class="role">Alavanca Aceleradora</div>
-          <p>Já mapeou gargalo e financeiro de dezenas de empresas em Manaus. Conduz os 2 encontros de Processo e Financeiro.</p>
+          <p>Especialista em gestão, processos e financeiro, focado em transformar operação bagunçada em negócio organizado. Conduz os 2 encontros de Processo e Financeiro.</p>
           <div class="areas-box">
             <span>Gestão</span><span>Financeiro</span><span>Inovação</span><span>Processos</span>
           </div>
@@ -754,8 +772,7 @@
       <span class="plus">+</span>
       <div class="brand-chip dark"><img src="alavanca-aceleradora-logo.png" alt="Alavanca Aceleradora" /></div>
     </div>
-    <p>Alavanca Up é um produto conjunto da AlcanceUp e da Alavanca Aceleradora.</p>
-    <p>Marketing conduzido pela AlcanceUp. Processo e financeiro conduzidos pela Alavanca Aceleradora.</p>
+    <p>Powered by AlcanceUp e Alavanca Aceleradora</p>
   </footer>
 
   <!-- ── SCROLL ANIMATIONS ── -->
