@@ -559,10 +559,135 @@
     .footer-brands .brand-chip.dark img { height: 20px; }
     .footer-brands .plus { color: rgba(255,255,255,.3); font-weight: 700; font-size: 1.1rem; }
 
+    /* ══════════════════════════════════════
+       DIAGNÓSTICO INTERATIVO
+    ══════════════════════════════════════ */
+    .diag-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(11,26,43,.72);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .diag-overlay.active { display: flex; }
+    .diag-box {
+      background: var(--white);
+      border-radius: 20px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 34px 28px;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,.35);
+    }
+    .diag-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: none;
+      background: var(--cream);
+      color: var(--navy);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+      font-family: inherit;
+    }
+    .diag-close:hover { background: var(--border); }
+    .diag-progress-wrap {
+      height: 6px;
+      background: var(--border);
+      border-radius: 50px;
+      overflow: hidden;
+      margin: 4px 0 26px;
+    }
+    .diag-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--orange), var(--orange-dark));
+      border-radius: 50px;
+      transition: width .4s ease;
+    }
+    .diag-step-label {
+      font-size: .74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--orange-dark);
+      margin-bottom: 10px;
+    }
+    .diag-question {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 22px;
+      line-height: 1.35;
+    }
+    .diag-options { display: flex; flex-direction: column; gap: 10px; }
+    .diag-option {
+      text-align: left;
+      background: var(--cream);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      font-size: .94rem;
+      color: var(--text);
+      cursor: pointer;
+      font-family: inherit;
+      transition: border-color .2s, background .2s, transform .15s;
+    }
+    .diag-option:hover { border-color: var(--orange); background: rgba(226,112,63,.08); transform: translateX(2px); }
+    .diag-result-title { font-size: 1.35rem; font-weight: 900; color: var(--navy); margin-bottom: 6px; line-height: 1.3; }
+    .diag-result-sub { font-size: .92rem; color: var(--text-muted); margin-bottom: 22px; }
+    .diag-bars { display: flex; flex-direction: column; gap: 16px; margin-bottom: 24px; }
+    .diag-bar-label { display: flex; justify-content: space-between; font-size: .84rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .diag-bar-track { height: 10px; background: var(--border); border-radius: 50px; overflow: hidden; }
+    .diag-bar-fill { height: 100%; border-radius: 50px; width: 0%; transition: width .7s ease; }
+    .diag-bar-item.marketing .diag-bar-fill { background: var(--orange); }
+    .diag-bar-item.processo .diag-bar-fill { background: var(--navy-light); }
+    .diag-bar-item.financeiro .diag-bar-fill { background: var(--green); }
+    .diag-recs { display: flex; flex-direction: column; gap: 12px; margin-bottom: 26px; }
+    .diag-rec { background: var(--cream); border-left: 4px solid var(--orange); border-radius: 10px; padding: 13px 16px; font-size: .86rem; color: var(--text); line-height: 1.5; }
+    .diag-rec strong { color: var(--navy); display: block; margin-bottom: 4px; }
+    .diag-rec.processo { border-left-color: var(--navy-light); }
+    .diag-rec.financeiro { border-left-color: var(--green); }
+    .diag-contact-form { border-top: 1px solid var(--border); padding-top: 22px; margin-top: 4px; }
+    .diag-contact-form .diag-lead { font-size: .88rem; color: var(--text-muted); margin-bottom: 14px; }
+    .diag-contact-form input {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: .94rem;
+      margin-bottom: 10px;
+      font-family: inherit;
+    }
+    .diag-contact-form button[type="submit"] { font-family: inherit; }
+    .diag-success { text-align: center; padding: 26px 6px 10px; }
+    .diag-success .check {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: var(--green);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin: 0 auto 16px;
+    }
+    .diag-success h3 { color: var(--navy); font-size: 1.15rem; margin-bottom: 8px; }
+    .diag-success p { font-size: .92rem; color: var(--text-muted); }
+    button.btn { font-family: inherit; }
+
     @media (max-width: 640px) {
       .stat-item { border-right: none; border-bottom: 1px solid rgba(0,0,0,.1); }
       .stat-item:last-child { border-bottom: none; }
       .entregaveis-list { grid-template-columns: 1fr; }
+      .diag-box { padding: 26px 20px; }
+      .diag-question { font-size: 1.08rem; }
     }
   </style>
 </head>
@@ -577,7 +702,7 @@
       <h1 class="fade-up">Sua empresa fatura. Mas ninguém enxerga o motivo de <span>sobrar tão pouco</span>.</h1>
       <p class="fade-up">Em 6 encontros ao longo de 60 dias, dois especialistas colocam a lupa no seu marketing, no seu processo mais travado e no seu financeiro, e entregam um plano pronto pra rodar. Não é curso. Não é consultoria de 6 meses. É diagnóstico com entrega.</p>
       <div class="hero-ctas fade-up">
-        <a href="#comecar" class="btn">Quero meu diagnóstico completo</a>
+        <button type="button" class="btn" onclick="abrirDiagnostico()">Quero meu diagnóstico completo</button>
       </div>
       <small class="fade-up">Conversa rápida e sem compromisso para confirmar o encaixe da sua empresa.</small>
     </div>
@@ -751,7 +876,7 @@
       <div class="vagas">Condição especial no Pix</div>
       <div class="vagas">Execução completa em até 60 dias</div>
       <div class="vagas">Condição especial para as primeiras 10 empresas</div>
-      <a href="#comecar" class="btn btn-block">Quero começar meu Alavanca Up</a>
+      <button type="button" class="btn btn-block" onclick="abrirDiagnostico()">Quero começar meu Alavanca Up</button>
       <div class="garantia-box"><strong>Garantia:</strong> se ao final do programa você não sair com os 6 entregáveis documentados, devolvemos 100% do valor. O risco é nosso.</div>
     </div>
   </section>
@@ -829,6 +954,17 @@
     <p>Powered by AlcanceUp e Alavanca Aceleradora</p>
   </footer>
 
+  <!-- ══════════════════════════════════════
+       DIAGNÓSTICO INTERATIVO (MODAL)
+  ══════════════════════════════════════ -->
+  <div class="diag-overlay" id="diagnostico-modal" onclick="if(event.target===this) fecharDiagnostico()">
+    <div class="diag-box">
+      <button type="button" class="diag-close" onclick="fecharDiagnostico()" aria-label="Fechar">✕</button>
+      <div class="diag-progress-wrap"><div class="diag-progress-bar" id="diag-progress-bar"></div></div>
+      <div id="diag-content"></div>
+    </div>
+  </div>
+
   <!-- ── SCROLL ANIMATIONS ── -->
   <script>
     const observer = new IntersectionObserver((entries) => {
@@ -841,6 +977,263 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+  <!-- ── DIAGNÓSTICO INTERATIVO ── -->
+  <script>
+    const DIAG_PILARES = {
+      marketing:  'Marketing',
+      processo:   'Processo',
+      financeiro: 'Financeiro'
+    };
+
+    const DIAG_QUESTIONS = [
+      {
+        pilar: 'marketing',
+        texto: 'Como você definiria o posicionamento da sua marca hoje?',
+        opcoes: [
+          { t: 'Não sei explicar em uma frase o que nos diferencia', v: 1 },
+          { t: 'Tenho uma ideia, mas não é consistente em tudo que publico', v: 2 },
+          { t: 'Tenho um posicionamento definido, mas nem sempre aplico', v: 3 },
+          { t: 'É claro e aparece em tudo que a empresa comunica', v: 4 }
+        ]
+      },
+      {
+        pilar: 'marketing',
+        texto: 'Com que frequência você produz e publica conteúdo de marca (redes sociais, site etc.)?',
+        opcoes: [
+          { t: 'Quase nunca, ou de forma bem esporádica', v: 1 },
+          { t: 'Publico às vezes, sem planejamento', v: 2 },
+          { t: 'Tenho uma rotina, mas sem estratégia clara por trás', v: 3 },
+          { t: 'Publico com constância, seguindo uma estratégia de conteúdo', v: 4 }
+        ]
+      },
+      {
+        pilar: 'marketing',
+        texto: 'Sua empresa compete hoje principalmente por...',
+        opcoes: [
+          { t: 'Preço, é o que os clientes mais perguntam', v: 1 },
+          { t: 'Um pouco de preço, um pouco de indicação', v: 2 },
+          { t: 'Reputação, mas ainda sinto que poderia comunicar melhor o valor', v: 3 },
+          { t: 'Valor claro, os clientes sabem por que pagam o que pagam', v: 4 }
+        ]
+      },
+      {
+        pilar: 'processo',
+        texto: 'Se você tirar 1 semana de férias sem acesso a nada, o que acontece com a operação?',
+        opcoes: [
+          { t: 'Trava, muita coisa depende só de mim', v: 1 },
+          { t: 'Funciona mal, tem gargalos que só eu resolvo', v: 2 },
+          { t: 'Funciona razoável, mas perde ritmo', v: 3 },
+          { t: 'Funciona quase normal, a equipe sabe o que fazer', v: 4 }
+        ]
+      },
+      {
+        pilar: 'processo',
+        texto: 'Os principais processos da empresa estão documentados (fluxo, POP)?',
+        opcoes: [
+          { t: 'Não, está tudo na minha cabeça ou da equipe', v: 1 },
+          { t: 'Só uma parte, de forma informal', v: 2 },
+          { t: 'Os principais sim, mas desatualizados', v: 3 },
+          { t: 'Sim, documentados e atualizados', v: 4 }
+        ]
+      },
+      {
+        pilar: 'processo',
+        texto: 'Você tem indicadores pra saber se a operação está travando ou destravando?',
+        opcoes: [
+          { t: 'Não acompanho nenhum número de processo', v: 1 },
+          { t: 'Acompanho de cabeça, sem registrar', v: 2 },
+          { t: 'Tenho alguns indicadores, mas não uso pra decidir', v: 3 },
+          { t: 'Tenho indicadores claros e uso pra decidir', v: 4 }
+        ]
+      },
+      {
+        pilar: 'financeiro',
+        texto: 'Você sabe, com certeza, qual é a margem de lucro real da sua empresa hoje?',
+        opcoes: [
+          { t: 'Não, só sei se sobrou dinheiro no fim do mês', v: 1 },
+          { t: 'Tenho uma ideia aproximada', v: 2 },
+          { t: 'Sei a margem geral, mas não por produto/serviço', v: 3 },
+          { t: 'Sei a margem exata, geral e por produto/serviço', v: 4 }
+        ]
+      },
+      {
+        pilar: 'financeiro',
+        texto: 'Como você define os preços dos seus produtos/serviços?',
+        opcoes: [
+          { t: 'Copio o mercado ou "no feeling"', v: 1 },
+          { t: 'Baseado em custo, sem revisar há tempos', v: 2 },
+          { t: 'Revisado de vez em quando, mas sem método fixo', v: 3 },
+          { t: 'Com uma metodologia clara, revisada periodicamente', v: 4 }
+        ]
+      },
+      {
+        pilar: 'financeiro',
+        texto: 'Seu fluxo de caixa está...',
+        opcoes: [
+          { t: 'Sempre apertado, muita surpresa no fim do mês', v: 1 },
+          { t: 'Instável, tem mês bom e mês ruim sem eu saber por quê', v: 2 },
+          { t: 'Sob controle, mas sem planejamento de médio prazo', v: 3 },
+          { t: 'Previsível, com planejamento de entradas e saídas', v: 4 }
+        ]
+      }
+    ];
+
+    const DIAG_RECS = {
+      marketing: {
+        critico:  'Sua marca ainda não comunica valor com clareza, o que provavelmente te empurra pra competir por preço. O pilar de Marketing do Alavanca Up entrega um diagnóstico de posicionamento e um vídeo de apresentação do negócio pronto pra virar esse jogo.',
+        atencao:  'Você já tem alguma comunicação, mas sem consistência. Um framework de posicionamento claro destrava o próximo nível de percepção de valor.',
+        solido:   'Sua base de marketing é sólida. O ganho aqui é refinar a estratégia de conteúdo e reforçar a comunicação de valor pra sustentar preços melhores.'
+      },
+      processo: {
+        critico:  'Sua operação depende demais de você. O pilar de Processo mapeia o principal gargalo e entrega fluxo + POP documentados pra tirar isso da sua cabeça.',
+        atencao:  'Você já tem processo, mas ainda informal ou desatualizado. Documentar e criar indicadores é o que falta pra ganhar ritmo sem depender de você o tempo todo.',
+        solido:   'Sua operação já é razoavelmente independente. O ganho aqui é afinar indicadores pra enxergar gargalos antes que virem problema.'
+      },
+      financeiro: {
+        critico:  'Você está tomando decisão no escuro: sem saber a margem real nem controlar o fluxo de caixa. O pilar Financeiro entrega diagnóstico com indicadores e revisão de precificação pra parar de deixar dinheiro na mesa.',
+        atencao:  'Você tem noção do financeiro, mas sem método. Indicadores e uma revisão de precificação vão trazer previsibilidade real pro caixa.',
+        solido:   'Seu financeiro já está relativamente sob controle. O ganho aqui é ganhar previsibilidade de médio prazo e afinar a precificação por produto/serviço.'
+      }
+    };
+
+    let diagIndex = 0;
+    let diagAnswers = [];
+
+    function abrirDiagnostico() {
+      diagIndex = 0;
+      diagAnswers = [];
+      document.getElementById('diagnostico-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+      renderDiagStep();
+    }
+
+    function fecharDiagnostico() {
+      document.getElementById('diagnostico-modal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function renderDiagStep() {
+      const total = DIAG_QUESTIONS.length;
+      document.getElementById('diag-progress-bar').style.width = (diagIndex / total * 100) + '%';
+      const q = DIAG_QUESTIONS[diagIndex];
+      const content = document.getElementById('diag-content');
+      content.innerHTML =
+        '<div class="diag-step-label">Pergunta ' + (diagIndex + 1) + ' de ' + total + ' · ' + DIAG_PILARES[q.pilar] + '</div>' +
+        '<div class="diag-question">' + q.texto + '</div>' +
+        '<div class="diag-options">' +
+          q.opcoes.map((o, i) => '<button type="button" class="diag-option" onclick="responderDiag(' + i + ')">' + o.t + '</button>').join('') +
+        '</div>';
+    }
+
+    function responderDiag(i) {
+      const q = DIAG_QUESTIONS[diagIndex];
+      diagAnswers.push({ pilar: q.pilar, pergunta: q.texto, resposta: q.opcoes[i].t, valor: q.opcoes[i].v });
+      diagIndex++;
+      if (diagIndex < DIAG_QUESTIONS.length) {
+        renderDiagStep();
+      } else {
+        renderDiagResult();
+      }
+    }
+
+    function diagTier(pct) {
+      if (pct < 50) return 'critico';
+      if (pct < 75) return 'atencao';
+      return 'solido';
+    }
+
+    function renderDiagResult() {
+      document.getElementById('diag-progress-bar').style.width = '100%';
+
+      const pilares = ['marketing', 'processo', 'financeiro'];
+      const scores = {};
+      pilares.forEach(p => {
+        const respostas = diagAnswers.filter(a => a.pilar === p);
+        const soma = respostas.reduce((s, a) => s + a.valor, 0);
+        const max = respostas.length * 4;
+        scores[p] = { pct: Math.round(soma / max * 100) };
+      });
+
+      const somaTotal = pilares.reduce((s, p) => s + scores[p].pct, 0);
+      const pctTotal = Math.round(somaTotal / pilares.length);
+      const tierGeral = diagTier(pctTotal);
+      const labelGeral = tierGeral === 'critico'
+        ? 'Sua empresa está apagando incêndio'
+        : tierGeral === 'atencao'
+          ? 'Sua empresa tem potencial, falta direção'
+          : 'Sua empresa está no caminho certo';
+
+      const barsHtml = pilares.map(p =>
+        '<div class="diag-bar-item ' + p + '">' +
+          '<div class="diag-bar-label"><span>' + DIAG_PILARES[p] + '</span><span>' + scores[p].pct + '%</span></div>' +
+          '<div class="diag-bar-track"><div class="diag-bar-fill" style="width:' + scores[p].pct + '%"></div></div>' +
+        '</div>'
+      ).join('');
+
+      const recsHtml = pilares.map(p =>
+        '<div class="diag-rec ' + p + '"><strong>' + DIAG_PILARES[p] + '</strong>' + DIAG_RECS[p][diagTier(scores[p].pct)] + '</div>'
+      ).join('');
+
+      document.getElementById('diag-content').innerHTML =
+        '<div class="diag-step-label">Resultado do seu diagnóstico</div>' +
+        '<div class="diag-result-title">' + labelGeral + '</div>' +
+        '<p class="diag-result-sub">Veja como está cada frente da sua empresa hoje:</p>' +
+        '<div class="diag-bars">' + barsHtml + '</div>' +
+        '<div class="diag-recs">' + recsHtml + '</div>' +
+        '<form class="diag-contact-form" id="diag-contact-form">' +
+          '<p class="diag-lead">Quer receber esse resultado completo, com as recomendações práticas pra cada pilar? Deixa seu contato:</p>' +
+          '<input type="text" name="nome" placeholder="Seu nome completo" required />' +
+          '<input type="text" name="empresa" placeholder="Nome da empresa" required />' +
+          '<input type="tel" name="whatsapp" placeholder="WhatsApp com DDD" required />' +
+          '<button type="submit" class="btn btn-block">Quero receber meu resultado</button>' +
+          '<p class="privacidade">Dados protegidos, sem spam.</p>' +
+        '</form>';
+
+      document.getElementById('diag-contact-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const form = e.target;
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+
+        const respostasResumo = diagAnswers.map(a => a.pergunta + ' → ' + a.resposta).join('\n');
+
+        const payload = {
+          _subject: 'Novo diagnóstico Alavanca Up',
+          _template: 'table',
+          nome: form.nome.value,
+          empresa: form.empresa.value,
+          whatsapp: form.whatsapp.value,
+          resultado_geral: labelGeral + ' (' + pctTotal + '%)',
+          marketing: scores.marketing.pct + '%',
+          processo: scores.processo.pct + '%',
+          financeiro: scores.financeiro.pct + '%',
+          respostas: respostasResumo
+        };
+
+        fetch('https://formsubmit.co/ajax/jonatha.oliveira.am@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+          .then(r => r.json())
+          .then(() => {
+            document.getElementById('diag-content').innerHTML =
+              '<div class="diag-success">' +
+                '<div class="check">✓</div>' +
+                '<h3>Resultado enviado!</h3>' +
+                '<p>Recebemos seu diagnóstico. Nosso time entra em contato pelo WhatsApp em até 1 dia útil com a análise completa.</p>' +
+              '</div>';
+          })
+          .catch(() => {
+            btn.disabled = false;
+            btn.textContent = 'Quero receber meu resultado';
+            alert('Não conseguimos enviar agora. Tenta de novo em instantes.');
+          });
+      });
+    }
   </script>
 </body>
 </html>
