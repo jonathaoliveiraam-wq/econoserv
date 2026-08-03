@@ -186,28 +186,54 @@
       text-align: left;
     }
     .dado-card {
-      background: var(--cream);
+      background: var(--white);
       border: 1px solid var(--border);
       border-top: 4px solid var(--orange);
-      border-radius: 14px;
-      padding: 26px 24px;
-      transition: transform .25s ease, box-shadow .25s ease;
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 20px rgba(11,26,43,.05);
+      transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
     }
-    .dado-card:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(11,26,43,.1); }
+    .dado-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(11,26,43,.14); border-color: var(--orange); }
+    .dado-card.processo:hover { border-color: var(--navy-light); }
+    .dado-card.financeiro:hover { border-color: var(--green); }
     .dado-card.processo { border-top-color: var(--navy-light); }
     .dado-card.financeiro { border-top-color: var(--green); }
+    .dado-icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      transition: background .3s ease;
+    }
+    .dado-icon svg { width: 24px; height: 24px; }
+    .dado-card.marketing .dado-icon { background: rgba(226,112,63,.12); }
+    .dado-card.processo .dado-icon { background: rgba(11,26,43,.08); }
+    .dado-card.financeiro .dado-icon { background: rgba(46,184,87,.12); }
     .dado-card .dado-num {
       display: block;
-      font-size: 2.6rem;
+      font-size: 2.8rem;
       font-weight: 900;
       color: var(--navy);
       line-height: 1;
+      letter-spacing: -.02em;
       margin-bottom: 12px;
     }
     .dado-card.marketing .dado-num { color: var(--orange-dark); }
     .dado-card.financeiro .dado-num { color: var(--green-dark); }
-    .dado-card p { font-size: .92rem; color: var(--text); margin-bottom: 10px; }
-    .dado-card .fonte { font-size: .72rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: .05em; font-weight: 600; }
+    .dado-card p { font-size: .88rem; color: var(--text-muted); line-height: 1.55; margin-bottom: 14px; }
+    .dado-card .fonte {
+      display: inline-block;
+      font-size: .68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      font-weight: 700;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 50px;
+    }
 
     /* ══════════════════════════════════════
        SOLUÇÃO
@@ -366,9 +392,11 @@
       transition: transform .25s ease, background .25s ease, border-color .25s ease;
     }
     .entregaveis-list div:hover {
-      transform: translateY(-4px);
-      background: rgba(226,112,63,.12);
-      border-color: rgba(226,112,63,.4);
+      transform: translateY(-6px) scale(1.02);
+      background: rgba(226,112,63,.22);
+      border-color: var(--orange);
+      box-shadow: 0 10px 30px rgba(226,112,63,.35);
+      cursor: default;
     }
     .entregaveis-list div::before {
       content: '✓';
@@ -421,7 +449,18 @@
     .oferta-card ul { list-style: none; margin-bottom: 24px; }
     .oferta-card ul li { font-size: .96rem; padding-left: 26px; position: relative; margin-bottom: 12px; color: var(--text); }
     .oferta-card ul li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--green); font-weight: 800; }
-    .price-row { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; margin: 20px 0 6px; }
+    .price-row {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 2px;
+      margin: 20px 0 6px;
+      background: var(--cream);
+      border: 2px solid var(--orange);
+      border-radius: 16px;
+      padding: 22px 20px;
+    }
     .price-row .price-installments { font-size: .95rem; font-weight: 700; color: var(--text-muted); }
     .price-row .price { font-size: 3rem; font-weight: 900; color: var(--navy); line-height: 1; }
     .oferta-card .pagamento { font-size: .86rem; color: var(--text-muted); margin-bottom: 10px; font-weight: 600; }
@@ -567,16 +606,25 @@
     </div>
     <div class="dados-grid">
       <div class="dado-card marketing fade-up">
+        <div class="dado-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#E2703F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
         <span class="dado-num">1.200%</span>
         <p>foi o crescimento das vendas de pequenos negócios pela internet em 5 anos, saltando de R$5 bi para R$67 bi. Quem não constrói presença de marca fica de fora desse crescimento.</p>
         <span class="fonte">Fonte: MDIC / Receita Federal, 2025</span>
       </div>
       <div class="dado-card processo fade-up">
+        <div class="dado-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#16314E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg>
+        </div>
         <span class="dado-num">60%</span>
         <p>das micro e pequenas empresas brasileiras fecham em até 5 anos, principalmente por deficiência de gestão e falta de planejamento estratégico.</p>
         <span class="fonte">Fonte: Sebrae</span>
       </div>
       <div class="dado-card financeiro fade-up">
+        <div class="dado-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2EB857" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
         <span class="dado-num">48%</span>
         <p>das micro e pequenas empresas fecham por falta de planejamento financeiro e descontrole do fluxo de caixa.</p>
         <span class="fonte">Fonte: Sebrae</span>
