@@ -421,8 +421,9 @@
     .oferta-card ul { list-style: none; margin-bottom: 24px; }
     .oferta-card ul li { font-size: .96rem; padding-left: 26px; position: relative; margin-bottom: 12px; color: var(--text); }
     .oferta-card ul li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--green); font-weight: 800; }
-    .price-row { display: flex; align-items: baseline; gap: 8px; margin: 20px 0 6px; }
-    .price-row .price { font-size: 2.4rem; font-weight: 900; color: var(--navy); }
+    .price-row { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; margin: 20px 0 6px; }
+    .price-row .price-installments { font-size: .95rem; font-weight: 700; color: var(--text-muted); }
+    .price-row .price { font-size: 3rem; font-weight: 900; color: var(--navy); line-height: 1; }
     .oferta-card .pagamento { font-size: .86rem; color: var(--text-muted); margin-bottom: 10px; font-weight: 600; }
     .oferta-card .vagas { font-size: .86rem; color: var(--orange-dark); font-weight: 700; margin-bottom: 22px; }
     .garantia-box {
@@ -695,7 +696,8 @@
         <li>Todos os entregáveis documentados e prontos para aplicar</li>
       </ul>
       <div class="price-row">
-        <span class="price">12x de R$250</span>
+        <span class="price-installments">12x de</span>
+        <span class="price">R$250</span>
       </div>
       <div class="pagamento">no cartão</div>
       <div class="vagas">Condição especial no Pix</div>
