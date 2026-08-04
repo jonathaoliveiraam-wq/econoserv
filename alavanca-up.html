@@ -1480,6 +1480,12 @@
         }, 150);
       });
     }
+
+    if (window.location.hash === '#comecar') {
+      window.scrollTo(0, 0);
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+      abrirDiagnostico();
+    }
   </script>
 </body>
 </html>
