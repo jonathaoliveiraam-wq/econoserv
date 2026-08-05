@@ -1303,10 +1303,20 @@
             headers: { 'Accept': 'application/json' }
           });
         })
-          .then(() => {
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('FormSubmit respondeu HTTP ' + response.status);
+            }
+            return response.json().catch(() => ({}));
+          })
+          .then((data) => {
+            if (data && data.success === false) {
+              throw new Error('FormSubmit recusou: ' + (data.message || JSON.stringify(data)));
+            }
             renderDiagFinalScreen();
           })
-          .catch(() => {
+          .catch((err) => {
+            console.error('Falha no envio do diagnóstico:', err);
             btn.disabled = false;
             btn.textContent = 'Baixar meu diagnóstico';
             alert('Não conseguimos gerar seu diagnóstico agora. Tenta de novo em instantes.');
