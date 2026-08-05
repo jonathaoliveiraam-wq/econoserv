@@ -1175,6 +1175,8 @@
     let diagIndex = 0;
     let diagAnswers = [];
     let diagResultData = null;
+    let diagPdfBlob = null;
+    let diagPdfFilename = null;
 
     function abrirDiagnostico() {
       diagIndex = 0;
@@ -1241,31 +1243,21 @@
           ? 'Sua empresa tem potencial, falta direção'
           : 'Sua empresa está no caminho certo';
 
-      const barsHtml = pilares.map(p =>
-        '<div class="diag-bar-item ' + p + '">' +
-          '<div class="diag-bar-label"><span>' + DIAG_PILARES[p] + '</span><span>' + scores[p].pct + '%</span></div>' +
-          '<div class="diag-bar-track"><div class="diag-bar-fill" style="width:' + scores[p].pct + '%"></div></div>' +
-        '</div>'
-      ).join('');
-
-      const recsHtml = pilares.map(p =>
-        '<div class="diag-rec ' + p + '"><strong>' + DIAG_PILARES[p] + '</strong>' + DIAG_RECS[p][diagTier(scores[p].pct)] + '</div>'
-      ).join('');
-
       diagResultData = { scores, labelGeral, pctTotal };
 
+      renderDiagGate();
+    }
+
+    function renderDiagGate() {
       document.getElementById('diag-content').innerHTML =
-        '<div class="diag-step-label">Resultado do seu diagnóstico</div>' +
-        '<div class="diag-result-title">' + labelGeral + '</div>' +
-        '<p class="diag-result-sub">Veja como está cada frente da sua empresa hoje:</p>' +
-        '<div class="diag-bars">' + barsHtml + '</div>' +
-        '<div class="diag-recs">' + recsHtml + '</div>' +
+        '<div class="diag-step-label">Diagnóstico pronto</div>' +
+        '<div class="diag-result-title">Seu resultado já está calculado</div>' +
         '<form class="diag-contact-form" id="diag-contact-form">' +
-          '<p class="diag-lead">Deixa seu contato pra baixar seu diagnóstico completo em PDF, com as recomendações práticas pra cada pilar:</p>' +
+          '<p class="diag-lead">Preenche seus dados pra liberar o resultado completo e baixar seu diagnóstico em PDF, com as recomendações práticas pra cada pilar:</p>' +
           '<input type="text" name="nome" placeholder="Seu nome completo" required />' +
           '<input type="text" name="empresa" placeholder="Nome da empresa" required />' +
           '<input type="tel" name="whatsapp" placeholder="WhatsApp com DDD" required />' +
-          '<button type="submit" class="btn btn-block">Baixar meu diagnóstico em PDF</button>' +
+          '<button type="submit" class="btn btn-block">Baixar meu diagnóstico</button>' +
           '<p class="privacidade">Dados protegidos, sem spam.</p>' +
         '</form>';
 
@@ -1274,7 +1266,7 @@
         const form = e.target;
         const btn = form.querySelector('button[type="submit"]');
         btn.disabled = true;
-        btn.textContent = 'Gerando PDF...';
+        btn.textContent = 'Gerando diagnóstico...';
 
         const dados = {
           nome: form.nome.value,
@@ -1287,14 +1279,8 @@
         const respostasResumo = diagAnswers.map(a => a.pergunta + ' → ' + a.resposta).join('\n');
 
         gerarDiagPdfBlob(dados).then(({ blob, filename }) => {
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = filename;
-          document.body.appendChild(a);
-          a.click();
-          a.remove();
-          URL.revokeObjectURL(url);
+          diagPdfBlob = blob;
+          diagPdfFilename = filename;
 
           btn.textContent = 'Enviando...';
           const fd = new FormData();
@@ -1318,18 +1304,49 @@
           });
         })
           .then(() => {
-            document.getElementById('diag-content').innerHTML =
-              '<div class="diag-success">' +
-                '<div class="check">✓</div>' +
-                '<h3>Diagnóstico em PDF baixado!</h3>' +
-                '<p>Confira o arquivo na pasta de downloads do seu navegador. Nosso time também recebeu seus dados e entra em contato pelo WhatsApp em até 1 dia útil.</p>' +
-              '</div>';
+            renderDiagFinalScreen();
           })
           .catch(() => {
             btn.disabled = false;
-            btn.textContent = 'Baixar meu diagnóstico em PDF';
-            alert('Não conseguimos gerar o PDF agora. Tenta de novo em instantes.');
+            btn.textContent = 'Baixar meu diagnóstico';
+            alert('Não conseguimos gerar seu diagnóstico agora. Tenta de novo em instantes.');
           });
+      });
+    }
+
+    function renderDiagFinalScreen() {
+      const { scores, labelGeral } = diagResultData;
+      const pilares = ['marketing', 'processo', 'financeiro'];
+
+      const barsHtml = pilares.map(p =>
+        '<div class="diag-bar-item ' + p + '">' +
+          '<div class="diag-bar-label"><span>' + DIAG_PILARES[p] + '</span><span>' + scores[p].pct + '%</span></div>' +
+          '<div class="diag-bar-track"><div class="diag-bar-fill" style="width:' + scores[p].pct + '%"></div></div>' +
+        '</div>'
+      ).join('');
+
+      const recsHtml = pilares.map(p =>
+        '<div class="diag-rec ' + p + '"><strong>' + DIAG_PILARES[p] + '</strong>' + DIAG_RECS[p][diagTier(scores[p].pct)] + '</div>'
+      ).join('');
+
+      document.getElementById('diag-content').innerHTML =
+        '<div class="diag-step-label">Resultado do seu diagnóstico</div>' +
+        '<div class="diag-result-title">' + labelGeral + '</div>' +
+        '<p class="diag-result-sub">Veja como está cada frente da sua empresa hoje:</p>' +
+        '<div class="diag-bars">' + barsHtml + '</div>' +
+        '<div class="diag-recs">' + recsHtml + '</div>' +
+        '<button type="button" class="btn btn-block" id="diag-download-btn">Baixar meu diagnóstico em PDF</button>' +
+        '<p class="diag-lead">Nosso time também recebeu seus dados e entra em contato pelo WhatsApp em até 1 dia útil.</p>';
+
+      document.getElementById('diag-download-btn').addEventListener('click', function () {
+        const url = URL.createObjectURL(diagPdfBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = diagPdfFilename;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
       });
     }
 
