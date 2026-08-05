@@ -1297,7 +1297,7 @@
           fd.append('respostas', respostasResumo);
           fd.append('attachment', new File([blob], filename, { type: 'application/pdf' }));
 
-          return fetch('https://formsubmit.co/jonatha.oliveira.am@gmail.com', {
+          return fetch('/api/diagnostico', {
             method: 'POST',
             body: fd,
             headers: { 'Accept': 'application/json' }
@@ -1305,13 +1305,13 @@
         })
           .then((response) => {
             if (!response.ok) {
-              throw new Error('FormSubmit respondeu HTTP ' + response.status);
+              throw new Error('Envio respondeu HTTP ' + response.status);
             }
             return response.json().catch(() => ({}));
           })
           .then((data) => {
-            if (data && data.success === false) {
-              throw new Error('FormSubmit recusou: ' + (data.message || JSON.stringify(data)));
+            if (data && (data.success === false || data.success === 'false')) {
+              throw new Error('Envio recusado: ' + (data.message || JSON.stringify(data)));
             }
             renderDiagFinalScreen();
           })
