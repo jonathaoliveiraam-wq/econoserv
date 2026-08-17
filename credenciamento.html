@@ -540,6 +540,151 @@
     gap: 16px;
     flex-wrap: wrap;
   }
+
+  /* ---------- ANÁLISE DE INVESTIMENTO ---------- */
+
+  .invest-wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 340px) 1fr;
+    gap: 32px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+  }
+
+  .invest-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .control label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13px;
+    color: var(--ink-muted);
+    margin-bottom: 8px;
+  }
+
+  .control label .control-val {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .control input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent);
+  }
+
+  .control input[type="number"] {
+    width: 100%;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    color: var(--ink);
+    font: inherit;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .toggle-group {
+    display: flex;
+    gap: 8px;
+  }
+
+  .toggle-btn {
+    flex: 1;
+    font: inherit;
+    font-size: 13px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    color: var(--ink-muted);
+    border-radius: 8px;
+    padding: 8px 10px;
+    cursor: pointer;
+    transition: background 0.12s ease, color 0.12s ease, border-color 0.12s ease;
+  }
+
+  .toggle-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+    font-weight: 700;
+  }
+
+  .invest-results {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .result-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .result-stat {
+    background: var(--surface);
+    padding: 16px 18px;
+  }
+
+  .result-stat .value {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 24px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em;
+  }
+
+  .result-stat .value.good { color: var(--good); }
+  .result-stat .value.bad { color: var(--bad); }
+
+  .result-stat .label {
+    font-size: 12px;
+    color: var(--ink-muted);
+    margin-top: 4px;
+  }
+
+  .breakdown {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+
+  .breakdown-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 9px 2px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13.5px;
+  }
+
+  .breakdown-row .b-label { color: var(--ink-muted); }
+  .breakdown-row .b-val { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .breakdown-row.total .b-label,
+  .breakdown-row.total .b-val { color: var(--ink); font-weight: 700; }
+  .breakdown-row.neg .b-val { color: var(--bad); }
+  .breakdown-row.pos .b-val { color: var(--good); }
+
+  .invest-note {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 680px) {
+    .invest-wrap { grid-template-columns: 1fr; }
+    .result-stats { grid-template-columns: 1fr; }
+  }
 </style>
 
 <div class="page">
@@ -876,6 +1021,113 @@
     </div>
   </section>
 
+  <!-- ============ ANÁLISE DE INVESTIMENTO ============ -->
+  <section>
+    <div class="section-head"><h2>Análise de investimento</h2></div>
+
+    <div class="invest-wrap">
+      <div class="invest-controls">
+
+        <div class="control">
+          <label>Valor da ficha <span class="control-val" id="vFicha">R$ 12.000</span></label>
+          <input type="range" id="iFicha" min="1000" max="30000" step="500" value="12000">
+        </div>
+
+        <div class="control">
+          <label>% que o Sebrae paga <span class="control-val" id="vSplit">70%</span></label>
+          <input type="range" id="iSplit" min="10" max="100" step="5" value="70">
+        </div>
+
+        <div class="control">
+          <label>Fichas fechadas por mês <span class="control-val" id="vVolume">1</span></label>
+          <input type="range" id="iVolume" min="1" max="20" step="1" value="1">
+        </div>
+
+        <div class="control">
+          <label>Estados na mesma rota (dividem o consultor) <span class="control-val" id="vGrupo">3</span></label>
+          <input type="range" id="iGrupo" min="1" max="5" step="1" value="3">
+        </div>
+
+        <div class="control">
+          <label>Endereço fiscal mensal</label>
+          <div class="toggle-group">
+            <button type="button" class="toggle-btn active" id="btnEnd150" data-val="150">R$150 · padrão</button>
+            <button type="button" class="toggle-btn" id="btnEnd600" data-val="600">R$600 · sem opção</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="invest-results">
+
+        <div class="result-stats">
+          <div class="result-stat">
+            <div class="value good" id="rLiquidoFicha">R$ 0</div>
+            <div class="label">Líquido por ficha</div>
+          </div>
+          <div class="result-stat">
+            <div class="value" id="rFichasMeta">0</div>
+            <div class="label">Fichas/ano p/ bater R$100k</div>
+          </div>
+          <div class="result-stat">
+            <div class="value" id="rLiquidoAno">R$ 0</div>
+            <div class="label">Líquido projetado/ano</div>
+          </div>
+        </div>
+
+        <div class="breakdown">
+          <div class="breakdown-row">
+            <span class="b-label">Bruto recebido do Sebrae (por ficha)</span>
+            <span class="b-val" id="bBruto">R$ 0</span>
+          </div>
+          <div class="breakdown-row neg">
+            <span class="b-label">Imposto (6% do valor cheio)</span>
+            <span class="b-val" id="bImposto">−R$ 0</span>
+          </div>
+          <div class="breakdown-row neg">
+            <span class="b-label">Custo de execução (10% do valor cheio)</span>
+            <span class="b-val" id="bExecucao">−R$ 0</span>
+          </div>
+          <div class="breakdown-row neg">
+            <span class="b-label">Comissão do consultor (R$100/ficha)</span>
+            <span class="b-val" id="bComissao">−R$ 0</span>
+          </div>
+          <div class="breakdown-row total">
+            <span class="b-label">Líquido por ficha</span>
+            <span class="b-val" id="bLiquidoFicha2">R$ 0</span>
+          </div>
+          <div class="breakdown-row" style="margin-top:8px">
+            <span class="b-label">Receita líquida de fichas no ano (volume × 12)</span>
+            <span class="b-val" id="bReceitaAno">R$ 0</span>
+          </div>
+          <div class="breakdown-row neg">
+            <span class="b-label">Abertura de CNPJ (só ano 1: JUCEA + Alvará)</span>
+            <span class="b-val" id="bAbertura">−R$ 800</span>
+          </div>
+          <div class="breakdown-row neg">
+            <span class="b-label">Manutenção anual (contabilidade + endereço fiscal)</span>
+            <span class="b-val" id="bManutencao">−R$ 0</span>
+          </div>
+          <div class="breakdown-row neg">
+            <span class="b-label">Consultor fixo, rateado entre os estados da rota</span>
+            <span class="b-val" id="bConsultor">−R$ 0</span>
+          </div>
+          <div class="breakdown-row total">
+            <span class="b-label">Líquido real do estado — ano 1</span>
+            <span class="b-val" id="bLiquidoAno1">R$ 0</span>
+          </div>
+          <div class="breakdown-row total pos">
+            <span class="b-label">Líquido real do estado — ano 2 em diante</span>
+            <span class="b-val" id="bLiquidoSteady">R$ 0</span>
+          </div>
+        </div>
+
+        <p class="invest-note">Fixos usados: contabilidade R$4.044/ano · consultor R$3.000 salário + R$500 ajuda de custo (R$3.500/mês) · comissão R$100/ficha · JUCEA R$500 + alvará R$300 (abertura). Mexa nos controles pra simular cada estado.</p>
+
+      </div>
+    </div>
+  </section>
+
   <footer>
     <span>Planejamento de expansão</span>
   </footer>
@@ -1127,4 +1379,96 @@
     budgetRows.forEach(function (row) { row.classList.remove("is-picked"); });
     updateSelectionBar();
   });
+
+  // ---- análise de investimento ----
+  (function () {
+    var IMPOSTO_PCT = 0.06;
+    var EXECUCAO_PCT = 0.10;
+    var CONTABILIDADE_ANUAL = 4044;
+    var CONSULTOR_FIXO_MENSAL = 3500; // 3000 salário + 500 ajuda de custo
+    var COMISSAO_POR_FICHA = 100;
+    var ABERTURA_UNICA = 800; // JUCEA 500 + alvará 300
+    var META_ANUAL = 100000;
+
+    var iFicha = document.getElementById("iFicha");
+    var iSplit = document.getElementById("iSplit");
+    var iVolume = document.getElementById("iVolume");
+    var iGrupo = document.getElementById("iGrupo");
+    var btnEnd150 = document.getElementById("btnEnd150");
+    var btnEnd600 = document.getElementById("btnEnd600");
+    var enderecoFiscal = 150;
+
+    function fmt(n) {
+      var sign = n < 0 ? "−" : "";
+      return sign + "R$ " + Math.abs(Math.round(n)).toLocaleString("pt-BR");
+    }
+
+    function calc() {
+      var fichaValor = parseFloat(iFicha.value);
+      var splitPct = parseFloat(iSplit.value) / 100;
+      var volumeMes = parseFloat(iVolume.value);
+      var grupoSize = parseFloat(iGrupo.value);
+
+      var bruto = fichaValor * splitPct;
+      var imposto = fichaValor * IMPOSTO_PCT;
+      var execucao = fichaValor * EXECUCAO_PCT;
+      var liquidoFicha = bruto - imposto - execucao - COMISSAO_POR_FICHA;
+
+      var fichasAno = volumeMes * 12;
+      var receitaAno = fichasAno * liquidoFicha;
+
+      var manutencaoAnual = (enderecoFiscal * 12) + CONTABILIDADE_ANUAL;
+      var consultorRateado = (CONSULTOR_FIXO_MENSAL * 12) / grupoSize;
+
+      var custoFixoAno1 = ABERTURA_UNICA + manutencaoAnual + consultorRateado;
+      var custoFixoSteady = manutencaoAnual + consultorRateado;
+
+      var liquidoAno1 = receitaAno - custoFixoAno1;
+      var liquidoSteady = receitaAno - custoFixoSteady;
+
+      var fichasParaMeta = liquidoFicha > 0 ? Math.ceil((META_ANUAL + custoFixoSteady) / liquidoFicha) : 0;
+
+      document.getElementById("vFicha").textContent = fmt(fichaValor);
+      document.getElementById("vSplit").textContent = iSplit.value + "%";
+      document.getElementById("vVolume").textContent = volumeMes;
+      document.getElementById("vGrupo").textContent = grupoSize;
+
+      document.getElementById("rLiquidoFicha").textContent = fmt(liquidoFicha);
+      document.getElementById("rFichasMeta").textContent = fichasParaMeta;
+      var rLiquidoAnoEl = document.getElementById("rLiquidoAno");
+      rLiquidoAnoEl.textContent = fmt(liquidoSteady);
+      rLiquidoAnoEl.className = "value " + (liquidoSteady >= 0 ? "good" : "bad");
+
+      document.getElementById("bBruto").textContent = fmt(bruto);
+      document.getElementById("bImposto").textContent = "−" + fmt(imposto);
+      document.getElementById("bExecucao").textContent = "−" + fmt(execucao);
+      document.getElementById("bComissao").textContent = "−" + fmt(COMISSAO_POR_FICHA);
+      document.getElementById("bLiquidoFicha2").textContent = fmt(liquidoFicha);
+      document.getElementById("bReceitaAno").textContent = fmt(receitaAno);
+      document.getElementById("bAbertura").textContent = "−" + fmt(ABERTURA_UNICA);
+      document.getElementById("bManutencao").textContent = "−" + fmt(manutencaoAnual);
+      document.getElementById("bConsultor").textContent = "−" + fmt(consultorRateado);
+      document.getElementById("bLiquidoAno1").textContent = fmt(liquidoAno1);
+      document.getElementById("bLiquidoSteady").textContent = fmt(liquidoSteady);
+    }
+
+    [iFicha, iSplit, iVolume, iGrupo].forEach(function (el) {
+      el.addEventListener("input", calc);
+    });
+
+    btnEnd150.addEventListener("click", function () {
+      enderecoFiscal = 150;
+      btnEnd150.classList.add("active");
+      btnEnd600.classList.remove("active");
+      calc();
+    });
+    btnEnd600.addEventListener("click", function () {
+      enderecoFiscal = 600;
+      btnEnd600.classList.add("active");
+      btnEnd150.classList.remove("active");
+      calc();
+    });
+
+    calc();
+  })();
 </script>
