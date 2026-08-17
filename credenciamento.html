@@ -685,6 +685,65 @@
     .invest-wrap { grid-template-columns: 1fr; }
     .result-stats { grid-template-columns: 1fr; }
   }
+
+  /* ---------- PRÓXIMOS PASSOS ---------- */
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .step {
+    display: grid;
+    grid-template-columns: 108px 130px 1fr;
+    align-items: baseline;
+    gap: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 20px;
+  }
+
+  .step-when {
+    font-size: 12.5px;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .step-title {
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    font-weight: 600;
+    font-size: 16px;
+  }
+
+  .step-desc {
+    font-size: 14px;
+    color: var(--ink-muted);
+  }
+
+  .step-status {
+    grid-column: 3;
+    margin-top: 6px;
+  }
+
+  .steps-goal {
+    margin-top: 4px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .steps-goal strong { color: var(--accent); }
+
+  @media (max-width: 680px) {
+    .step { grid-template-columns: 1fr; gap: 4px; }
+    .step-status { grid-column: 1; }
+  }
 </style>
 
 <div class="page">
@@ -793,6 +852,49 @@
       <div id="panelBody"></div>
     </div>
     <p id="panelPlaceholder" class="panel-placeholder">Clique num estado do mapa para ver as empresas credenciadas.</p>
+  </section>
+
+  <!-- ============ PRÓXIMOS PASSOS ============ -->
+  <section>
+    <div class="section-head"><h2>Próximos passos — set-dez 2026</h2></div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-when">Setembro</div>
+        <div class="step-title">Viagem ao Ceará</div>
+        <div class="step-desc step-status">Objetivo: abrir mercado e fechar até 10 empresas no estado. Camocim já é 1 rodando — faltam 9.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-when">Rota 1</div>
+        <div class="step-title">Parnaíba · PI</div>
+        <div class="step-desc step-status">Endereço fiscal já disponível — pronto pra abrir a empresa.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-when">Rota 1</div>
+        <div class="step-title">Chapadinha · MA</div>
+        <div class="step-desc step-status">Verificar endereço fiscal antes de abrir.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-when">Base isolada</div>
+        <div class="step-title">Amapá</div>
+        <div class="step-desc step-status">Endereço em vista — candidato a abrir.</div>
+      </div>
+
+      <div class="step">
+        <div class="step-when">Base isolada</div>
+        <div class="step-title">Roraima</div>
+        <div class="step-desc step-status">Escolha do cliente recém-liberada na plataforma — aguardando a primeira demanda cair, sem ação adicional necessária.</div>
+      </div>
+
+    </div>
+
+    <div class="steps-goal">
+      <strong>Meta de fim de ano:</strong> fechar 2026 com PI, MA, AP e PA (Santarém) credenciados, além dos 3 já ativos (AM, RR, CE) — total de <strong>7 estados</strong> até dezembro.
+    </div>
   </section>
 
   <!-- ============ ORÇAMENTO ============ -->
