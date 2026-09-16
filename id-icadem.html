@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Marca ICADEM</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #F4F6F5;
+    --bg-raised: #FFFFFF;
+    --bg-sunken: #E9EDEB;
+    --text: #16302C;
+    --text-muted: #4B615D;
+    --text-faint: #7C8E8A;
+    --border: #D7E0DD;
+    --border-strong: #B7C6C1;
+    --accent: #B5601E;
+    --accent-ink: #FFFFFF;
+    --focus: #0E3B36;
+
+    --brand-teal: #0E3B36;
+    --brand-teal-ink: #F4F6F5;
+    --brand-terracota: #B5562E;
+    --brand-ouro: #D89B3C;
+    --brand-grafite: #262624;
+    --brand-areia: #F1ECE3;
+
+    --shadow: 0 1px 2px rgba(14,59,54,0.06), 0 8px 24px rgba(14,59,54,0.06);
+    --radius-s: 4px;
+    --radius-m: 8px;
+    --serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0B1917;
+      --bg-raised: #102520;
+      --bg-sunken: #081210;
+      --text: #E7EEEC;
+      --text-muted: #A3B8B3;
+      --text-faint: #6E8580;
+      --border: #1E3733;
+      --border-strong: #2C4A44;
+      --accent: #E0A15E;
+      --accent-ink: #16130C;
+      --focus: #E0A15E;
+      --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 30px rgba(0,0,0,0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #0B1917;
+    --bg-raised: #102520;
+    --bg-sunken: #081210;
+    --text: #E7EEEC;
+    --text-muted: #A3B8B3;
+    --text-faint: #6E8580;
+    --border: #1E3733;
+    --border-strong: #2C4A44;
+    --accent: #E0A15E;
+    --accent-ink: #16130C;
+    --focus: #E0A15E;
+    --shadow: 0 1px 2px rgba(0,0,0,0.3), 0 8px 30px rgba(0,0,0,0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible, .tocLink:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+
+  ::selection { background: var(--brand-ouro); color: #16130C; }
+
+  .shell {
+    display: grid;
+    grid-template-columns: 260px minmax(0,1fr);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* ---------- TOC ---------- */
+  .toc {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 2.5rem 1.5rem 2rem 2rem;
+    border-right: 1px solid var(--border);
+    scrollbar-width: thin;
+  }
+  .tocBrand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 2rem;
+  }
+  .tocMark { width: 26px; height: 26px; flex: none; }
+  .tocBrand strong {
+    font-family: var(--mono);
+    font-size: 0.95rem;
+    letter-spacing: 0.06em;
+  }
+  .tocList { list-style: none; margin: 0; padding: 0; }
+  .tocGroup { margin-bottom: 1.4rem; }
+  .tocGroupLabel {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+  .tocLink {
+    display: block;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    padding: 0.28rem 0;
+    border-left: 2px solid transparent;
+    padding-left: 0.7rem;
+    margin-left: -0.72rem;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tocLink:hover { color: var(--text); border-left-color: var(--border-strong); }
+
+  .tocToggle { display: none; }
+
+  /* ---------- MAIN ---------- */
+  main { min-width: 0; }
+
+  .hero {
+    background: var(--brand-teal);
+    color: var(--brand-teal-ink);
+    padding: 4.5rem 4rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::after {
+    content: "";
+    position: absolute;
+    right: -6%;
+    top: -20%;
+    width: 480px;
+    height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(216,155,60,0.22), transparent 70%);
+    pointer-events: none;
+  }
+  .heroEyebrow {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brand-ouro);
+    margin: 0 0 1.1rem;
+  }
+  .heroLockup { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.6rem; }
+  .heroMark { width: 52px; height: 52px; flex: none; }
+  .heroName {
+    font-family: var(--mono);
+    font-weight: 600;
+    font-size: 2.6rem;
+    letter-spacing: 0.02em;
+    margin: 0;
+  }
+  .heroFull {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.3rem;
+    color: rgba(244,246,245,0.82);
+    margin: 0 0 2rem;
+    max-width: 40ch;
+    text-wrap: balance;
+  }
+  .heroTagline {
+    font-family: var(--serif);
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+    font-weight: 500;
+    max-width: 16ch;
+    text-wrap: balance;
+    margin: 0;
+    position: relative;
+  }
+
+  section {
+    padding: 3.6rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  .kicker {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.7rem;
+  }
+  h2.sectionTitle {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(1.6rem, 2.4vw, 2.05rem);
+    margin: 0 0 1.6rem;
+    text-wrap: balance;
+  }
+  .lede {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 62ch;
+    margin: 0 0 1.8rem;
+    text-wrap: balance;
+  }
+  p { max-width: 65ch; }
+  p.body { color: var(--text-muted); }
+
+  /* ---------- Propósito / Missão / Visão ---------- */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    margin-bottom: 2.2rem;
+  }
+  .pillar {
+    background: var(--bg-raised);
+    padding: 1.8rem 1.7rem;
+  }
+  .pillarLabel {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 0 0 0.7rem;
+  }
+  .pillar p { margin: 0; color: var(--text); font-size: 0.97rem; }
+
+  .valuesList {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+  }
+  .valueItem { background: var(--bg-raised); padding: 1.4rem 1.5rem; }
+  .valueItem strong { display: block; font-size: 0.98rem; margin-bottom: 0.3rem; }
+  .valueItem span { color: var(--text-muted); font-size: 0.88rem; }
+
+  @media (max-width: 860px) {
+    .pillars, .valuesList { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Personalidade ---------- */
+  .traitGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+    margin-bottom: 2.4rem;
+  }
+  .trait {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1.2rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border);
+    align-items: baseline;
+  }
+  .trait:first-child { border-top: none; }
+  .traitName {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.15rem;
+  }
+  .traitDesc { color: var(--text-muted); font-size: 0.92rem; margin: 0; }
+  @media (max-width: 700px) {
+    .trait { grid-template-columns: 1fr; gap: 0.3rem; }
+  }
+
+  .personCard {
+    background: var(--bg-sunken);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    padding: 2rem 2.2rem;
+    margin-bottom: 1.6rem;
+  }
+  .personCard .kicker { margin-bottom: 0.9rem; }
+  .personCard p {
+    font-family: var(--serif);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    margin: 0;
+    color: var(--text);
+    max-width: 60ch;
+  }
+
+  .antiRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .antiChip {
+    font-size: 0.82rem;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    color: var(--text-muted);
+    font-family: var(--mono);
+  }
+  .antiChip::before { content: "✕ "; color: var(--text-faint); }
+
+  .archetypeBadge {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-top: 1.6rem;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--border-strong);
+    border-radius: 100px;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+  .archetypeBadge b { color: var(--accent); }
+
+  /* ---------- Cores ---------- */
+  .swatchGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1.1rem;
+  }
+  .swatch {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    background: var(--bg-raised);
+    box-shadow: var(--shadow);
+  }
+  .swatchColor { height: 96px; }
+  .swatchInfo { padding: 0.9rem 1.05rem 1.1rem; }
+  .swatchName { font-weight: 600; font-size: 0.95rem; margin: 0 0 0.15rem; }
+  .swatchRole { font-size: 0.78rem; color: var(--text-faint); margin: 0 0 0.6rem; }
+  .swatchHex {
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    margin: 0 0 0.55rem;
+  }
+  .swatchWhy { font-size: 0.85rem; color: var(--text-muted); margin: 0; }
+
+  /* ---------- Tipografia ---------- */
+  .typeSpecimen {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    padding: 2rem 2.2rem;
+    margin-bottom: 1.2rem;
+    background: var(--bg-raised);
+  }
+  .typeRole {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 0.9rem;
+  }
+  .typeSample.display {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    margin: 0 0 0.6rem;
+    text-wrap: balance;
+  }
+  .typeSample.body {
+    font-family: var(--sans);
+    font-size: 1.02rem;
+    color: var(--text-muted);
+    max-width: 58ch;
+    margin: 0 0 0.6rem;
+  }
+  .typeSample.mono {
+    font-family: var(--mono);
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+  .typeMeta { font-size: 0.82rem; color: var(--text-faint); margin-top: 0.7rem; }
+
+  /* ---------- Logo ---------- */
+  .logoConceptWrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 780px) { .logoConceptWrap { grid-template-columns: 1fr; } }
+
+  .logoVariants {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  .logoCard {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9rem;
+    background: var(--bg-raised);
+  }
+  .logoCard.dark { background: var(--brand-teal); }
+  .logoCard span {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    text-align: center;
+  }
+  .logoCard.dark span { color: rgba(244,246,245,0.65); }
+
+  .clearspaceNote {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-left: 2px solid var(--brand-ouro);
+    padding-left: 1rem;
+    margin: 1.6rem 0 0;
+  }
+
+  /* ---------- Voz ---------- */
+  .voiceScale {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    margin-bottom: 2.2rem;
+  }
+  .voiceRow { display: grid; grid-template-columns: 140px 1fr 140px; align-items: center; gap: 1rem; }
+  .voiceLabel { font-size: 0.82rem; color: var(--text-faint); font-family: var(--mono); }
+  .voiceLabel.right { text-align: right; }
+  .voiceTrack { position: relative; height: 6px; background: var(--border); border-radius: 3px; }
+  .voiceDot { position: absolute; top: 50%; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); transform: translate(-50%,-50%); border: 2px solid var(--bg); }
+  @media (max-width: 700px) {
+    .voiceRow { grid-template-columns: 1fr; text-align: left; gap: 0.35rem; }
+    .voiceLabel.right { text-align: left; }
+  }
+
+  .doDont { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius-m); overflow: hidden; }
+  .doDontCol { background: var(--bg-raised); padding: 1.4rem 1.6rem; }
+  .doDontCol h4 { margin: 0 0 0.9rem; font-family: var(--mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  .doDontCol.do h4 { color: #3F7A5E; }
+  .doDontCol.dont h4 { color: var(--brand-terracota); }
+  .doDontCol ul { margin: 0; padding-left: 1.1rem; color: var(--text-muted); font-size: 0.9rem; }
+  .doDontCol li { margin-bottom: 0.55rem; }
+  @media (max-width: 700px) { .doDont { grid-template-columns: 1fr; } }
+
+  .vocabRow { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+  .vocabChip { font-size: 0.82rem; padding: 0.3rem 0.75rem; border-radius: 100px; font-family: var(--mono); }
+  .vocabChip.use { background: rgba(63,122,94,0.12); color: #3F7A5E; border: 1px solid rgba(63,122,94,0.3); }
+  .vocabChip.avoid { background: rgba(181,86,46,0.1); color: var(--brand-terracota); border: 1px solid rgba(181,86,46,0.28); text-decoration: line-through; }
+
+  /* ---------- Mensagens ---------- */
+  .messageStack { display: flex; flex-direction: column; gap: 1.4rem; margin-bottom: 2rem; }
+  .messageItem { border-top: 1px solid var(--border); padding-top: 1.1rem; }
+  .messageItem:first-child { border-top: none; padding-top: 0; }
+  .messageLabel { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 0.4rem; }
+  .messageText { font-family: var(--serif); font-size: 1.15rem; margin: 0; max-width: 58ch; }
+  .taglineOptions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 0.6rem; }
+  .taglinePill {
+    font-family: var(--serif); font-style: italic; font-size: 0.95rem;
+    padding: 0.4rem 1rem; border: 1px solid var(--border-strong); border-radius: 100px;
+  }
+  .taglinePill.primary { background: var(--brand-teal); color: var(--brand-teal-ink); border-color: var(--brand-teal); }
+
+  .hierarchyList { list-style: none; margin: 0; padding: 0; }
+  .hierarchyItem { display: grid; grid-template-columns: 32px 1fr; gap: 1rem; padding: 0.9rem 0; border-top: 1px solid var(--border); }
+  .hierarchyItem:first-child { border-top: none; }
+  .hierarchyLevel { font-family: var(--mono); font-size: 0.75rem; color: var(--accent); }
+  .hierarchyItem p { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
+
+  /* ---------- História ---------- */
+  .storyBlock { max-width: 62ch; }
+  .storyBlock p { font-family: var(--serif); font-size: 1.12rem; line-height: 1.7; color: var(--text); margin: 0 0 1.2rem; }
+
+  /* ---------- Logo em uso ---------- */
+  .logoUseGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.3rem;
+  }
+  .logoUseCard.span2 { grid-column: 1 / -1; }
+  @media (max-width: 720px) {
+    .logoUseGrid { grid-template-columns: 1fr; }
+    .logoUseCard.span2 { grid-column: auto; }
+  }
+  .logoUseCard {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    background: var(--bg-raised);
+    box-shadow: var(--shadow);
+  }
+  .logoUsePreview {
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.6rem;
+  }
+  .logoUseInfo { padding: 0.9rem 1.1rem 1.1rem; border-top: 1px solid var(--border); }
+  .logoUseName { font-weight: 600; font-size: 0.92rem; margin-bottom: 0.15rem; }
+  .logoUseSpec { font-size: 0.8rem; color: var(--text-faint); }
+
+  .profileRow { display: flex; gap: 2.2rem; align-items: center; justify-content: center; }
+  .profileItem { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+  .profileRing {
+    width: 84px; height: 84px; border-radius: 50%; overflow: hidden;
+    border: 2.5px solid var(--brand-ouro);
+    box-shadow: 0 0 0 3px var(--brand-teal), 0 0 0 6px rgba(216,155,60,0.28);
+  }
+  .profileRing svg { width: 100%; height: 100%; display: block; }
+  .profileTag {
+    font-family: var(--mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(244,246,245,0.55);
+  }
+
+  .emailMock { width: 100%; max-width: 620px; margin: 0 auto; background: var(--brand-teal); }
+  .emailMockTopline { height: 3px; background: linear-gradient(90deg, var(--brand-ouro), transparent); }
+  .emailMockBody {
+    padding: 1.8rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+  }
+  .emailMockLeft { display: flex; align-items: center; gap: 1.1rem; }
+  .emailMockName { font-family: var(--mono); font-weight: 600; font-size: 0.98rem; color: #F4F6F5; letter-spacing: 0.02em; margin-bottom: 0.2rem; }
+  .emailMockRole { font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--brand-ouro); margin-bottom: 0.6rem; }
+  .emailMockDivider { height: 1px; width: 100%; background: rgba(244,246,245,0.18); margin-bottom: 0.6rem; }
+  .emailMockContact { font-size: 0.76rem; color: rgba(244,246,245,0.6); }
+  .emailMockRight { display: flex; flex-direction: column; align-items: flex-end; gap: 0.6rem; }
+  .emailMockUrl { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(244,246,245,0.4); }
+  .emailMockFooterLine { height: 1px; background: rgba(244,246,245,0.12); }
+  .emailMockFooter {
+    padding: 0.7rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: rgba(244,246,245,0.35);
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 560px) {
+    .emailMockBody { justify-content: center; text-align: center; }
+    .emailMockLeft { flex-direction: column; text-align: center; }
+    .emailMockRight { align-items: center; }
+    .emailMockFooter { flex-direction: column; gap: 0.3rem; text-align: center; }
+  }
+
+  .appSubhead {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin: 2.6rem 0 1.1rem;
+  }
+  .photoNote {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-left: 2px solid var(--brand-ouro);
+    padding-left: 1rem;
+    margin: 0 0 1.6rem;
+    max-width: 62ch;
+  }
+  .photoGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.1rem;
+  }
+  .photoTile {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    overflow: hidden;
+    background: var(--bg-raised);
+    box-shadow: var(--shadow);
+  }
+  .photoTile img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+  }
+  .photoCaption {
+    padding: 0.75rem 1rem 0.9rem;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+  }
+
+  /* ---------- Governança ---------- */
+  .govList { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; }
+  .govList li { display: grid; grid-template-columns: 160px 1fr; gap: 1rem; padding-bottom: 0.9rem; border-bottom: 1px solid var(--border); }
+  .govList li:last-child { border-bottom: none; }
+  .govList strong { font-size: 0.85rem; color: var(--text-faint); font-family: var(--mono); }
+  .govList p { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
+  @media (max-width: 700px) { .govList li { grid-template-columns: 1fr; gap: 0.3rem; } }
+
+  footer.pageFooter {
+    padding: 2.5rem 4rem 3.5rem;
+    color: var(--text-faint);
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 980px) {
+    .shell { grid-template-columns: 1fr; }
+    .toc {
+      position: relative;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 1.5rem;
+    }
+    .toc.collapsed .tocList { display: none; }
+    .tocToggle {
+      display: block;
+      margin-left: auto;
+      background: none;
+      border: 1px solid var(--border-strong);
+      border-radius: 100px;
+      padding: 0.3rem 0.8rem;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .tocBrand { margin-bottom: 0; flex: 1; }
+    .toc { display: flex; flex-direction: column; }
+  }
+
+  @media (max-width: 640px) {
+    section, .hero { padding-left: 1.4rem; padding-right: 1.4rem; }
+    footer.pageFooter { padding-left: 1.4rem; padding-right: 1.4rem; }
+  }
+
+  .revealOnScroll {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .revealOnScroll.isVisible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .revealOnScroll { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <nav class="toc" id="toc">
+    <div class="tocBrand">
+      <svg class="tocMark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="3" y="19" width="6" height="10" rx="1" fill="#B5562E"/>
+        <rect x="13" y="12" width="6" height="17" rx="1" fill="#D89B3C"/>
+        <path d="M23 29V8.8h-3.6L23 3l3.6 5.8H23" fill="#0E3B36" stroke="#0E3B36" stroke-width="1.4" stroke-linejoin="round"/>
+      </svg>
+      <strong>ICADEM</strong>
+    </div>
+    <button class="tocToggle" id="tocToggle" aria-expanded="false" aria-controls="tocList">Índice</button>
+    <ul class="tocList" id="tocList">
+      <li class="tocGroup">
+        <span class="tocGroupLabel">Fundação</span>
+        <a class="tocLink" href="#proposito">Propósito, missão, visão</a>
+        <a class="tocLink" href="#valores">Valores</a>
+      </li>
+      <li class="tocGroup">
+        <span class="tocGroupLabel">Personalidade</span>
+        <a class="tocLink" href="#personalidade">Traços de marca</a>
+        <a class="tocLink" href="#arquetipo">Arquétipo</a>
+      </li>
+      <li class="tocGroup">
+        <span class="tocGroupLabel">Identidade visual</span>
+        <a class="tocLink" href="#cores">Paleta de cores</a>
+        <a class="tocLink" href="#tipografia">Tipografia</a>
+        <a class="tocLink" href="#logotipo">Direção de logotipo</a>
+        <a class="tocLink" href="#estilo">Estilo visual</a>
+      </li>
+      <li class="tocGroup">
+        <span class="tocGroupLabel">Identidade verbal</span>
+        <a class="tocLink" href="#voz">Voz da marca</a>
+        <a class="tocLink" href="#mensagens">Mensagens-chave</a>
+        <a class="tocLink" href="#historia">História</a>
+      </li>
+      <li class="tocGroup">
+        <span class="tocGroupLabel">Uso</span>
+        <a class="tocLink" href="#aplicacoes">Logo em uso</a>
+        <a class="tocLink" href="#nome">Nome e sigla</a>
+        <a class="tocLink" href="#governanca">Governança</a>
+      </li>
+    </ul>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <p class="heroEyebrow">Manual de marca — versão 1.0</p>
+      <div class="heroLockup">
+        <svg class="heroMark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="3" y="19" width="6" height="10" rx="1" fill="#B5562E"/>
+          <rect x="13" y="12" width="6" height="17" rx="1" fill="#D89B3C"/>
+          <path d="M23 29V8.8h-3.6L23 3l3.6 5.8H23" fill="#F4F6F5" stroke="#F4F6F5" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+        <p class="heroName">ICADEM</p>
+      </div>
+      <p class="heroFull">Instituto de Capacitação e Desenvolvimento do Empreendedor</p>
+      <p class="heroTagline">Empreender com estrutura.</p>
+    </header>
+
+    <section id="proposito">
+      <p class="kicker">Fundação</p>
+      <h2 class="sectionTitle">Propósito, missão e visão</h2>
+      <p class="lede">Abrir um negócio é fácil — mantê-lo de pé, de forma organizada, e crescer é o que costuma faltar.</p>
+      <div class="pillars">
+        <div class="pillar">
+          <p class="pillarLabel">Propósito</p>
+          <p>Capacitar e desenvolver o empreendedor para melhorar sua jornada empreendedora — reduzindo custo, tempo e risco em cada etapa do negócio.</p>
+        </div>
+        <div class="pillar">
+          <p class="pillarLabel">Missão</p>
+          <p>Capacitar, formalizar e equipar micro e pequenos empreendedores com conhecimento, tecnologia e suporte institucional para transformar negócios informais em empresas estruturadas.</p>
+        </div>
+        <div class="pillar">
+          <p class="pillarLabel">Visão</p>
+          <p>Ser a principal referência nacional em desenvolvimento de empreendedores de base — reconhecida por transformar capacitação em resultado mensurável: negócios formalizados, geridos com tecnologia e prontos para crescer.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="valores">
+      <p class="kicker">Fundação</p>
+      <h2 class="sectionTitle">Valores</h2>
+      <div class="valuesList">
+        <div class="valueItem"><strong>Foco no resultado</strong><span>Toda ação termina em algo verificável: documento emitido, sistema implantado, custo reduzido.</span></div>
+        <div class="valueItem"><strong>Gerar impacto</strong><span>Sucesso se mede pelo negócio que continua de pé um ano depois, não pelo certificado entregue.</span></div>
+        <div class="valueItem"><strong>Eficiência</strong><span>Menos burocracia, menos custo, menos tempo perdido — para o instituto e para o empreendedor.</span></div>
+        <div class="valueItem"><strong>Parceria</strong><span>Rede com Sebrae, prefeituras e bancos de fomento para multiplicar alcance sem multiplicar estrutura.</span></div>
+        <div class="valueItem"><strong>Transparência</strong><span>Dado aberto, prestação de contas real — com quem financia e com quem é atendido.</span></div>
+      </div>
+    </section>
+
+    <section id="personalidade">
+      <p class="kicker">Personalidade</p>
+      <h2 class="sectionTitle">Cinco traços de marca</h2>
+      <div class="traitGrid">
+        <div class="trait">
+          <p class="traitName">Competente</p>
+          <p class="traitDesc">Fala com dado, mostra plano, cumpre prazo. É a instituição que o parceiro público confia para assinar convênio.</p>
+        </div>
+        <div class="trait">
+          <p class="traitName">Acolhedor</p>
+          <p class="traitDesc">Trata o feirante e o dono de loja formal com o mesmo respeito. Não existe empreendedor "pequeno demais" para ser atendido bem.</p>
+        </div>
+        <div class="trait">
+          <p class="traitName">Atualizado</p>
+          <p class="traitDesc">Usa sistema, não planilha manual. Tecnologia é ferramenta de trabalho, não vitrine.</p>
+        </div>
+        <div class="trait">
+          <p class="traitName">Direto</p>
+          <p class="traitDesc">Vai ao ponto: qual documento falta, qual sistema resolve, qual prazo cumprir. Sem burocracia que não precisa existir.</p>
+        </div>
+        <div class="trait">
+          <p class="traitName">Enraizado</p>
+          <p class="traitDesc">Carrega a experiência real de quem empreendeu com pouco no Ceará — não é teoria importada de manual internacional.</p>
+        </div>
+      </div>
+
+      <div class="personCard">
+        <p class="kicker">A marca como pessoa</p>
+        <p>Se o ICADEM fosse uma pessoa numa mesa de jantar, seria aquele profissional que já vendeu na feira, se formalizou, estudou gestão, e hoje ajuda outros a fazer esse caminho mais rápido. Não é o "coach de palco" — é o parceiro técnico que resolve documento, monta sistema e cobra resultado.</p>
+      </div>
+
+      <p class="kicker" style="margin-bottom:0.8rem">O ICADEM não é</p>
+      <div class="antiRow">
+        <span class="antiChip">Distante ou elitista</span>
+        <span class="antiChip">Burocrático e frio</span>
+        <span class="antiChip">Hype vazio de "startup"</span>
+        <span class="antiChip">Paternalista com o pequeno negócio</span>
+      </div>
+    </section>
+
+    <section id="arquetipo">
+      <p class="kicker">Personalidade</p>
+      <h2 class="sectionTitle">Arquétipo de marca</h2>
+      <p class="body">Combinação de <strong style="color:var(--text)">Sábio</strong> (compartilha conhecimento, ilumina o caminho da formalização) com <strong style="color:var(--text)">Cuidador</strong> (protege o pequeno negócio do erro que o faria fechar). O Sábio evita virar professoral porque o Cuidador mantém a proximidade; o Cuidador evita virar assistencialista porque o Sábio exige método.</p>
+      <span class="archetypeBadge">Primário <b>Sábio</b> · Secundário <b>Cuidador</b></span>
+    </section>
+
+    <section id="cores">
+      <p class="kicker">Identidade visual</p>
+      <h2 class="sectionTitle">Paleta de cores</h2>
+      <p class="lede">Petróleo profundo para estabilidade institucional, terracota e ouro para o sol e a terra que formam o empreendedorismo cearense — sem travar a marca a uma bandeira regional.</p>
+      <div class="swatchGrid">
+        <div class="swatch">
+          <div class="swatchColor" style="background:#0E3B36"></div>
+          <div class="swatchInfo">
+            <p class="swatchName">Petróleo</p>
+            <p class="swatchRole">Primária</p>
+            <p class="swatchHex">#0E3B36</p>
+            <p class="swatchWhy">Confiança institucional, seriedade sem frieza. Cor de fundo de capa, cabeçalhos e materiais oficiais.</p>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatchColor" style="background:#B5562E"></div>
+          <div class="swatchInfo">
+            <p class="swatchName">Terracota</p>
+            <p class="swatchRole">Secundária</p>
+            <p class="swatchHex">#B5562E</p>
+            <p class="swatchWhy">Chão, energia, ação. Representa o empreendedor colocando a mão na massa.</p>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatchColor" style="background:#D89B3C"></div>
+          <div class="swatchInfo">
+            <p class="swatchName">Ouro-mostarda</p>
+            <p class="swatchRole">Destaque</p>
+            <p class="swatchHex">#D89B3C</p>
+            <p class="swatchWhy">Crescimento e oportunidade. Reservado para chamadas, links e o único ponto de "brilho" da marca.</p>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatchColor" style="background:#262624"></div>
+          <div class="swatchInfo">
+            <p class="swatchName">Grafite</p>
+            <p class="swatchRole">Neutro escuro</p>
+            <p class="swatchHex">#262624</p>
+            <p class="swatchWhy">Texto principal sobre fundo claro. Mais quente que preto puro.</p>
+          </div>
+        </div>
+        <div class="swatch">
+          <div class="swatchColor" style="background:#F1ECE3; border-bottom:1px solid var(--border)"></div>
+          <div class="swatchInfo">
+            <p class="swatchName">Areia</p>
+            <p class="swatchRole">Neutro claro</p>
+            <p class="swatchHex">#F1ECE3</p>
+            <p class="swatchWhy">Fundo de documentos e materiais impressos — acolhedor, não estéril.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tipografia">
+      <p class="kicker">Identidade visual</p>
+      <h2 class="sectionTitle">Tipografia</h2>
+      <div class="typeSpecimen">
+        <p class="typeRole">Display — Newsreader</p>
+        <p class="typeSample display">Do informal ao estruturado</p>
+        <p class="typeMeta">Uso: títulos, manchetes, citações de propósito. Peso 500, itálico permitido para destaque editorial.</p>
+      </div>
+      <div class="typeSpecimen">
+        <p class="typeRole">Texto — IBM Plex Sans</p>
+        <p class="typeSample body">Todo empreendedor que passa pelo ICADEM sai com um negócio mais formal, mais organizado e mais preparado para crescer — não só com um certificado. Corpo de texto em parágrafos, formulários e sistemas.</p>
+        <p class="typeMeta">Uso: corpo de texto, interface, formulários. Pesos 400 (texto) e 600 (ênfase).</p>
+      </div>
+      <div class="typeSpecimen">
+        <p class="typeRole">Mono — IBM Plex Mono</p>
+        <p class="typeSample mono">ICADEM · CNPJ · DADOS</p>
+        <p class="typeMeta">Uso: sigla nas peças de marca, rótulos, dados/números em tabelas e sistemas.</p>
+      </div>
+    </section>
+
+    <section id="logotipo">
+      <p class="kicker">Identidade visual</p>
+      <h2 class="sectionTitle">Direção de logotipo</h2>
+      <p class="body" style="margin-bottom:1.8rem">A marca é conduzida por logotipo (não por símbolo isolado): a palavra ICADEM em caixa alta, Plex Mono, acompanhada de um ícone de três barras ascendentes que se resolvem numa seta — a leitura direta de "negócio informal vira negócio que cresce".</p>
+      <div class="logoVariants">
+        <div class="logoCard">
+          <svg width="120" height="40" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ICADEM, versão principal">
+            <rect x="4" y="34" width="10" height="18" rx="1.5" fill="#B5562E"/>
+            <rect x="20" y="20" width="10" height="32" rx="1.5" fill="#D89B3C"/>
+            <path d="M46 52V17.6h-6.6L46 6l6.6 11.6H46" fill="#0E3B36" stroke="#0E3B36" stroke-width="2" stroke-linejoin="round"/>
+            <text x="66" y="42" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="26" letter-spacing="1" fill="#16302C">ICADEM</text>
+          </svg>
+          <span>Principal</span>
+        </div>
+        <div class="logoCard dark">
+          <svg width="120" height="40" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ICADEM, versão sobre fundo escuro">
+            <rect x="4" y="34" width="10" height="18" rx="1.5" fill="#B5562E"/>
+            <rect x="20" y="20" width="10" height="32" rx="1.5" fill="#D89B3C"/>
+            <path d="M46 52V17.6h-6.6L46 6l6.6 11.6H46" fill="#F4F6F5" stroke="#F4F6F5" stroke-width="2" stroke-linejoin="round"/>
+            <text x="66" y="42" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="26" letter-spacing="1" fill="#F4F6F5">ICADEM</text>
+          </svg>
+          <span>Sobre fundo escuro</span>
+        </div>
+        <div class="logoCard">
+          <svg width="44" height="44" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Ícone isolado ICADEM">
+            <rect x="4" y="34" width="10" height="18" rx="1.5" fill="#B5562E"/>
+            <rect x="20" y="20" width="10" height="32" rx="1.5" fill="#D89B3C"/>
+            <path d="M46 52V17.6h-6.6L46 6l6.6 11.6H46" fill="#0E3B36" stroke="#0E3B36" stroke-width="2" stroke-linejoin="round"/>
+          </svg>
+          <span>Ícone isolado (avatar, favicon)</span>
+        </div>
+        <div class="logoCard">
+          <svg width="120" height="40" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="ICADEM, versão monocromática">
+            <rect x="4" y="34" width="10" height="18" rx="1.5" fill="#262624"/>
+            <rect x="20" y="20" width="10" height="32" rx="1.5" fill="#262624"/>
+            <path d="M46 52V17.6h-6.6L46 6l6.6 11.6H46" fill="#262624" stroke="#262624" stroke-width="2" stroke-linejoin="round"/>
+            <text x="66" y="42" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="26" letter-spacing="1" fill="#262624">ICADEM</text>
+          </svg>
+          <span>Monocromático (carimbo, ofício)</span>
+        </div>
+      </div>
+      <p class="clearspaceNote">Área de proteção mínima: altura do ícone em todos os lados. Tamanho mínimo: 24px de altura para o ícone isolado, 96px de largura para o logotipo completo. Não usar sobre fotografias sem uma base sólida por trás.</p>
+    </section>
+
+    <section id="estilo">
+      <p class="kicker">Identidade visual</p>
+      <h2 class="sectionTitle">Estilo visual</h2>
+      <div class="pillars">
+        <div class="pillar">
+          <p class="pillarLabel">Fotografia</p>
+          <p>Empreendedores reais em ambientes reais — banca, oficina, loja pequena, sala de capacitação. Luz natural, cores quentes. Nunca banco de imagem genérico de "reunião corporativa".</p>
+        </div>
+        <div class="pillar">
+          <p class="pillarLabel">Iconografia</p>
+          <p>Linha fina, geométrica, consistente com o traço do logotipo. Evitar ícones 3D ou ilustrativos demais — o tom é técnico, não infantilizado.</p>
+        </div>
+        <div class="pillar">
+          <p class="pillarLabel">Layout</p>
+          <p>Grid limpo, hierarquia clara, bastante espaço em branco. Nada de excesso de gráfico "estilo startup" — a seriedade institucional vem da sobriedade.</p>
+        </div>
+      </div>
+
+      <p class="appSubhead">Direção fotográfica — moodboard</p>
+      <p class="photoNote">Imagens geradas para ilustrar o tom desejado (luz natural, ambiente real, sem pose de banco de imagem genérico). São referência de direção de arte — antes de qualquer peça final, substituir por fotografia real licenciada ou produzida com empreendedores atendidos pelo instituto.</p>
+      <div class="photoGrid">
+        <div class="photoTile">
+          <img src="icadem-feira.jpg" alt="Vendedor organizando produtos numa banca de feira, luz natural de manhã" loading="lazy">
+          <p class="photoCaption">Feira — luz de manhã, mão na massa</p>
+        </div>
+        <div class="photoTile">
+          <img src="icadem-loja.jpg" alt="Dono de loja pequena atendendo cliente no balcão, luz natural" loading="lazy">
+          <p class="photoCaption">Loja pequena — atendimento real</p>
+        </div>
+        <div class="photoTile">
+          <img src="icadem-treinamento.jpg" alt="Grupo de empreendedores em sala de capacitação simples e iluminada" loading="lazy">
+          <p class="photoCaption">Capacitação — grupo, sala simples</p>
+        </div>
+        <div class="photoTile">
+          <img src="icadem-sistema.jpg" alt="Mãos usando tablet com sistema de gestão sobre balcão de loja" loading="lazy">
+          <p class="photoCaption">Tecnologia — sistema no dia a dia</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="voz">
+      <p class="kicker">Identidade verbal</p>
+      <h2 class="sectionTitle">Voz da marca</h2>
+      <div class="voiceScale">
+        <div class="voiceRow">
+          <span class="voiceLabel">Formal</span>
+          <div class="voiceTrack"><div class="voiceDot" style="left:62%"></div></div>
+          <span class="voiceLabel right">Casual</span>
+        </div>
+        <div class="voiceRow">
+          <span class="voiceLabel">Sério</span>
+          <div class="voiceTrack"><div class="voiceDot" style="left:38%"></div></div>
+          <span class="voiceLabel right">Brincalhão</span>
+        </div>
+        <div class="voiceRow">
+          <span class="voiceLabel">Respeitoso</span>
+          <div class="voiceTrack"><div class="voiceDot" style="left:18%"></div></div>
+          <span class="voiceLabel right">Irreverente</span>
+        </div>
+        <div class="voiceRow">
+          <span class="voiceLabel">Neutro</span>
+          <div class="voiceTrack"><div class="voiceDot" style="left:68%"></div></div>
+          <span class="voiceLabel right">Entusiasmado</span>
+        </div>
+      </div>
+
+      <div class="doDont">
+        <div class="doDontCol do">
+          <h4>Fazer</h4>
+          <ul>
+            <li>Falar em "você", direto ao empreendedor</li>
+            <li>Dar exemplo concreto: qual documento, qual prazo, qual resultado</li>
+            <li>Reconhecer o esforço de quem já está tentando, mesmo informal</li>
+          </ul>
+        </div>
+        <div class="doDontCol dont">
+          <h4>Evitar</h4>
+          <ul>
+            <li>Tom professoral, de cima para baixo</li>
+            <li>Promessa de "sucesso da noite para o dia"</li>
+            <li>Jargão de gestão vazio ou termo em inglês sem necessidade</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="kicker" style="margin:1.8rem 0 0.4rem">Vocabulário</p>
+      <div class="vocabRow">
+        <span class="vocabChip use">capacitação</span>
+        <span class="vocabChip use">formalizar</span>
+        <span class="vocabChip use">estruturar</span>
+        <span class="vocabChip use">sistema</span>
+        <span class="vocabChip use">plano</span>
+        <span class="vocabChip use">resultado</span>
+        <span class="vocabChip avoid">carente</span>
+        <span class="vocabChip avoid">fácil e rápido</span>
+        <span class="vocabChip avoid">empowerment</span>
+        <span class="vocabChip avoid">mindset</span>
+      </div>
+    </section>
+
+    <section id="mensagens">
+      <p class="kicker">Identidade verbal</p>
+      <h2 class="sectionTitle">Mensagens-chave</h2>
+      <div class="messageStack">
+        <div class="messageItem">
+          <p class="messageLabel">Tagline</p>
+          <div class="taglineOptions">
+            <span class="taglinePill primary">Empreender com estrutura.</span>
+            <span class="taglinePill">Do informal ao estruturado.</span>
+            <span class="taglinePill">Capacitação que vira negócio.</span>
+          </div>
+        </div>
+        <div class="messageItem">
+          <p class="messageLabel">Promessa de marca</p>
+          <p class="messageText">Todo empreendedor que passa pelo ICADEM sai com um negócio mais formal, mais organizado e mais preparado para crescer — não só com um certificado.</p>
+        </div>
+      </div>
+
+      <p class="kicker" style="margin-bottom:0.8rem">Hierarquia de mensagens</p>
+      <ul class="hierarchyList">
+        <li class="hierarchyItem">
+          <span class="hierarchyLevel">SEMPRE</span>
+          <p>Capacitação que vira negócio formal e sustentável. Tecnologia e suporte real, não só teoria em sala.</p>
+        </li>
+        <li class="hierarchyItem">
+          <span class="hierarchyLevel">QUANDO CABE</span>
+          <p>Parcerias institucionais (Sebrae, prefeituras, bancos de fomento), dados de formalização, cases de empreendedores atendidos.</p>
+        </li>
+        <li class="hierarchyItem">
+          <span class="hierarchyLevel">NUNCA</span>
+          <p>Promessa de enriquecimento rápido, comparação depreciativa com outros institutos, qualquer viés político-partidário.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section id="historia">
+      <p class="kicker">Identidade verbal</p>
+      <h2 class="sectionTitle">História da marca</h2>
+      <div class="storyBlock">
+        <p>O ICADEM nasce de dentro, não de fora. Foi fundado por empreendedores que já passaram por todas as fases da jornada empreendedora — começaram pequenos, enfrentaram a informalidade, a falta de sistema, a falta de rede — e venceram essas etapas.</p>
+        <p>Unidos por um mesmo propósito, decidiram levar o que aprenderam para outros empreendedores, inclusive — e principalmente — para quem ainda está em dificuldade. Não como conselho de quem nunca passou pelo aperto, mas como parceiro que já esteve lá. A regra da diretoria é unânime: todo diretor do ICADEM é, antes de tudo, empreendedor.</p>
+        <p>Daí nasce a ideia central do instituto: criar um ambiente seguro, onde se entrega conhecimento, conexão e oportunidade real de desenvolvimento — de negócio e de gente.</p>
+      </div>
+    </section>
+
+    <section id="aplicacoes">
+      <p class="kicker">Uso</p>
+      <h2 class="sectionTitle">Logo em uso</h2>
+
+      <div class="logoUseGrid">
+        <div class="logoUseCard">
+          <div class="logoUsePreview" style="background:var(--brand-teal)">
+            <div class="profileRow">
+              <div class="profileItem">
+                <div class="profileRing">
+                  <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-label="Ícone ICADEM, perfil Instagram">
+                    <rect width="60" height="60" fill="#0E3B36"/>
+                    <rect x="4" y="34" width="10" height="18" rx="1.5" fill="#B5562E"/>
+                    <rect x="20" y="20" width="10" height="32" rx="1.5" fill="#D89B3C"/>
+                    <path d="M46 52V17.6h-6.6L46 6l6.6 11.6H46" fill="#F4F6F5" stroke="#F4F6F5" stroke-width="2" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="profileTag">Instagram</span>
+              </div>
+              <div class="profileItem">
+                <div class="profileRing">
+                  <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-label="Ícone ICADEM, perfil WhatsApp">
+                    <rect width="60" height="60" fill="#0E3B36"/>
+                    <rect x="4" y="34" width="10" height="18" rx="1.5" fill="#B5562E"/>
+                    <rect x="20" y="20" width="10" height="32" rx="1.5" fill="#D89B3C"/>
+                    <path d="M46 52V17.6h-6.6L46 6l6.6 11.6H46" fill="#F4F6F5" stroke="#F4F6F5" stroke-width="2" stroke-linejoin="round"/>
+                  </svg>
+                </div>
+                <span class="profileTag">WhatsApp</span>
+              </div>
+            </div>
+          </div>
+          <div class="logoUseInfo">
+            <div class="logoUseName">Foto de perfil</div>
+            <div class="logoUseSpec">Instagram · WhatsApp · 800×800px, ícone centralizado</div>
+          </div>
+        </div>
+
+        <div class="logoUseCard">
+          <div class="logoUsePreview" style="background:var(--brand-teal); padding:2.4rem;">
+            <svg width="100%" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" aria-label="ICADEM, logo grande" style="max-width:280px">
+              <rect x="4" y="34" width="10" height="18" rx="1.5" fill="#B5562E"/>
+              <rect x="20" y="20" width="10" height="32" rx="1.5" fill="#D89B3C"/>
+              <path d="M46 52V17.6h-6.6L46 6l6.6 11.6H46" fill="#F4F6F5" stroke="#F4F6F5" stroke-width="2" stroke-linejoin="round"/>
+              <text x="66" y="42" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="26" letter-spacing="1" fill="#F4F6F5">ICADEM</text>
+            </svg>
+          </div>
+          <div class="logoUseInfo">
+            <div class="logoUseName">Logo grande</div>
+            <div class="logoUseSpec">Arquivo mestre · vetor, sem limite de escala</div>
+          </div>
+        </div>
+
+        <div class="logoUseCard span2">
+          <div class="logoUsePreview" style="padding:0; background:var(--bg-sunken);">
+            <div class="emailMock">
+              <div class="emailMockTopline"></div>
+              <div class="emailMockBody">
+                <div class="emailMockLeft">
+                  <svg width="52" height="52" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-label="Ícone ICADEM">
+                    <rect width="60" height="60" rx="6" fill="#0E3B36"/>
+                    <rect x="4" y="34" width="10" height="18" rx="1.5" fill="#B5562E"/>
+                    <rect x="20" y="20" width="10" height="32" rx="1.5" fill="#D89B3C"/>
+                    <path d="M46 52V17.6h-6.6L46 6l6.6 11.6H46" fill="#F4F6F5" stroke="#F4F6F5" stroke-width="2" stroke-linejoin="round"/>
+                  </svg>
+                  <div>
+                    <div class="emailMockName">Nome do Colaborador</div>
+                    <div class="emailMockRole">Núcleo de Relacionamento</div>
+                    <div class="emailMockDivider"></div>
+                    <div class="emailMockContact">+55 85 0000-0000</div>
+                    <div class="emailMockContact">nome@icadem.org.br</div>
+                  </div>
+                </div>
+                <div class="emailMockRight">
+                  <svg width="130" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" aria-label="ICADEM">
+                    <rect x="4" y="34" width="10" height="18" rx="1.5" fill="#B5562E"/>
+                    <rect x="20" y="20" width="10" height="32" rx="1.5" fill="#D89B3C"/>
+                    <path d="M46 52V17.6h-6.6L46 6l6.6 11.6H46" fill="#F4F6F5" stroke="#F4F6F5" stroke-width="2" stroke-linejoin="round"/>
+                    <text x="66" y="42" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="26" letter-spacing="1" fill="#F4F6F5">ICADEM</text>
+                  </svg>
+                  <span class="emailMockUrl">icadem.org.br</span>
+                </div>
+              </div>
+              <div class="emailMockFooterLine"></div>
+              <div class="emailMockFooter">
+                <span>Empreender com estrutura.</span>
+                <span>Fortaleza · CE · Brasil</span>
+              </div>
+            </div>
+          </div>
+          <div class="logoUseInfo">
+            <div class="logoUseName">Imagem para e-mail</div>
+            <div class="logoUseSpec">Assinatura em card · 600px · exportar como imagem única</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nome">
+      <p class="kicker">Uso</p>
+      <h2 class="sectionTitle">Diretrizes de uso do nome</h2>
+      <p class="body">ICADEM é a marca — usada em fachada, redes sociais, materiais de campanha e comunicação com o público. O nome por extenso é institucional — usado em estatuto, CNPJ, convênios e ofícios formais.</p>
+      <div class="doDont" style="margin-top:1.4rem">
+        <div class="doDontCol do">
+          <h4>Usar ICADEM</h4>
+          <ul>
+            <li>Logotipo, redes sociais, site, campanhas</li>
+            <li>Falado no dia a dia com o empreendedor</li>
+          </ul>
+        </div>
+        <div class="doDontCol do">
+          <h4>Usar nome por extenso</h4>
+          <ul>
+            <li>Estatuto social, CNPJ, contratos, convênios</li>
+            <li>Primeira menção em documento formal, seguida de "(ICADEM)"</li>
+          </ul>
+        </div>
+      </div>
+      <p class="clearspaceNote">Importante: ICADEM não é um acrônimo letra-a-letra do nome por extenso — é uma marca própria, com "DEM" ecoando a primeira opção de nome do fundador. Não apresentar como se cada letra representasse uma palavra do nome institucional.</p>
+    </section>
+
+    <section id="governanca">
+      <p class="kicker">Uso</p>
+      <h2 class="sectionTitle">Governança da marca</h2>
+      <ul class="govList">
+        <li><strong>Quem aprova</strong><p>Fundador/direção do instituto aprova qualquer novo uso de marca fora do já documentado neste manual.</p></li>
+        <li><strong>Novas aplicações</strong><p>Peça nova (material impresso, campanha, parceria co-branded) passa por aprovação antes de produção final.</p></li>
+        <li><strong>Revisão do manual</strong><p>Revisão anual, ou antes disso se o instituto expandir para novo estado e a comunicação precisar refletir isso.</p></li>
+      </ul>
+    </section>
+
+    <footer class="pageFooter">
+      ICADEM — Manual de marca, versão 1.0. Documento vivo: atualizar conforme a marca ganha uso real.
+    </footer>
+  </main>
+</div>
+
+<script>
+  (function() {
+    var toggle = document.getElementById('tocToggle');
+    var toc = document.getElementById('toc');
+    if (toggle) {
+      toc.classList.add('collapsed');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.addEventListener('click', function() {
+        var collapsed = toc.classList.toggle('collapsed');
+        toggle.setAttribute('aria-expanded', String(!collapsed));
+      });
+    }
+
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!reduce && 'IntersectionObserver' in window) {
+      var sections = document.querySelectorAll('section, .hero');
+      sections.forEach(function(el) { el.classList.add('revealOnScroll'); });
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('isVisible');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      sections.forEach(function(el) { obs.observe(el); });
+    }
+  })();
+</script>
+
+</body>
+</html>
